@@ -1,0 +1,26 @@
+.deck {
+  background-color: black;
+  display:inline-block;
+  position: relative;
+  margin: 20px;
+}
+
+.nocard {
+  color: whitesmoke;
+  position: relative;
+  border: 2px solid gray;
+  border-radius: 5px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Lucida Console, Courier, monospace;
+}
+
+.card {
+  border: 2px solid gray;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index : 0;
+}

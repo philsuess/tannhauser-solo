@@ -1,0 +1,35 @@
+.teamselection {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.characters {
+  /*background-image: linear-gradient(black, white), url('../img/Solo_Reich_cards/Rbacks-bw.png');
+  background-repeat: no-repeat;
+  background-position: right 35% bottom 45%;
+  background-size: 70%;*/
+  width: 30%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.character {
+  margin: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.unselected {
+  filter: grayscale(80%);
+}
