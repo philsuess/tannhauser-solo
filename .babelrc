@@ -1,0 +1,30 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", // support all browsers newer than 2 years
+      {
+        "targets": {
+          "browsers": "last 2 years"
+        },
+        "modules": false
+      }
+    ],
+    "@babel/preset-react" // support React
+  ],
+  "plugins": [
+    [
+      "import", // support antd css: https://github.com/ant-design/babel-plugin-import
+      {
+        "libraryName": "antd",
+        "style": "css"
+      }
+    ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel" // in development mode, support react hot loader
+      ]
+    }
+  }
+}
