@@ -1,7 +1,5 @@
-.vscode
-.DS_STORE
-node_modules
-.module-cache
-*.log*
-build
-dist
+node_modules/
+.DS_Store
+dist/
+.vs
+yarn-error.log

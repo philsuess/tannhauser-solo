@@ -1,66 +1,90 @@
-# Frontend Boilerplate with React, Redux & TypeScript
+# A Template for Web-App Development with React and Typescript
 
-A bare minimum react-redux-webpack-typescript boilerplate with TodoMVC example. 
+This is a template (“boilerplate”) for creating a web application frontend (that is, an application that runs in a web browser). It uses 
+- the [React](https://reactjs.org/) UI framework
+- the [Typescript](http://www.typescriptlang.org/) programming language
+- the [webpack](https://webpack.js.org/) build tool
+- the [Yarn](https://yarnpkg.com) package manager
 
-[Live demo](https://rokoroku.github.io/react-redux-typescript-boilerplate)
+Core features:
+- [Typescript](http://www.typescriptlang.org/)
+- [React](https://reactjs.org/) with hot reloading and [router](https://github.com/ReactTraining/react-router)
+- [Sass (scss)](http://sass-lang.com/) support
 
-Note that this project does not include **Server-Side Rendering**,  **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated.
+Optional:
+- [ant design](http://ant.design) UI library
+- [Redux](https://redux.js.org/) with [typescript-fsa](https://github.com/aikoven/typescript-fsa)
 
-Ideal for creating React apps from the scratch.
+## Authors
+- Original boilerplate: [Tobias Zimmermann](@zimmermann)
+- Adaption and extension: [Michael Helmling](@helmling) and [Phil Süss](@suess)
 
-See also: [react-mobx-typescript-boilerplate](https://github.com/rokoroku/react-mobx-typescript-boilerplate)
+# Getting Started
 
-### Branches
-- [`feature-tslint`](https://github.com/rokoroku/react-redux-typescript-boilerplate/tree/feature/tslint): yarn + tslint + prettier integrated branch.
+## Install the Requirements
+1. [Visual Studio Code](https://code.visualstudio.com/) with the following extensions:
+    - Debugger for Chrome
+    - EditorConfig for VS Code
+    - TSLint
+    - Sass
+2. [Node.js](https://nodejs.org/en/)
+3. [Yarn](https://yarnpkg.com/)
+4. [Google Chrome](https://www.google.com/chrome/) with the following extensions (optional):
+    - React Developer Tools
+    - Redux DevTools
+5. *Checkout this git repository*
 
-## Contains
+## Start the Development Server
+Open the checked-out repository in VS code. Then, in the VS Code console:
+- Install 3rd-party packages: `yarn install` *(a restart of VS Code may be necessary)*
+- Start dev server: `yarn start` (or in VS code `Tasks → Run Task … → dev-server`)
 
-- [x] [Typescript](https://www.typescriptlang.org/) 2.9
-- [x] [React](https://facebook.github.io/react/) 16.4
-- [x] [Redux](https://github.com/reactjs/redux) 4
-- [x] [React Router](https://github.com/ReactTraining/react-router) 4.3
-- [x] [React Router Redux](https://github.com/reactjs/react-router-redux) 5
-- [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [x] [TodoMVC example](http://todomvc.com)
+Then start the browser: `F5`. You should see a screen similar to the following:
+![screenshot](screenshot.png)
 
-### Build tools
+The visual studio code configuration is located in the [`.vscode`](.vscode) subdirectory.
 
-- [x] [Webpack](https://webpack.github.io) 4
-  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
-  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-- [x] [Typescript Loader](https://github.com/TypeStrong/ts-loader)
-- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
-  - [x] [CSS next](https://github.com/MoOx/postcss-cssnext)
-  - [x] [CSS modules](https://github.com/css-modules/css-modules)
-- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-- [x] [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
-- [x] [Prettier](https://github.com/prettier/prettier)
+# Description of the Boilerplate
 
-## Setup
+## npm and yarn: package management
+The [`package.json`](package.json) file centrally defines your project (comparable to a `csproj` or `sln` file in C#).
 
-```
-$ npm install
-```
+This file defines
+- your project's name, version etc.,
+- other 3rd-party packages your project depends on,
+- a set of *scripts* that can be run in your project (e.g. “build”, “run dev-server”, …)
 
-## Running
+Third-party packages are installed into the [`node_modules`](node_modules) subdirectory.
 
-```
-$ npm start
-```
+While originally defined by npm, the yarn package manager operates on the same `package.json` file format and has some advantages. Yarn also owns [`yarn.lock`](yarn.lock) file.
 
-## Build
+## Webpack: the build tool
+Webpack is a *bundler* for javascript—think of a compiler. It bundles (compiles) all your source files into *one* single javascript file called *bundle.js*. Via plugins, webpack accomplishes additional tasks:
+- bundle resources (like images)
+- bundle CSS stylesheets, compile SCSS or less into css
+- compile typescript into plain javascript
+- transpile javascript to support older browsers. This uses a tool named *babel*, configured in [`.babelrc`](.babelrc)
+- provide a *development webserver* that delivers your app to a browser, supporting e.g. automatic reloading of the page whenever the source code changes
 
-```
-$ npm run build
-```
+Webpack is configured in the [`webpack.config.js`](webpack.config.js) file. The plugins are usually named `<xxx>-loader` (webpack plugin supporting a special type of input) or `<xxx>-webpack-plugin` (other purpose plugin). A lot of the dependencies in [`package.json`](package.json) are webpack plugins!
 
-## Prettier
+## Typescript: the language
+Typescript is configured in the [`tsconfig.json`](tsconfig.json) file. The [`typings`](typings) directory contains auxiliary type definitions.
 
-```
-$ npm run prettier
-```
+The boilerplate also configures a *Linter* for typescript, that is, a tool that checks the code style according to defined rules (e.g. brace style). It is called *tslint* and configured in [`tslint.json`](tslint.json).
 
-# License
+Another file somewhat related to linting is [`.editorconfig`](.editorconfig). [EditorConfig](http://editorconfig.org/) is an editor- and language-independent approach for defining certain file properties such as indentation, line endings and encoding.
 
-MIT
+# List of Top-Level Files / Directories
+- [`.vscode`](.vscode): VS code configuration files
+- `dist`: build output directory (created on e.g. `yarn run build:prod`)
+- `node_modules`: downloaded 3rd-party packages
+- [`src`](src): source code. **You will work here most of the time!**
+- [`typings`](typings): auxiliary typescript type definitions
+- [`.babelrc`](.babelrc): configuration file for [Babel](https://babeljs.io/)
+- [`.editorconfig`](.editorconfig): configuration of line endings, indent etc.
+- [`package.json`](package.json): main package definition, including 3rd-party dependencies
+- [`tsconfig.json`](tsconfig.json): typescript configuration
+- [`tslint.json`](tslint.json): configuration of [TSLint](https://palantir.github.io/tslint/), the linter for typescript
+- [`webpack.config.js`]: Webpack (javascript bundler) configuration
+- [`yarn.lock`]: Auxiliary file for yarn (tracks exact package versions)

@@ -1,0 +1,27 @@
+stages:
+  - install
+  - build
+
+cache:
+  untracked: true
+
+install:
+  stage: install
+  tags:
+    - yarn
+  script:
+    - yarn --no-progress install
+    
+build_prod:
+  stage: build
+  tags:
+    - yarn
+  script:
+    - yarn run build:prod --no-progress
+    
+build_dev:
+  stage: build
+  tags:
+    - yarn
+  script:
+    - yarn run build:dev --no-progress
