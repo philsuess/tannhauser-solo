@@ -57,7 +57,6 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "antd": "^3.6.4",
     "babel-polyfill": "^6.26.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.1",

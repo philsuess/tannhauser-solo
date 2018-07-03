@@ -1,4 +1,2 @@
-import * as joke from "modules/jokereactredux";
-
-export type State = joke.GlobalState;
+export type State = {};
 export default State;
