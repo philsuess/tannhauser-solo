@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Style from '../style.css';
+import Style from '../style.css';
 import * as Model from '../../model';
 
 interface TeamSelectionProps {

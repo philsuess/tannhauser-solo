@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as DeckStyle from '../style.css';
+import DeckStyle from '../style.css';
 import * as DeckConstants from '../constants';
 
 interface cardImageProps {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as FactionMatStyle from '../style.css';
+import FactionMatStyle from '../style.css';
 import * as CharacterMat from '../../charactermat';
 import * as Model from '../../model';
 

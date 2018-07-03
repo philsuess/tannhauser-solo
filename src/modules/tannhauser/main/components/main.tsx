@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as TeamSelection from '../../teamselection';
 import * as FactionSelection from '../../factionselection';
 import * as FactionMat from '../../factionmat';
-import * as Style from '../style.css';
+import Style from '../style.css';
 import * as Model from '../../model';
 
 interface MainProps {

@@ -5,8 +5,8 @@ import * as MatConstants from '../constants';
 import * as Model from '../../model';
 
 interface CharacterMatState {
-  draw_deck: string[];
-  drawn_card: string;
+  drawDeck: string[];
+  drawnCard: string;
 }
 
 function randomIntFromInterval(min: number, max: number)
@@ -18,40 +18,40 @@ export default class CharacterMat extends React.Component<Model.CharacterData,Ch
   constructor(props: Model.CharacterData) {
     super(props);
     this.state = {
-      draw_deck: props.deck.slice(),
-      drawn_card: "",
+      drawDeck: props.deck.slice(),
+      drawnCard: "",
     };
   }
 
   shuffleAllCardsIntoDeck() {
     this.setState({
       ...this.state,
-      draw_deck: this.props.deck.slice(),
-      drawn_card: "",
+      drawDeck: this.props.deck.slice(),
+      drawnCard: "",
     });
   }
 
   drawCard() {
-    if (this.state.draw_deck.length === 0) {
+    if (this.state.drawDeck.length === 0) {
       this.shuffleAllCardsIntoDeck();
       return;
     }
-    const randomCardIndex = randomIntFromInterval(0, this.state.draw_deck.length - 1);
-    const draw = this.state.draw_deck[randomCardIndex];
-    const newDrawDeck = this.state.draw_deck;
+    const randomCardIndex = randomIntFromInterval(0, this.state.drawDeck.length - 1);
+    const draw = this.state.drawDeck[randomCardIndex];
+    const newDrawDeck = this.state.drawDeck;
     newDrawDeck.splice(randomCardIndex, 1);
     this.setState({
       ...this.state,
-      draw_deck: newDrawDeck,
-      drawn_card: draw,
+      drawDeck: newDrawDeck,
+      drawnCard: draw,
     });
   }
 
   renderDrawDeck() {
     return (
       <Deck.Components.Deck
-        top_card_file={this.props.card_back_image}
-        num_cards={this.state.draw_deck.length}
+        topCardFile={this.props.card_back_image}
+        numCards={this.state.drawDeck.length}
         clicked={() => this.drawCard()}
       />
     );
@@ -60,8 +60,8 @@ export default class CharacterMat extends React.Component<Model.CharacterData,Ch
   renderDiscardPile() {
     return (
       <Deck.Components.Deck
-        top_card_file={this.state.drawn_card}
-        num_cards={this.props.deck.length - this.state.draw_deck.length}
+        topCardFile={this.state.drawnCard}
+        numCards={this.props.deck.length - this.state.drawDeck.length}
         clicked={() => console.log("Discard pile clicked")}
       />
     );

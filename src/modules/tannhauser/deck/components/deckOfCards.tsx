@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as style from '../style.css';
+import style from '../style.css';
 import * as DeckConstants from '../constants';
 import CardImage from './cardImage';
 
@@ -28,7 +28,7 @@ export default class Deck extends React.Component<DeckProps> {
     return (
         <div className={style.deck} onClick={this.props.clicked}>
           <div className={style.nocard} style={DeckSpaceStyle}>empty</div>
-            {cardStack(this.props.num_cards, this.props.top_card_file)}
+            {cardStack(this.props.numCards, this.props.topCardFile)}
         </div>
       );
   }
