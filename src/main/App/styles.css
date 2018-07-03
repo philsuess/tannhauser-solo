@@ -1,47 +1,10 @@
-:global {
-  body, html {
-    margin: 0;
-    padding: 0;
-  }
-  main {
-    background-color: white;
-    height: 100%;
-  }
-}
-.layout {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "sider main"
-    "sider footer";
-}
-
-.sider {
-  & .logo {
-    height: 42px;
-    margin: 20px;
-  }  
- grid-area: sider;
- background-color: white;
-}
-
 .content {
   grid-area: main;
-  padding: 36px;
+  padding: 0px;
   justify-self: stretch;
   align-self: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  
-}
-
-.footer {
-  grid-area: footer;
-  justify-self: center;
-  align-self: center;
-  padding: 12px 0;
 }
