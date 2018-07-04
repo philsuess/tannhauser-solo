@@ -37,6 +37,15 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
     });
   }
 
+  renderEventMats() {
+    const Event = Model.AllEvents[this.props.eventsDeck];
+    return <CharacterMat.Component {...Event} key={Event.name + "_mat"} />
+  }
+
+  renderMats() {
+    return [this.renderEventMats()].concat(this.renderCharacterMats());
+  }
+
   render() {
     return (
       <div className={FactionMatStyle.factionmat}>
@@ -44,7 +53,7 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
           {this.renderHeader()}
         </div>
         <div>
-          {this.renderCharacterMats()}
+          {this.renderMats()}
         </div>
       </div>
     );
