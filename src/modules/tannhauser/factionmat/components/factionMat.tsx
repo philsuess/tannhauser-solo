@@ -4,6 +4,7 @@ import * as CharacterMat from '../../charactermat';
 import * as Model from '../../model';
 
 interface FactionMatProps {
+  eventsDeck: string;
   characters: string[];
 }
 
@@ -12,18 +13,21 @@ interface FactionMatState {
 }
 
 export default class FactionMat extends React.Component<FactionMatProps,FactionMatState> {
-  constructor(props: FactionMatProps) {
-    super(props);
-    this.state = {
-      currentCharacter: 0,
-    };
-  }
+  state = { currentCharacter: 0 };
 
-  renderHeader() {
+  renderCharacterHeader() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
       return <a href={"#" + characterName} ><img key={characterName} src={Player.token_image} height={100} /></a>;
     });
+  }
+
+  renderEventHeader() {
+    return <img key={'eventImage'} src={Model.AllEvents[this.props.eventsDeck].image} height={100} />
+  }
+
+  renderHeader() {
+    return [this.renderEventHeader()].concat(this.renderCharacterHeader());
   }
 
   renderCharacterMats() {

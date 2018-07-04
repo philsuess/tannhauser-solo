@@ -52,7 +52,7 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   renderFactionMat() {
-    return <FactionMat.Component characters={this.state.selectedCharacters} />
+    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.state.selectedCharacters} />
   }
 
   render() {

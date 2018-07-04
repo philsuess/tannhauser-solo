@@ -1,4 +1,5 @@
 import ksiazBackCardImage from './img/KsiazEvent/Kback.jpg';
+import ksiazImage from './img/Ksiaz.png';
 import ksiazEvent1 from './img/KsiazEvent/K0.jpg';
 import ksiazEvent2 from './img/KsiazEvent/K1.jpg';
 import ksiazEvent3 from './img/KsiazEvent/K2.jpg';
@@ -280,6 +281,7 @@ import { Deck } from './deck/components';
 
 export interface EventData {
   name: string;
+  image: string;
   card_back_image: string;
   deck: string[];
 };
@@ -291,6 +293,7 @@ export interface Events {
 export const AllEvents: Events = {
   Ksiaz: {
     name: "Ksiaz",
+    image: ksiazImage,
     card_back_image: ksiazBackCardImage,
     deck: [
       ksiazEvent1,
