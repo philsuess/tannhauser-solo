@@ -9,8 +9,9 @@ interface DeckProps {
   clicked: () => any;
 }
 
-function cardStack(numCards: number, imageFileName: string) { 
-  return Array.from(Array(numCards).keys()).map(index => {
+function cardStack(numCards: number, imageFileName: string) {
+  const numCardstoRender = Math.min(DeckConstants.maxCardsInDeck, numCards);
+  return Array.from(Array(numCardstoRender).keys()).map(index => {
     const z = index + 1;
     const top = index * DeckConstants.cardStackOffset;
     const left = index * DeckConstants.cardStackOffset;

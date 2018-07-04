@@ -16,8 +16,7 @@ interface CharacterMatState {
   drawnCard: string;
 }
 
-function randomIntFromInterval(min: number, max: number)
-{
+function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
 
@@ -84,6 +83,7 @@ export default class CharacterMat extends React.Component<CharacterMatProps,Char
         <div>
           <img src={this.props.image} width={MatConstants.characterImageVidth} />
           <h2>{this.props.name}</h2>
+          <h3>({this.state.drawDeck.length} cards left)</h3>
         </div>
         {this.renderDrawDeck()}
         {this.renderDiscardPile()}
