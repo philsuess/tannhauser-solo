@@ -4,18 +4,24 @@ import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
 import * as Model from '../../model';
 
+interface CharacterMatProps {
+  name: string;
+  image: string;
+  deck: string[];
+  card_back_image: string;
+}
+
 interface CharacterMatState {
   drawDeck: string[];
   drawnCard: string;
 }
 
-function randomIntFromInterval(min: number, max: number)
-{
+function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-export default class CharacterMat extends React.Component<Model.CharacterData,CharacterMatState> {
-  constructor(props: Model.CharacterData) {
+export default class CharacterMat extends React.Component<CharacterMatProps,CharacterMatState> {
+  constructor(props: CharacterMatProps) {
     super(props);
     this.state = {
       drawDeck: props.deck.slice(),
@@ -77,6 +83,7 @@ export default class CharacterMat extends React.Component<Model.CharacterData,Ch
         <div>
           <img src={this.props.image} width={MatConstants.characterImageVidth} />
           <h2>{this.props.name}</h2>
+          <h3>({this.state.drawDeck.length} cards left)</h3>
         </div>
         {this.renderDrawDeck()}
         {this.renderDiscardPile()}

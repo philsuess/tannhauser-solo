@@ -1,3 +1,62 @@
+import ksiazBackCardImage from './img/KsiazEvent/Kback.jpg';
+import ksiazImage from './img/Ksiaz.png';
+import ksiazEvent1 from './img/KsiazEvent/K0.jpg';
+import ksiazEvent2 from './img/KsiazEvent/K1.jpg';
+import ksiazEvent3 from './img/KsiazEvent/K2.jpg';
+import ksiazEvent4 from './img/KsiazEvent/K3.jpg';
+import ksiazEvent5 from './img/KsiazEvent/K4.jpg';
+import ksiazEvent6 from './img/KsiazEvent/K5.jpg';
+import ksiazEvent7 from './img/KsiazEvent/K6.jpg';
+import ksiazEvent8 from './img/KsiazEvent/K7.jpg';
+import ksiazEvent9 from './img/KsiazEvent/K8.jpg';
+import ksiazEvent10 from './img/KsiazEvent/K9.jpg';
+import ksiazEvent11 from './img/KsiazEvent/K10.jpg';
+import ksiazEvent12 from './img/KsiazEvent/K11.jpg';
+import ksiazEvent13 from './img/KsiazEvent/K12.jpg';
+import ksiazEvent14 from './img/KsiazEvent/K13.jpg';
+import ksiazEvent15 from './img/KsiazEvent/K14.jpg';
+import ksiazEvent16 from './img/KsiazEvent/K15.jpg';
+import ksiazEvent17 from './img/KsiazEvent/K16.jpg';
+import ksiazEvent18 from './img/KsiazEvent/K17.jpg';
+import ksiazEvent19 from './img/KsiazEvent/K18.jpg';
+import ksiazEvent20 from './img/KsiazEvent/K19.jpg';
+import ksiazEvent21 from './img/KsiazEvent/K20.jpg';
+import ksiazEvent22 from './img/KsiazEvent/K21.jpg';
+import ksiazEvent23 from './img/KsiazEvent/K22.jpg';
+import ksiazEvent24 from './img/KsiazEvent/K23.jpg';
+import ksiazEvent25 from './img/KsiazEvent/K24.jpg';
+import ksiazEvent26 from './img/KsiazEvent/K25.jpg';
+import ksiazEvent27 from './img/KsiazEvent/K26.jpg';
+import ksiazEvent28 from './img/KsiazEvent/K27.jpg';
+import ksiazEvent29 from './img/KsiazEvent/K28.jpg';
+import ksiazEvent30 from './img/KsiazEvent/K29.jpg';
+import ksiazEvent31 from './img/KsiazEvent/K30.jpg';
+import ksiazEvent32 from './img/KsiazEvent/K31.jpg';
+import ksiazEvent33 from './img/KsiazEvent/K32.jpg';
+import ksiazEvent34 from './img/KsiazEvent/K33.jpg';
+import ksiazEvent35 from './img/KsiazEvent/K34.jpg';
+import ksiazEvent36 from './img/KsiazEvent/K35.jpg';
+import ksiazEvent37 from './img/KsiazEvent/K36.jpg';
+import ksiazEvent38 from './img/KsiazEvent/K37.jpg';
+import ksiazEvent39 from './img/KsiazEvent/K38.jpg';
+import ksiazEvent40 from './img/KsiazEvent/K39.jpg';
+import ksiazEvent41 from './img/KsiazEvent/K40.jpg';
+import ksiazEvent42 from './img/KsiazEvent/K41.jpg';
+import ksiazEvent43 from './img/KsiazEvent/K42.jpg';
+import ksiazEvent44 from './img/KsiazEvent/K43.jpg';
+import ksiazEvent45 from './img/KsiazEvent/K44.jpg';
+import ksiazEvent46 from './img/KsiazEvent/K45.jpg';
+import ksiazEvent47 from './img/KsiazEvent/K46.jpg';
+import ksiazEvent48 from './img/KsiazEvent/K47.jpg';
+import ksiazEvent49 from './img/KsiazEvent/K48.jpg';
+import ksiazEvent50 from './img/KsiazEvent/K49.jpg';
+import ksiazEvent51 from './img/KsiazEvent/K50.jpg';
+import ksiazEvent52 from './img/KsiazEvent/K51.jpg';
+import ksiazEvent53 from './img/KsiazEvent/K52.jpg';
+import ksiazEvent54 from './img/KsiazEvent/K53.jpg';
+import ksiazEvent55 from './img/KsiazEvent/K54.jpg';
+
+
 import reichBackCardImage from './img/Solo_Reich_cards/Rbacks.jpg';
 import evaImage from './img/eva.png';
 import evaToken from './img/eva-token.png';
@@ -217,6 +276,84 @@ import talaCard7 from './img/Solo_Union_cards/Tala/Tala7.jpg';
 import talaCard8 from './img/Solo_Union_cards/Tala/Tala8.jpg';
 import talaCard9 from './img/Solo_Union_cards/Tala/Tala9.jpg';
 import talaCard10 from './img/Solo_Union_cards/Tala/Tala10.jpg';
+import { Deck } from './deck/components';
+
+
+export interface EventData {
+  name: string;
+  image: string;
+  card_back_image: string;
+  deck: string[];
+};
+
+export interface Events {
+  [key: string]: EventData;
+};
+
+export const AllEvents: Events = {
+  Ksiaz: {
+    name: "Ksiaz",
+    image: ksiazImage,
+    card_back_image: ksiazBackCardImage,
+    deck: [
+      ksiazEvent1,
+      ksiazEvent2,
+      ksiazEvent3,
+      ksiazEvent4,
+      ksiazEvent5,
+      ksiazEvent6,
+      ksiazEvent7,
+      ksiazEvent8,
+      ksiazEvent9,
+      ksiazEvent10,
+      ksiazEvent11,
+      ksiazEvent12,
+      ksiazEvent13,
+      ksiazEvent14,
+      ksiazEvent15,
+      ksiazEvent16,
+      ksiazEvent17,
+      ksiazEvent18,
+      ksiazEvent19,
+      ksiazEvent20,
+      ksiazEvent21,
+      ksiazEvent22,
+      ksiazEvent23,
+      ksiazEvent24,
+      ksiazEvent25,
+      ksiazEvent26,
+      ksiazEvent27,
+      ksiazEvent28,
+      ksiazEvent29,
+      ksiazEvent30,
+      ksiazEvent31,
+      ksiazEvent32,
+      ksiazEvent33,
+      ksiazEvent34,
+      ksiazEvent35,
+      ksiazEvent36,
+      ksiazEvent37,
+      ksiazEvent38,
+      ksiazEvent39,
+      ksiazEvent40,
+      ksiazEvent41,
+      ksiazEvent42,
+      ksiazEvent43,
+      ksiazEvent44,
+      ksiazEvent45,
+      ksiazEvent46,
+      ksiazEvent47,
+      ksiazEvent48,
+      ksiazEvent49,
+      ksiazEvent50,
+      ksiazEvent51,
+      ksiazEvent52,
+      ksiazEvent53,
+      ksiazEvent54,
+      ksiazEvent55,
+    ],
+  },
+}
 
 
 export enum Faction {
@@ -241,10 +378,6 @@ export interface CharacterData {
 export interface Characters {
   [key: string] : CharacterData;
 }
-
-const app_base_folder = "app/modules/tannhauser/";
-const reich_cards_folder = app_base_folder + "img/Solo_Reich_cards/";
-const union_cards_folder = app_base_folder + "img/Solo_Union_cards/";
 
 export const AllCharacters: Characters = {
   Eva: {
