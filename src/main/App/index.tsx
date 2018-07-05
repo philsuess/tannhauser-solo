@@ -10,7 +10,7 @@ const App = () => (
       exact
       path="/"
       component={() => (
-        <SoloApp.App.Component />
+        <SoloApp.App.Main />
       )}
     />
   </main>

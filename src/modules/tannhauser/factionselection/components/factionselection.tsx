@@ -32,12 +32,16 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
         </div>
         <div>
           <img 
-            className={this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.selected : Style.unselected}
+            className={
+              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.selected : Style.unselected
+            }
             src={reichSymbol}
             onClick={() => this.select(Model.Faction.Reich)} 
           />
           <img 
-            className={this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.selected : Style.unselected}
+            className={
+              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.selected : Style.unselected
+            }
             src={unionSymbol}
             onClick={() => this.select(Model.Faction.Union)} />
         </div>
