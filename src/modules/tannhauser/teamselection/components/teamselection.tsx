@@ -39,17 +39,15 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
   countSelected() {
     let selected = 0;
     Object.keys(this.state).forEach(key => {
-      if (this.state[key])
-        selected = selected + 1;
+      if (this.state[key]) selected = selected + 1;
     });
     return selected;
   }
 
   getSelectedAsStrings() {
-    let selected: string[] = [];
+    const selected: string[] = [];
     Object.keys(this.state).forEach(key => {
-      if (this.state[key])
-        selected.push(key);
+      if (this.state[key]) selected.push(key);
     });
     return selected;
   }
@@ -65,7 +63,9 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
       const char = this.props.characters[key];
       return (
         <div key={key} className={Style.character} onClick={() => this.select(key)} >
-          <img src={char.token_image} alt={char.name} height={100} className={this.state[key] ? Style.selected : Style.unselected} />
+          <img src={char.token_image} alt={char.name} height={100} 
+            className={this.state[key] ? Style.selected : Style.unselected} 
+          />
           <h3>{char.name}</h3>
         </div>
       );

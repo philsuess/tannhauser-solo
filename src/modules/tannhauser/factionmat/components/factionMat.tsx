@@ -33,7 +33,9 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   renderCharacterMats() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
-      return <div id={characterName} key={characterName + "_matd"} ><CharacterMat.Component {...Player} key={characterName + "_mat"} /></div>;
+      return <div id={characterName} key={characterName + "_matd"} >
+        <CharacterMat.Component {...Player} key={characterName + "_mat"} />
+        </div>;
     });
   }
 
