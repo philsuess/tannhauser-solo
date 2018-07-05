@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FactionMatStyle from '../style.css';
-import * as CharacterMat from '../../charactermat';
+import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 
 interface FactionMatProps {
@@ -30,22 +30,22 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
     return [this.renderEventHeader()].concat(this.renderCharacterHeader());
   }
 
-  renderCharacterMats() {
+  renderDeckMats() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
       return <div id={characterName} key={characterName + "_matd"} >
-        <CharacterMat.Component {...Player} key={characterName + "_mat"} />
+        <DeckMat.Component {...Player} key={characterName + "_mat"} />
         </div>;
     });
   }
 
   renderEventMats() {
     const Event = Model.AllEvents[this.props.eventsDeck];
-    return <CharacterMat.Component {...Event} key={Event.name + "_mat"} />
+    return <DeckMat.Component {...Event} key={Event.name + "_mat"} />
   }
 
   renderMats() {
-    return [this.renderEventMats()].concat(this.renderCharacterMats());
+    return [this.renderEventMats()].concat(this.renderDeckMats());
   }
 
   render() {

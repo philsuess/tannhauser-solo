@@ -1,17 +1,17 @@
 import * as React from 'react';
-import CharacterMatStyle from '../style.css';
+import DeckMatStyle from '../style.css';
 import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
 import * as Model from '../../model';
 
-interface CharacterMatProps {
+interface DeckMatProps {
   name: string;
   image: string;
   deck: string[];
   card_back_image: string;
 }
 
-interface CharacterMatState {
+interface DeckMatState {
   drawDeck: string[];
   drawnCard: string;
 }
@@ -20,8 +20,8 @@ function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-export default class CharacterMat extends React.Component<CharacterMatProps,CharacterMatState> {
-  constructor(props: CharacterMatProps) {
+export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> {
+  constructor(props: DeckMatProps) {
     super(props);
     this.state = {
       drawDeck: props.deck.slice(),
@@ -74,14 +74,14 @@ export default class CharacterMat extends React.Component<CharacterMatProps,Char
   }
 
   render() {
-    const VariableCharacterMatStyle = {
+    const VariableDeckMatStyle = {
       height: MatConstants.height,
       width: MatConstants.width,
     };
     return (
-      <div className={CharacterMatStyle.charactermat} style={VariableCharacterMatStyle} >
+      <div className={DeckMatStyle.deckmat} style={VariableDeckMatStyle} >
         <div>
-          <img src={this.props.image} width={MatConstants.characterImageVidth} />
+          <img src={this.props.image} width={MatConstants.deckImageVidth} />
           <h2>{this.props.name}</h2>
           <h3>({this.state.drawDeck.length} cards left)</h3>
         </div>
