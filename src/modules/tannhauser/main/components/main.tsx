@@ -13,59 +13,30 @@ interface MainProps {
   selectCharacters: ActionCreator<string[]>;
 }
 
-interface MainState {
-  selectedFaction: string;
-  selectedCharacters: string[];
-}
-
-export default class Main extends React.Component<MainProps,MainState> {
-  constructor(props: MainProps) {
-    super(props);
-    this.state = {
-      selectedFaction: "",
-      selectedCharacters: [],
-    };
-  }
-
-  catchCompleteFactionSelection(faction: string) {
-    this.setState({
-      ...this.state,
-      selectedFaction: faction,
-    });
-    this.props.selectFaction(faction);
-  }
-
-  catchCompleteCharacterSelection(characters: string[]) { 
-    this.setState({
-      ...this.state,
-      selectedCharacters: characters,
-    });
-    this.props.selectCharacters(characters);
-  }
-
+export default class Main extends React.Component<MainProps> {
   renderFactionSelection() {
     return <FactionSelection.Component 
               factions={ [Model.Faction.Reich, Model.Faction.Union] } 
-              selectionComplete={(selection: string) => this.catchCompleteFactionSelection(selection)}
+              selectionComplete={(selection: string) => this.props.selectFaction(selection)}
             />
   }
 
   renderTeamSelection() {
     return <TeamSelection.Component 
-              faction={ Model.StringToFaction(this.state.selectedFaction) }
+              faction={ Model.StringToFaction(this.props.selectedFaction) }
               characters={Model.AllCharacters}
-              selectionComplete={(selection: string[]) => this.catchCompleteCharacterSelection(selection)}
+              selectionComplete={(selection: string[]) => this.props.selectCharacters(selection)}
             />
   }
 
   renderFactionMat() {
-    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.state.selectedCharacters} />
+    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.props.selectedCharacters} />
   }
 
   render() {
     let renderComponent = this.renderFactionSelection();
-    if (this.state.selectedCharacters.length > 0) renderComponent = this.renderFactionMat();
-    else if (this.state.selectedFaction.length > 0) renderComponent = this.renderTeamSelection();
+    if (this.props.selectedCharacters.length > 0) renderComponent = this.renderFactionMat();
+    else if (this.props.selectedFaction.length > 0) renderComponent = this.renderTeamSelection();
     return (
       <div className={Style.main}>
         { renderComponent }
