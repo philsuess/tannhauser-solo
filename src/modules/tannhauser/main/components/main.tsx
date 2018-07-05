@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ActionCreator } from "typescript-fsa";
 import * as TeamSelection from '../../teamselection';
 import * as FactionSelection from '../../factionselection';
 import * as FactionMat from '../../factionmat';
@@ -6,6 +7,10 @@ import Style from '../style.css';
 import * as Model from '../../model';
 
 interface MainProps {
+  selectedFaction: string;
+  selectedCharacters: string[];
+  selectFaction: ActionCreator<string>;
+  selectCharacters: ActionCreator<string[]>;
 }
 
 interface MainState {
@@ -27,6 +32,7 @@ export default class Main extends React.Component<MainProps,MainState> {
       ...this.state,
       selectedFaction: faction,
     });
+    this.props.selectFaction(faction);
   }
 
   catchCompleteCharacterSelection(characters: string[]) { 
@@ -34,6 +40,7 @@ export default class Main extends React.Component<MainProps,MainState> {
       ...this.state,
       selectedCharacters: characters,
     });
+    this.props.selectCharacters(characters);
   }
 
   renderFactionSelection() {
