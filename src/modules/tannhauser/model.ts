@@ -70,6 +70,8 @@ import stosstruppenImage from './img/stosstruppen.png';
 import stosstruppenToken from './img/stosstruppen-token.png';
 import heizingerImage from './img/heizinger.png';
 import heizingerToken from './img/heizinger-token.png';
+import hossImage from './img/hoss.png';
+import hossToken from './img/hoss-token.png';
 import yulaImage from './img/yula.png';
 import yulaToken from './img/yula-token.png';
 
@@ -94,6 +96,26 @@ import houndBackImage from './img/Solo_Union_cards/Ramirez/HoundDog/HDBack.jpg';
 import talaImage from './img/tala.png';
 import talaToken from './img/tala-token.png';
 
+const asterosBackCardImage = reichBackCardImage;
+import asterosImage from './img/Asteros.png';
+import asterosToken from './img/Asteros-token.png';
+
+import asterosCard1 from './img/AsterosCards/Asteros1.jpg';
+import asterosCard2 from './img/AsterosCards/Asteros2.jpg';
+import asterosCard3 from './img/AsterosCards/Asteros3.jpg';
+import asterosCard4 from './img/AsterosCards/Asteros4.jpg';
+import asterosCard5 from './img/AsterosCards/Asteros5.jpg';
+import asterosCard6 from './img/AsterosCards/Asteros6.jpg';
+import asterosCard7 from './img/AsterosCards/Asteros7.jpg';
+import asterosCard8 from './img/AsterosCards/Asteros8.jpg';
+import asterosCard9 from './img/AsterosCards/Asteros9.jpg';
+import asterosCard10 from './img/AsterosCards/Asteros10.jpg';
+import asterosCard11 from './img/AsterosCards/Asteros11.jpg';
+import asterosCard12 from './img/AsterosCards/Asteros12.jpg';
+import asterosCard13 from './img/AsterosCards/Asteros13.jpg';
+import asterosCard14 from './img/AsterosCards/Asteros14.jpg';
+import asterosCard15 from './img/AsterosCards/Asteros15.jpg';
+
 import evaCard1 from './img/Solo_Reich_cards/Eva/Eva1.jpg';
 import evaCard2 from './img/Solo_Reich_cards/Eva/Eva2.jpg';
 import evaCard3 from './img/Solo_Reich_cards/Eva/Eva3.jpg';
@@ -106,6 +128,17 @@ import evaCard9 from './img/Solo_Reich_cards/Eva/Eva9.jpg';
 import evaCard10 from './img/Solo_Reich_cards/Eva/Eva10.jpg';
 import evaCard11 from './img/Solo_Reich_cards/Eva/Eva12.jpg';
 import evaCard12 from './img/Solo_Reich_cards/Eva/Eva34.jpg';
+
+import hossCard1 from './img/Solo_Reich_cards/Hoss/Hoss1.jpg';
+import hossCard2 from './img/Solo_Reich_cards/Hoss/Hoss2.jpg';
+import hossCard3 from './img/Solo_Reich_cards/Hoss/Hoss3.jpg';
+import hossCard4 from './img/Solo_Reich_cards/Hoss/Hoss4.jpg';
+import hossCard5 from './img/Solo_Reich_cards/Hoss/Hoss5.jpg';
+import hossCard6 from './img/Solo_Reich_cards/Hoss/Hoss6.jpg';
+import hossCard7 from './img/Solo_Reich_cards/Hoss/Hoss7.jpg';
+import hossCard8 from './img/Solo_Reich_cards/Hoss/Hoss8.jpg';
+import hossCard9 from './img/Solo_Reich_cards/Hoss/Hoss9.jpg';
+import hossCard10 from './img/Solo_Reich_cards/Hoss/Hoss10.jpg';
 
 import frankenstahlCard1 from './img/Solo_Reich_cards/Frankenstahl/Frank1.jpg';
 import frankenstahlCard2 from './img/Solo_Reich_cards/Frankenstahl/Frank2.jpg';
@@ -276,8 +309,6 @@ import talaCard7 from './img/Solo_Union_cards/Tala/Tala7.jpg';
 import talaCard8 from './img/Solo_Union_cards/Tala/Tala8.jpg';
 import talaCard9 from './img/Solo_Union_cards/Tala/Tala9.jpg';
 import talaCard10 from './img/Solo_Union_cards/Tala/Tala10.jpg';
-import { Deck } from './deck/components';
-
 
 export interface EventData {
   name: string;
@@ -359,10 +390,12 @@ export const AllEvents: Events = {
 export enum Faction {
   Reich,
   Union,
+  Daedalus,
 }
 
 export const StringToFaction = (fac: string): Faction => {
   if (fac === "Reich") return Faction.Reich;
+  else if (fac === "Daedalus") return Faction.Daedalus;
   return Faction.Union;
 }
 
@@ -418,6 +451,25 @@ export const AllCharacters: Characters = {
       frankenstahlCard8,
       frankenstahlCard9,
       frankenstahlCard10,
+    ],
+  },
+  Hoss: {
+    name: "Hoss Harbinger",
+    faction: Faction.Reich,
+    image: hossImage,
+    token_image: hossToken,
+    card_back_image: reichBackCardImage,
+    deck: [
+      hossCard1,
+      hossCard2,
+      hossCard3,
+      hossCard4,
+      hossCard5,
+      hossCard6,
+      hossCard7,
+      hossCard8,
+      hossCard9,
+      hossCard10,
     ],
   },
   Ozo: {
@@ -689,6 +741,30 @@ export const AllCharacters: Characters = {
       talaCard8,
       talaCard9,
       talaCard10,
+    ],
+  },
+  Asteros: {
+    name: "Asteros (Αστέρωσ)",
+    faction: Faction.Daedalus,
+    image: asterosImage,
+    token_image: asterosToken,
+    card_back_image: asterosBackCardImage,
+    deck: [
+      asterosCard1,
+      asterosCard2,
+      asterosCard3,
+      asterosCard4,
+      asterosCard5,
+      asterosCard6,
+      asterosCard7,
+      asterosCard8,
+      asterosCard9,
+      asterosCard10,
+      asterosCard11,
+      asterosCard12,
+      asterosCard13,
+      asterosCard14,
+      asterosCard15,
     ],
   },
 };
