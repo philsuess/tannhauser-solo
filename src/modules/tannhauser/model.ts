@@ -394,9 +394,10 @@ export enum Faction {
 }
 
 export const StringToFaction = (fac: string): Faction => {
-  if (fac === "Reich") return Faction.Reich;
-  else if (fac === "Daedalus") return Faction.Daedalus;
-  return Faction.Union;
+  let returnVal = Faction.Union
+  if (fac === "Reich") returnVal = Faction.Reich;
+  else if (fac === "Daedalus") returnVal = Faction.Daedalus;
+  return returnVal;
 }
 
 export interface CharacterData {
