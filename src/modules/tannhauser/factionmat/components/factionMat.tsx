@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ScrollIntoView from 'react-scroll-into-view';
 import FactionMatStyle from '../style.css';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
@@ -18,12 +19,20 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   renderCharacterHeader() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
-      return <a href={"#" + characterName} ><img key={characterName} src={Player.token_image} height={100} /></a>;
+      return <div key={characterName}>
+          <ScrollIntoView selector={"#" + characterName} >
+          <img key={characterName} src={Player.token_image} height={100} />
+          </ScrollIntoView>
+        </div>;
     });
   }
 
   renderEventHeader() {
-    return <img key={'eventImage'} src={Model.AllEvents[this.props.eventsDeck].image} height={100} />
+    return <div key={'eventImage'}>
+        <ScrollIntoView selector={"#event"} >
+        <img key={'eventImage'} src={Model.AllEvents[this.props.eventsDeck].image} height={100} />
+        </ScrollIntoView>
+      </div>;
   }
 
   renderHeader() {
@@ -41,7 +50,9 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
 
   renderEventMats() {
     const Event = Model.AllEvents[this.props.eventsDeck];
-    return <DeckMat.Component {...Event} key={Event.name + "_mat"} />
+    return <div id={"event"} key={"event"} >
+        <DeckMat.Component {...Event} key={Event.name + "_mat"} />
+      </div>;
   }
 
   renderMats() {
