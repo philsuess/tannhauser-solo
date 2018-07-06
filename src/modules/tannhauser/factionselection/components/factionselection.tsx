@@ -3,6 +3,7 @@ import Style from '../style.css';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";
+import daedalusSymbol from "../../img/daedalus-symbol.png";
 
 interface FactionSelectionProps {
   factions: Model.Faction[];
@@ -43,7 +44,15 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
               this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.selected : Style.unselected
             }
             src={unionSymbol}
-            onClick={() => this.select(Model.Faction.Union)} />
+            onClick={() => this.select(Model.Faction.Union)} 
+          />
+          <img 
+          className={
+            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? Style.selected : Style.unselected
+          }
+          src={daedalusSymbol}
+          onClick={() => this.select(Model.Faction.Daedalus)} 
+        />
         </div>
       </div>
     );
