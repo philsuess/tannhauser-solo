@@ -59,7 +59,7 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   renderFactionMat() {
-    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.props.selectedCharacters} />;
+    return <FactionMat.Component events={this.props.selectedEvents} characters={this.props.selectedCharacters} />;
   }
 
   areEventCardsDeclined() {

@@ -5,7 +5,7 @@ import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 
 interface FactionMatProps {
-  eventsDeck: string;
+  events: string[];
   characters: string[];
 }
 
@@ -27,16 +27,19 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
     });
   }
 
-  renderEventHeader() {
-    return <div key={'eventImage'}>
-        <ScrollIntoView selector={"#event"} >
-        <img key={'eventImage'} src={Model.AllEvents[this.props.eventsDeck].image} height={100} />
-        </ScrollIntoView>
-      </div>;
+  renderEventsHeader() {
+    return this.props.events.map(eventName => {
+      const Event = Model.AllEvents[eventName];
+      return <div key={eventName}>
+          <ScrollIntoView selector={"#" + eventName} >
+          <img key={eventName} src={Event.image} height={100} />
+          </ScrollIntoView>
+        </div>;
+    });
   }
 
   renderHeader() {
-    return [this.renderEventHeader()].concat(this.renderCharacterHeader());
+    return [this.renderEventsHeader()].concat(this.renderCharacterHeader());
   }
 
   renderDeckMats() {
@@ -49,10 +52,12 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   }
 
   renderEventMats() {
-    const Event = Model.AllEvents[this.props.eventsDeck];
-    return <div id={"event"} key={"event"} >
-        <DeckMat.Component {...Event} key={Event.name + "_mat"} />
-      </div>;
+    return this.props.events.map(eventName => {
+      const Event = Model.AllEvents[eventName];
+      return <div id={eventName} key={eventName + "_matd"} >
+        <DeckMat.Component {...Event} key={eventName + "_mat"} />
+        </div>;
+    });
   }
 
   renderMats() {
