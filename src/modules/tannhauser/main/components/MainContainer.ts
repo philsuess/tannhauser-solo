@@ -8,11 +8,13 @@ import { TannhauserState } from "../model";
 const mapStateToProps = ({ tannhauser }: GlobalState) => ({
   selectedFaction: tannhauser.selectedFaction,
   selectedCharacters: tannhauser.selectedCharacters,
+  selectedEvents: tannhauser.selectedEvents,
 });
 
 const mapDispatchToProps = {
   selectFaction: actions.selectFaction,
   selectCharacters: actions.selectCharacters,
+  selectEvents: actions.selectEvents,
 };
 
 export default connect(

@@ -1,0 +1,38 @@
+.eventsselection {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.events {
+  width: 30%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.event {
+  margin: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.unselected {
+  height: 300px;
+  margin: 20px;
+  filter: grayscale(80%);
+}
+
+.selected {
+  height: 300px;
+  margin: 20px;
+}
