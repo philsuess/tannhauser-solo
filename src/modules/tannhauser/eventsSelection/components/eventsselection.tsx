@@ -3,7 +3,7 @@ import Style from '../style.css';
 import * as Model from '../../model';
 
 interface EventsSelectionProps {
-  events: Model.EventData[];
+  events: Model.Event[];
   selectionComplete: (chosen: string[]) => any;
   selectNoEvent: () => any;
 }
@@ -13,7 +13,7 @@ interface EventsSelectionState {
 }
 
 export default class EventsSelection extends React.Component<EventsSelectionProps,EventsSelectionState> {
-  constructor(props: TeamSelectionProps) {
+  constructor(props: EventsSelectionProps) {
     super(props);
     this.resetAllSelections();
   }
