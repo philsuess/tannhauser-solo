@@ -3,7 +3,7 @@ import Style from '../style.css';
 import * as Model from '../../model';
 
 interface EventsSelectionProps {
-  events: Model.Event[];
+  events: Model.Events;
   selectionComplete: (chosen: string[]) => any;
   selectNoEvent: () => any;
 }

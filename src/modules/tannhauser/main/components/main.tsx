@@ -27,7 +27,7 @@ export default class Main extends React.Component<MainProps,MainState> {
     return <FactionSelection.Component 
               factions={ [Model.Faction.Reich, Model.Faction.Union] } 
               selectionComplete={(selection: string) => this.props.selectFaction(selection)}
-            />
+            />;
   }
 
   renderTeamSelection() {
@@ -35,22 +35,31 @@ export default class Main extends React.Component<MainProps,MainState> {
               faction={ Model.StringToFaction(this.props.selectedFaction) }
               characters={Model.AllCharacters}
               selectionComplete={(selection: string[]) => this.props.selectCharacters(selection)}
-            />
+            />;
+  }
+
+  setUseEventCards(useEvents: boolean) {
+    this.setState({
+      ...this.state,
+      optOutFromEvents: !useEvents,
+    });
+  }
+
+  selectEvents(selection: string[]) {
+    this.setUseEventCards(true);
+    this.props.selectEvents(selection);
   }
 
   renderEventSelection() {
     return <EventSelection.Component 
               events={ Model.AllEvents }
-              selectionComplete={(selection: string[]) => this.props.selectEvents(selection)}
-              selectNoEvent={() => this.setState({
-                ...this.state,
-                optOutFromEvents: false,
-              })}
-            />
+              selectionComplete={(selection: string[]) => this.selectEvents(selection)}
+              selectNoEvent={() => this.setUseEventCards(false)}
+            />;
   }
 
   renderFactionMat() {
-    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.props.selectedCharacters} />
+    return <FactionMat.Component eventsDeck="Ksiaz" characters={this.props.selectedCharacters} />;
   }
 
   areEventCardsDeclined() {
