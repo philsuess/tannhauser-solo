@@ -35,12 +35,12 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     this.state = noneSelected;
   }
 
-  select(character: string) {
+  select(characterKey: string) {
     this.setState({
       ...this.state,
-      [character]: {
-        ...this.state[character],
-        selected: !this.state[character].selected,
+      [characterKey]: {
+        ...this.state[characterKey],
+        selected: !this.state[characterKey].selected,
       },
     });
   }
@@ -67,13 +67,22 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     });
   }
 
-  selectPackFor(name: string, pack: string) {
-    console.log(pack + ' selected for ' + name);
+  selectPackFor(characterKey: string, pack: string) {
+    this.setState({
+      ...this.state,
+      [characterKey]: {
+        ...this.state[characterKey],
+        selected: true,
+        pack: pack,
+      },
+    });
   }
 
-  renderAvailablePacksFor(character: Model.CharacterData) {
+  renderAvailablePacksFor(characterKey: string) {
+    const character = this.props.characters[characterKey];
     return Model.GetAvailablePacks(character.type).map(pack => {
-      return <div key={character+pack}><a href="#" onClick={() => this.selectPackFor(character.name, pack)}>{pack} pack</a></div>;
+      return <div key={character+pack} className={Style.packSelectOption} onClick={() => this.selectPackFor(characterKey, pack)}>
+        {pack} pack</div>;
     });
   }
 
@@ -88,7 +97,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
             />
             <h3>{char.name}</h3>
             <div className={Style.dropdownContent}>
-              {this.renderAvailablePacksFor(char)}
+              {this.renderAvailablePacksFor(key)}
             </div>
           </div>
         </div>
