@@ -637,6 +637,12 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-tooltip@^3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/react-tooltip/-/react-tooltip-3.3.5.tgz#7b1b16ce00d76436328106a6ca7c4ad60de525d6"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@16.4.1":
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.1.tgz#c53bbfb4a78933db587da085ac60dbf5fcf73f8f"
@@ -2193,6 +2199,10 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.5:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
 cli-cursor@^2.1.0:
   version "2.1.0"
@@ -5676,6 +5686,13 @@ react-router@^4.3.1:
 react-scroll-into-view@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-scroll-into-view/-/react-scroll-into-view-1.2.0.tgz#0461d65e98748f8eb49d4b59abfd3ce7765e645b"
+
+react-tooltip@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.6.1.tgz#2ca993baa50d7e0271b8d13c6024445a883842eb"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
 
 react@^16.4.1:
   version "16.4.1"

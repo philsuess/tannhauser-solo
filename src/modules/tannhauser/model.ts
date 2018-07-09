@@ -415,6 +415,13 @@ export const StringToCharacterType = (type: string): CharacterType => {
   return returnVal;
 }
 
+export const GetPackColor = (pack: string): string => {
+  let returnVal = '#333300';
+  if (pack === "Combat") returnVal = '#960100';
+  else if (pack === "Command") returnVal = '#0000fe';
+  return returnVal;
+}
+
 export const GetAvailablePacks = (characterType: CharacterType): string[] => {
   const combat = "Combat";
   const command = "Command";

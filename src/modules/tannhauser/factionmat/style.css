@@ -20,3 +20,8 @@
 .header img {
   cursor: pointer;
 }
+
+.characterDeck {
+  display: flex;
+  flex-direction: row;
+}

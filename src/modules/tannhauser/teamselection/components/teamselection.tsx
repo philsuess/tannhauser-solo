@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactTooltip from 'react-tooltip'
 import Style from '../style.css';
 import * as Model from '../../model';
 
@@ -132,20 +133,29 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     });
   }
 
+  renderPackIndicator(pack: string) {
+    const packColor = Model.GetPackColor(pack);
+    return <div data-tip={pack + " pack selected"}>
+        <svg width={20} height={20} ><circle cx={10} cy={10} r={10} fill={packColor} /></svg>
+        <ReactTooltip place="left" type="dark" effect="float"/>
+      </div>
+  }
+
   renderFaction() {
     return this.getFactionKeys().map(key => {
       const char = this.props.characters[key];
       return (
-        <div key={key}>
-          <div className={Style.character} onClick={() => this.select(key)} >
+        <div key={key} className={Style.character} >
+          <div className={Style.dropDown} onClick={() => this.select(key)} >
             <img src={char.token_image} alt={char.name} height={100} 
               className={this.state[key].selected ? Style.selected : Style.unselected} 
             />
-            <h3>{char.name}</h3>
             <div className={Style.dropdownContent}>
               {this.renderAvailablePacksFor(key)}
             </div>
           </div>
+          <h3>{char.name}</h3>
+          {this.state[key].selected && this.renderPackIndicator(this.state[key].pack)}
         </div>
       );
     });
@@ -164,7 +174,8 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     return (
       <div className={Style.teamselection}>
         <div>
-          <h1>Select your opponents ({this.getCountString()})</h1>
+          <h1>Select your opponents</h1>
+          <h3>({this.getCountString()})</h3>
           <button onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select</button>
         </div>
         <div className={Style.characters} >{this.renderFaction()}</div>
