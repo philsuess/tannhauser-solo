@@ -394,9 +394,24 @@ export enum Faction {
 }
 
 export const StringToFaction = (fac: string): Faction => {
-  let returnVal = Faction.Union
+  let returnVal = Faction.Union;
   if (fac === "Reich") returnVal = Faction.Reich;
   else if (fac === "Daedalus") returnVal = Faction.Daedalus;
+  return returnVal;
+}
+
+export enum CharacterType {
+  Hero,
+  Soldier,
+  Mercenary,
+  None,
+}
+
+export const StringToCharacterType = (type: string): CharacterType => {
+  let returnVal = CharacterType.Soldier;
+  if (type === "Hero") returnVal = CharacterType.Hero;
+  else if (type === "Mercenary") returnVal = CharacterType.Mercenary;
+  else if (type === "None") returnVal = CharacterType.None;
   return returnVal;
 }
 
@@ -404,6 +419,7 @@ export interface CharacterData {
   name: string;
   image: string;
   faction: Faction;
+  type: CharacterType;
   token_image: string;
   card_back_image: string;
   deck: string[];
@@ -417,6 +433,7 @@ export const AllCharacters: Characters = {
   Eva: {
     name: "Eva Krämer",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: evaImage,
     token_image: evaToken,
     card_back_image: reichBackCardImage,
@@ -438,6 +455,7 @@ export const AllCharacters: Characters = {
   Frankenstahl: {
     name: "Frankenstahl",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: frankenstahlImage,
     token_image: frankenstahlToken,
     card_back_image: reichBackCardImage,
@@ -457,6 +475,7 @@ export const AllCharacters: Characters = {
   Hoss: {
     name: "Hoss Harbinger",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: hossImage,
     token_image: hossToken,
     card_back_image: reichBackCardImage,
@@ -476,6 +495,7 @@ export const AllCharacters: Characters = {
   Ozo: {
     name: "Karl 'Ozo' Zermann",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: ozoImage,
     token_image: ozoToken,
     card_back_image: reichBackCardImage,
@@ -495,6 +515,7 @@ export const AllCharacters: Characters = {
   Schocktruppen: {
     name: "Schocktruppen",
     faction: Faction.Reich,
+    type: CharacterType.Soldier,
     image: schocktruppenImage,
     token_image: schocktruppenToken,
     card_back_image: reichBackCardImage,
@@ -514,6 +535,7 @@ export const AllCharacters: Characters = {
   Stosstruppen: {
     name: "Stosstruppen",
     faction: Faction.Reich,
+    type: CharacterType.Soldier,
     image: stosstruppenImage,
     token_image: stosstruppenToken,
     card_back_image: reichBackCardImage,
@@ -533,6 +555,7 @@ export const AllCharacters: Characters = {
   Heizinger: {
     name: "Hermann Von Heïzinger",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: heizingerImage,
     token_image: heizingerToken,
     card_back_image: reichBackCardImage,
@@ -556,6 +579,7 @@ export const AllCharacters: Characters = {
   Yula: {
     name: "Yula Korlïtz",
     faction: Faction.Reich,
+    type: CharacterType.Hero,
     image: yulaImage,
     token_image: yulaToken,
     card_back_image: reichBackCardImage,
@@ -576,6 +600,7 @@ export const AllCharacters: Characters = {
   Alpha: {
     name: "Commando Alpha",
     faction: Faction.Union,
+    type: CharacterType.Soldier,
     image: alphaImage,
     token_image: alphaToken,
     card_back_image: unionBackCardImage,
@@ -595,6 +620,7 @@ export const AllCharacters: Characters = {
   Barry: {
     name: "Barry Daniel Brown",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: barryImage,
     token_image: barryToken,
     card_back_image: unionBackCardImage,
@@ -614,6 +640,7 @@ export const AllCharacters: Characters = {
   Delta: {
     name: "Commando Delta",
     faction: Faction.Union,
+    type: CharacterType.Soldier,
     image: deltaImage,
     token_image: deltaToken,
     card_back_image: unionBackCardImage,
@@ -633,6 +660,7 @@ export const AllCharacters: Characters = {
   Edison: {
     name: "James Edison",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: edisonImage,
     token_image: edisonToken,
     card_back_image: unionBackCardImage,
@@ -652,6 +680,7 @@ export const AllCharacters: Characters = {
   Hoax: {
     name: "Caitlin 'Hoax' Lamsbury",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: hoaxImage,
     token_image: hoaxToken,
     card_back_image: unionBackCardImage,
@@ -673,6 +702,7 @@ export const AllCharacters: Characters = {
   MacNeal: {
     name: "John MacNeal",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: macnealImage,
     token_image: macnealToken,
     card_back_image: unionBackCardImage,
@@ -694,6 +724,7 @@ export const AllCharacters: Characters = {
   Ramirez: {
     name: "Sergio Ramirez Delastillas",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: ramirezImage,
     token_image: ramirezToken,
     card_back_image: unionBackCardImage,
@@ -714,6 +745,7 @@ export const AllCharacters: Characters = {
   Hound: {
     name: "Hound Dog",
     faction: Faction.Union,
+    type: CharacterType.None,
     image: houndImage,
     token_image: houndToken,
     card_back_image: houndBackImage,
@@ -728,6 +760,7 @@ export const AllCharacters: Characters = {
   Tala: {
     name: "Tala Aponi",
     faction: Faction.Union,
+    type: CharacterType.Hero,
     image: talaImage,
     token_image: talaToken,
     card_back_image: unionBackCardImage,
@@ -747,6 +780,7 @@ export const AllCharacters: Characters = {
   Asteros: {
     name: "Asteros (Αστέρωσ)",
     faction: Faction.Daedalus,
+    type: CharacterType.Hero,
     image: asterosImage,
     token_image: asterosToken,
     card_back_image: asterosBackCardImage,
