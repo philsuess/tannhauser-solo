@@ -415,6 +415,20 @@ export const StringToCharacterType = (type: string): CharacterType => {
   return returnVal;
 }
 
+export const GetAvailablePacks = (characterType: CharacterType): string[] => {
+  const combat = "Combat";
+  const command = "Command";
+  const stamina = "Stamina";
+  let returnVal = [];
+  if (characterType === CharacterType.Hero) {
+    returnVal = [combat, command, stamina];
+  }
+  else if (characterType === CharacterType.Soldier) {
+    returnVal = [combat, stamina];
+  }
+  return returnVal;
+}
+
 export interface CharacterData {
   name: string;
   image: string;

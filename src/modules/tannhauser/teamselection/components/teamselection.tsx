@@ -58,6 +58,12 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     });
   }
 
+  renderAvailablePacksFor(character: Model.CharacterData) {
+    return Model.GetAvailablePacks(character.type).map(pack => {
+      return <a href="#">{pack} pack</a>;
+    });
+  }
+
   renderFaction() {
     return this.getFactionKeys().map(key => {
       const char = this.props.characters[key];
@@ -69,8 +75,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
             />
             <h3>{char.name}</h3>
             <div className={Style.dropdownContent}>
-              <a href="#">Combat</a>
-              <a href="#">Stamina</a>
+              {this.renderAvailablePacksFor(char)}
             </div>
           </div>
         </div>
