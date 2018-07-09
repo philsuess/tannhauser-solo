@@ -45,9 +45,12 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   renderDeckMats() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
+      const inlineStyleForDeckMat = {
+        color: Model.GetPackColor("Command"),
+      };
       const deckMatProps = {
         ...Player,
-        extra_text: "Equipped with the <span style=\"color: " + Model.GetPackColor("Command") + "\">" + characterName + "</span> pack",
+        extra_text: ["Equipped with the ", <span style={inlineStyleForDeckMat}>{characterName}</span>, " pack"],
       };
       return <div className={FactionMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
         <DeckMat.Component {...deckMatProps} key={characterName + "_mat"} />
