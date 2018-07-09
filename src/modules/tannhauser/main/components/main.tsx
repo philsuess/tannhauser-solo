@@ -12,7 +12,7 @@ interface MainProps {
   selectedCharacters: string[];
   selectedEvents: string[];
   selectFaction: ActionCreator<string>;
-  selectCharacters: ActionCreator<string[]>;
+  selectCharacters: ActionCreator<{characters: string[], packs: string[]}>;
   selectEvents: ActionCreator<string[]>;
 }
 
@@ -34,7 +34,7 @@ export default class Main extends React.Component<MainProps,MainState> {
     return <TeamSelection.Component 
               faction={ Model.StringToFaction(this.props.selectedFaction) }
               characters={Model.AllCharacters}
-              selectionComplete={(selection: string[]) => this.props.selectCharacters(selection)}
+              selectionComplete={(selection) => this.props.selectCharacters(selection)}
             />;
   }
 

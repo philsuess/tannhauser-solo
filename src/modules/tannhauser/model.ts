@@ -419,7 +419,7 @@ export const GetAvailablePacks = (characterType: CharacterType): string[] => {
   const combat = "Combat";
   const command = "Command";
   const stamina = "Stamina";
-  let returnVal = [];
+  let returnVal: string[] = [];
   if (characterType === CharacterType.Hero) {
     returnVal = [combat, command, stamina];
   }
