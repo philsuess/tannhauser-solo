@@ -9,7 +9,10 @@ interface TeamSelectionProps {
 }
 
 interface TeamSelectionState {
-  [key: string] : boolean;
+  [key: string]: {
+    selected: boolean,
+    pack: string,
+  };
 }
 
 export default class TeamSelectionMat extends React.Component<TeamSelectionProps,TeamSelectionState> {
@@ -23,7 +26,10 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     this.getFactionKeys().forEach(key => {
       noneSelected = {
         ...noneSelected,
-        [key]: false,
+        [key]: {
+          selected: false,
+          pack: "",
+        }
       }
     });
     this.state = noneSelected;
@@ -32,24 +38,27 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
   select(character: string) {
     this.setState({
       ...this.state,
-      [character]: !this.state[character],
+      [character]: {
+        ...this.state[character],
+        selected: !this.state[character].selected,
+      },
     });
   }
 
   countSelected() {
-    let selected = 0;
+    let count = 0;
     Object.keys(this.state).forEach(key => {
-      if (this.state[key]) selected = selected + 1;
+      if (this.state[key].selected) count = count + 1;
     });
-    return selected;
+    return count;
   }
 
   getSelectedAsStrings() {
-    const selected: string[] = [];
+    const chosen: string[] = [];
     Object.keys(this.state).forEach(key => {
-      if (this.state[key]) selected.push(key);
+      if (this.state[key].selected) chosen.push(key);
     });
-    return selected;
+    return chosen;
   }
 
   getFactionKeys() {
@@ -58,9 +67,13 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     });
   }
 
+  selectPackFor(name: string, pack: string) {
+    console.log(pack + ' selected for ' + name);
+  }
+
   renderAvailablePacksFor(character: Model.CharacterData) {
     return Model.GetAvailablePacks(character.type).map(pack => {
-      return <a href="#">{pack} pack</a>;
+      return <div key={character+pack}><a href="#" onClick={() => this.selectPackFor(character.name, pack)}>{pack} pack</a></div>;
     });
   }
 
@@ -71,7 +84,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
         <div key={key}>
           <div className={Style.character} onClick={() => this.select(key)} >
             <img src={char.token_image} alt={char.name} height={100} 
-              className={this.state[key] ? Style.selected : Style.unselected} 
+              className={this.state[key].selected ? Style.selected : Style.unselected} 
             />
             <h3>{char.name}</h3>
             <div className={Style.dropdownContent}>
