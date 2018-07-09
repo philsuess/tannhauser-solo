@@ -62,11 +62,17 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     return this.getFactionKeys().map(key => {
       const char = this.props.characters[key];
       return (
-        <div key={key} className={Style.character} onClick={() => this.select(key)} >
-          <img src={char.token_image} alt={char.name} height={100} 
-            className={this.state[key] ? Style.selected : Style.unselected} 
-          />
-          <h3>{char.name}</h3>
+        <div key={key}>
+          <div className={Style.character} onClick={() => this.select(key)} >
+            <img src={char.token_image} alt={char.name} height={100} 
+              className={this.state[key] ? Style.selected : Style.unselected} 
+            />
+            <h3>{char.name}</h3>
+            <div className={Style.dropdownContent}>
+              <a href="#">Combat</a>
+              <a href="#">Stamina</a>
+            </div>
+          </div>
         </div>
       );
     });

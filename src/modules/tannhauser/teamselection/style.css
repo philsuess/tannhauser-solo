@@ -28,8 +28,37 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
+  position: relative;
 }
 
 .unselected {
   filter: grayscale(80%);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 10;
+  left: 100px;
+}
+
+/* Links inside the dropdown */
+.dropdownContent a {
+  color: whitesmoke;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdownContent a:hover {background-color: rgba(169, 169, 169, 0.479)}
+
+/* Show the dropdown menu on hover */
+.character:hover .dropdownContent {
+  display: block;
 }
