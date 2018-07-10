@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip'
 import Style from '../style.css';
+import THStyle from '../../main/style.css';
 import * as Model from '../../model';
 
 interface CompleteSelection {
@@ -177,7 +178,10 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
         <div>
           <h1>Select your opponents</h1>
           <h3>({this.getCountString()})</h3>
-          <button onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select</button>
+          <button 
+            className={THStyle.thbutton}
+            onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select
+          </button>
         </div>
         <div className={Style.characters} >{this.renderFaction()}</div>
       </div>
