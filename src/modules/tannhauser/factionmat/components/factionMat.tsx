@@ -48,10 +48,15 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
       const Player = Model.AllCharacters[characterName];
       const equippedPack = this.props.packs[index];
       const inlineStyleForDeckMat = {
+        backgroundColor: '#ebeacb',
         color: Model.GetPackColor(equippedPack),
       };
       const packText = equippedPack === "" ? ["No pack selected"] : 
-        ["Equipped with the ", <span style={inlineStyleForDeckMat}>{equippedPack}</span>, " pack"];
+        [
+          "Equipped with the ", 
+          <span key={characterName+"style"} style={inlineStyleForDeckMat}><strong>{equippedPack}</strong></span>, 
+          " pack",
+        ];
       const deckMatProps = {
         ...Player,
         extra_text: packText,
