@@ -9,7 +9,7 @@ interface DeckMatProps {
   image: string;
   deck: string[];
   card_back_image: string;
-  extra_text?: string;
+  extra_text?: any;
 }
 
 interface DeckMatState {
