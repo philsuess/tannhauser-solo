@@ -135,7 +135,8 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
 
   renderPackIndicator(pack: string) {
     const packColor = Model.GetPackColor(pack);
-    return <div data-tip={pack + " pack selected"}>
+    const tipString = pack === "" ? "no pack selected" : pack + " pack selected";
+    return <div data-tip={tipString}>
         <svg width={20} height={20} ><circle cx={10} cy={10} r={10} fill={packColor} /></svg>
         <ReactTooltip place="left" type="dark" effect="float"/>
       </div>

@@ -416,9 +416,10 @@ export const StringToCharacterType = (type: string): CharacterType => {
 }
 
 export const GetPackColor = (pack: string): string => {
-  let returnVal = '#333300';
+  let returnVal = '#000000';
   if (pack === "Combat") returnVal = '#960100';
   else if (pack === "Command") returnVal = '#0000fe';
+  else if (pack === "Stamina") returnVal = '#333300';
   return returnVal;
 }
 
