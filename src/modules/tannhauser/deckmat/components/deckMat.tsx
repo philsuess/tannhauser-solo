@@ -9,6 +9,7 @@ interface DeckMatProps {
   image: string;
   deck: string[];
   card_back_image: string;
+  extra_text?: string;
 }
 
 interface DeckMatState {
@@ -87,6 +88,7 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
         </div>
         {this.renderDrawDeck()}
         {this.renderDiscardPile()}
+        {(this.props.extra_text != null) && <h3>{this.props.extra_text}</h3>}
       </div>
     );
   }

@@ -7,6 +7,7 @@ import * as Model from '../../model';
 interface FactionMatProps {
   events: string[];
   characters: string[];
+  packs: string[];
 }
 
 interface FactionMatState {
@@ -43,10 +44,20 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   }
 
   renderDeckMats() {
-    return this.props.characters.map(characterName => {
+    return this.props.characters.map((characterName, index) => {
       const Player = Model.AllCharacters[characterName];
-      return <div id={characterName} key={characterName + "_matd"} >
-        <DeckMat.Component {...Player} key={characterName + "_mat"} />
+      const equippedPack = this.props.packs[index];
+      const inlineStyleForDeckMat = {
+        color: Model.GetPackColor(equippedPack),
+      };
+      const packText = equippedPack === "" ? ["No pack selected"] : 
+        ["Equipped with the ", <span style={inlineStyleForDeckMat}>{equippedPack}</span>, " pack"];
+      const deckMatProps = {
+        ...Player,
+        extra_text: packText,
+      };
+      return <div className={FactionMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
+        <DeckMat.Component {...deckMatProps} key={characterName + "_mat"} />
         </div>;
     });
   }

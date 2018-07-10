@@ -6,6 +6,7 @@ const initialState: TannhauserState = {
   selectedFaction: "",
   selectedCharacters: [],
   selectedEvents: [],
+  selectedPacks: [],
 };
 
 export default reducerWithInitialState(initialState)
@@ -15,7 +16,8 @@ export default reducerWithInitialState(initialState)
   }))
   .case(actions.selectCharacters, (state, payload) => ({
     ...state,
-    selectedCharacters: payload,
+    selectedCharacters: payload.characters,
+    selectedPacks: payload.packs,
   }))
   .case(actions.selectEvents, (state, payload) => ({
     ...state,

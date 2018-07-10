@@ -10,9 +10,10 @@ import * as Model from '../../model';
 interface MainProps {
   selectedFaction: string;
   selectedCharacters: string[];
+  selectedPacks: string[];
   selectedEvents: string[];
   selectFaction: ActionCreator<string>;
-  selectCharacters: ActionCreator<string[]>;
+  selectCharacters: ActionCreator<{characters: string[], packs: string[]}>;
   selectEvents: ActionCreator<string[]>;
 }
 
@@ -34,7 +35,7 @@ export default class Main extends React.Component<MainProps,MainState> {
     return <TeamSelection.Component 
               faction={ Model.StringToFaction(this.props.selectedFaction) }
               characters={Model.AllCharacters}
-              selectionComplete={(selection: string[]) => this.props.selectCharacters(selection)}
+              selectionComplete={(selection) => this.props.selectCharacters(selection)}
             />;
   }
 
@@ -59,7 +60,11 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   renderFactionMat() {
-    return <FactionMat.Component events={this.props.selectedEvents} characters={this.props.selectedCharacters} />;
+    return <FactionMat.Component 
+      events={this.props.selectedEvents} 
+      characters={this.props.selectedCharacters} 
+      packs={this.props.selectedPacks}
+    />;
   }
 
   areEventCardsDeclined() {

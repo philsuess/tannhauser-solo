@@ -16,3 +16,12 @@
   top: 0;
   z-index: 100;
 }
+
+.header img {
+  cursor: pointer;
+}
+
+.characterDeck {
+  display: flex;
+  flex-direction: row;
+}
