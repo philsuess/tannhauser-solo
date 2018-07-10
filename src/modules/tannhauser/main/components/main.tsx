@@ -6,6 +6,7 @@ import * as FactionSelection from '../../factionselection';
 import * as FactionMat from '../../factionmat';
 import Style from '../style.css';
 import * as Model from '../../model';
+import ThLogo from '../../img/tannhauser-logo.png';
 
 interface MainProps {
   selectedFaction: string;
@@ -90,6 +91,10 @@ export default class Main extends React.Component<MainProps,MainState> {
     return configComplete;
   }
 
+  renderHeader() {
+    return <div className={Style.banner}><img src={ThLogo} /></div>
+  }
+
   render() {
     let renderComponent = this.renderFactionSelection();
     if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
@@ -97,6 +102,7 @@ export default class Main extends React.Component<MainProps,MainState> {
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (
       <div className={Style.main}>
+        { !this.isEverythingConfigured() && this.renderHeader() }
         { renderComponent }
       </div>
     );
