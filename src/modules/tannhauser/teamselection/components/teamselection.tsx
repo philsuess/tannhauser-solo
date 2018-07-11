@@ -141,7 +141,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     return <div data-tip={tipString}>
         <svg width={20} height={20} >
           <circle cx={10} cy={10} r={10} 
-            stroke={"grey"} stroke-width={circleStrokeWidth} fill={packColor} />
+            stroke={"grey"} strokeWidth={circleStrokeWidth} fill={packColor} />
         </svg>
         <ReactTooltip place="left" type="dark" effect="float"/>
       </div>

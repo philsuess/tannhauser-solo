@@ -90,7 +90,7 @@ import macnealImage from './img/macneal.png';
 import macnealToken from './img/macneal-token.png';
 import ramirezImage from './img/ramirez.png';
 import ramirezToken from './img/ramirez-token.png';
-import houndImage from './img/Solo_Union_cards/Ramirez/HoundDog/HDtempRULES.jpg';
+import houndImage from './img/hound_dog.png';
 import houndToken from './img/hound_dog-token.png';
 import houndBackImage from './img/Solo_Union_cards/Ramirez/HoundDog/HDBack.jpg';
 import talaImage from './img/tala.png';
