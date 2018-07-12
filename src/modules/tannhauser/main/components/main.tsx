@@ -20,16 +20,30 @@ interface MainProps {
 
 interface MainState {
   optOutFromEvents: boolean;
+  showOverview: boolean;
 }
 
 export default class Main extends React.Component<MainProps,MainState> {
-  state = { optOutFromEvents: false }
+  state = { 
+    optOutFromEvents: false,
+    showOverview: false,
+  }
 
   renderFactionSelection() {
-    return <FactionSelection.Component 
-              factions={ [Model.Faction.Reich, Model.Faction.Union] } 
-              selectionComplete={(selection: string) => this.props.selectFaction(selection)}
-            />;
+    const bgg = "https://boardgamegeek.com/";
+    const dansBlog = "https://boardgamegeek.com/blog/5464/creating-solo-play-tannhauser-game";
+    return <div className={Style.splash}>
+      <p>Play Tannhäuser solo or co-op and let your enemies be controlled by the AI system created by Dan Manning.
+        Find more ressources and the solo rules in his <a href={dansBlog}>blog</a> on <a href={bgg}>boardgamegeek</a>.
+      </p>
+      <p>Looking for a quick <a href="#" onClick={() => this.setState({showOverview: true})}>overwiew</a> for 
+        this app?
+      </p>
+      <FactionSelection.Component 
+        factions={ [Model.Faction.Reich, Model.Faction.Union] } 
+        selectionComplete={(selection: string) => this.props.selectFaction(selection)}
+      />
+    </div>;
   }
 
   renderTeamSelection() {
@@ -95,9 +109,14 @@ export default class Main extends React.Component<MainProps,MainState> {
     return <div className={Style.banner}><img src={ThLogo} /></div>
   }
 
+  renderOverview() {
+    return <button onClick={() => this.setState({showOverview: false})}>Close overwiew</button>
+  }
+
   render() {
     let renderComponent = this.renderFactionSelection();
-    if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
+    if (this.state.showOverview) renderComponent = this.renderOverview();
+    else if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (
