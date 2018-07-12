@@ -37,3 +37,22 @@
   color: navajowhite;
   font-size: 23px;
 }
+
+.helpSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 200px 0;
+}
+
+.hashLink {
+  cursor: pointer;
+  color: navajowhite;
+  font-size: 23px;
+  margin: 10px;
+}
+
+.helpSection img {
+  margin: 20px;
+  border: 2px solid antiquewhite;
+}

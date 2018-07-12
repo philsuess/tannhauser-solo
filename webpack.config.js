@@ -91,7 +91,7 @@ module.exports = {
         use: "raw-loader"
       },
       {
-        test: /\.(woff2?|png|tiff?|jpe?g)$/,
+        test: /\.(woff2?|png|gif|tiff?|jpe?g)$/,
         use: [
           {
             // Include files as data urls
