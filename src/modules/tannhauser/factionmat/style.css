@@ -19,6 +19,8 @@
 
 .header img {
   cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
 }
 
 .characterDeck {

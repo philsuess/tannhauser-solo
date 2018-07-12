@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Style from '../style.css';
+import THStyle from '../../main/style.css';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";
@@ -29,7 +30,10 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
       <div className={Style.factionselection}>
         <div>
           <h1>Select your opponents' faction</h1>
-          <button onClick={() => this.props.selectionComplete(this.state.chosenFaction) }>Select</button>
+          <button 
+            className={THStyle.thbutton}
+            onClick={() => this.props.selectionComplete(this.state.chosenFaction) }>Select
+          </button>
         </div>
         <div>
           <img 

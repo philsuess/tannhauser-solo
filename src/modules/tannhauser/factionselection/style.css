@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
+  padding: 60px 0;
 }
 
 .symbol {
@@ -15,12 +16,12 @@
 
 
 .unselected {
-  height: 300px;
+  height: 150px;
   margin: 20px;
   filter: grayscale(80%);
 }
 
 .selected {
-  height: 300px;
+  height: 200px;
   margin: 20px;
 }

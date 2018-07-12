@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip'
 import Style from '../style.css';
+import THStyle from '../../main/style.css';
 import * as Model from '../../model';
 
 interface CompleteSelection {
@@ -136,8 +137,12 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
   renderPackIndicator(pack: string) {
     const packColor = Model.GetPackColor(pack);
     const tipString = pack === "" ? "no pack selected" : pack + " pack selected";
+    const circleStrokeWidth = pack === "" ? 0 : 2;
     return <div data-tip={tipString}>
-        <svg width={20} height={20} ><circle cx={10} cy={10} r={10} fill={packColor} /></svg>
+        <svg width={20} height={20} >
+          <circle cx={10} cy={10} r={10} 
+            stroke={"grey"} strokeWidth={circleStrokeWidth} fill={packColor} />
+        </svg>
         <ReactTooltip place="left" type="dark" effect="float"/>
       </div>
   }
@@ -156,7 +161,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
             </div>
           </div>
           <h3>{char.name}</h3>
-          {this.state[key].selected && this.renderPackIndicator(this.state[key].pack)}
+          {this.renderPackIndicator(this.state[key].pack)}
         </div>
       );
     });
@@ -177,7 +182,10 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
         <div>
           <h1>Select your opponents</h1>
           <h3>({this.getCountString()})</h3>
-          <button onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select</button>
+          <button 
+            className={THStyle.thbutton}
+            onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select
+          </button>
         </div>
         <div className={Style.characters} >{this.renderFaction()}</div>
       </div>

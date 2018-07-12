@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Style from '../style.css';
+import THStyle from '../../main/style.css';
 import * as Model from '../../model';
 
 interface EventsSelectionProps {
@@ -67,8 +68,14 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
       <div className={Style.eventsselection}>
         <div>
           <h1>Pick event cards to draw</h1>
-          <button onClick={() => this.props.selectionComplete(this.getSelectedAsStrings()) }>Select</button>
-          <button onClick={() => this.props.selectNoEvent() }>Don't use event cards</button>
+          <button 
+            className={THStyle.thbutton}
+            onClick={() => this.props.selectionComplete(this.getSelectedAsStrings()) }>Select
+          </button>
+          <button
+            className={THStyle.thbutton}
+            onClick={() => this.props.selectNoEvent() }>Don't use event cards
+          </button>
         </div>
         <div className={Style.events} >{this.renderEvents()}</div>
       </div>

@@ -1,3 +1,58 @@
 .main {
   width: 100%;
 }
+
+.banner {
+  background-color: black;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.thbutton {
+  color: white;
+  background-color: #555555;
+  font-size: 16px;
+  padding: 15px 32px;
+  margin: 5px;
+}
+
+.splash {
+  margin: 0;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash p {
+  margin: 40px;
+  color: whitesmoke;
+  font-size: 23px;
+  text-align: center;
+  width: 30em;
+}
+
+.splash a:link, a:visited {
+  color: navajowhite;
+  font-size: 23px;
+}
+
+.helpSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 200px 0;
+}
+
+.hashLink {
+  cursor: pointer;
+  color: navajowhite;
+  font-size: 23px;
+  margin: 10px;
+}
+
+.helpSection img {
+  margin: 20px;
+  border: 2px solid antiquewhite;
+}
