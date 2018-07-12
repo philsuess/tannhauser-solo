@@ -13,22 +13,16 @@ interface MainProps {
   selectedCharacters: string[];
   selectedPacks: string[];
   selectedEvents: string[];
+  optOutFromEvents: boolean;
+  showHelp: boolean;
   selectFaction: ActionCreator<string>;
   selectCharacters: ActionCreator<{characters: string[], packs: string[]}>;
   selectEvents: ActionCreator<string[]>;
+  toggleOptOutFromEvents: ActionCreator<boolean>;
+  toggleShowHelp: ActionCreator<boolean>;
 }
 
-interface MainState {
-  optOutFromEvents: boolean;
-  showOverview: boolean;
-}
-
-export default class Main extends React.Component<MainProps,MainState> {
-  state = { 
-    optOutFromEvents: false,
-    showOverview: false,
-  }
-
+export default class Main extends React.Component<MainProps> {
   renderFactionSelection() {
     const bgg = "https://boardgamegeek.com/";
     const dansBlog = "https://boardgamegeek.com/blog/5464/creating-solo-play-tannhauser-game";
@@ -36,7 +30,7 @@ export default class Main extends React.Component<MainProps,MainState> {
       <p>Play Tannhäuser solo or co-op and let your enemies be controlled by the AI system created by Dan Manning.
         Find more ressources and the solo rules in his <a href={dansBlog}>blog</a> on <a href={bgg}>boardgamegeek</a>.
       </p>
-      <p>Looking for a quick <a href="#" onClick={() => this.setState({showOverview: true})}>overwiew</a> for 
+      <p>Looking for a quick <a href="#" onClick={() => this.props.toggleShowHelp(true)}>overwiew</a> for 
         this app?
       </p>
       <FactionSelection.Component 
@@ -55,10 +49,7 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   setUseEventCards(useEvents: boolean) {
-    this.setState({
-      ...this.state,
-      optOutFromEvents: !useEvents,
-    });
+    this.props.toggleOptOutFromEvents(!useEvents);
   }
 
   selectEvents(selection: string[]) {
@@ -83,7 +74,7 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   areEventCardsDeclined() {
-    return this.state.optOutFromEvents;
+    return this.props.optOutFromEvents;
   }
 
   areEventCardsSelected() {
@@ -110,12 +101,12 @@ export default class Main extends React.Component<MainProps,MainState> {
   }
 
   renderOverview() {
-    return <button onClick={() => this.setState({showOverview: false})}>Close overwiew</button>
+    return <button onClick={() => this.props.toggleShowHelp(false)}>Close overwiew</button>
   }
 
   render() {
     let renderComponent = this.renderFactionSelection();
-    if (this.state.showOverview) renderComponent = this.renderOverview();
+    if (this.props.showHelp) renderComponent = this.renderOverview();
     else if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();

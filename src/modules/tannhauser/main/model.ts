@@ -3,4 +3,6 @@ export interface TannhauserState {
   selectedCharacters: string[];
   selectedEvents: string[];
   selectedPacks: string[];
+  optOutFromEvents: boolean;
+  showHelp: boolean;
 }
