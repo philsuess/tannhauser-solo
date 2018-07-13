@@ -2,7 +2,6 @@ import * as React from 'react';
 import DeckMatStyle from '../style.css';
 import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
-import * as Model from '../../model';
 
 interface DeckMatProps {
   name: string;
