@@ -10,12 +10,7 @@ interface FactionMatProps {
   packs: string[];
 }
 
-interface FactionMatState {
-  currentCharacter: number;
-}
-
-export default class FactionMat extends React.Component<FactionMatProps,FactionMatState> {
-  state = { currentCharacter: 0 };
+export default class FactionMat extends React.Component<FactionMatProps> {
 
   renderCharacterHeader() {
     return this.props.characters.map(characterName => {
