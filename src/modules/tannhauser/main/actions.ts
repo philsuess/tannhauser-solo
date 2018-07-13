@@ -1,6 +1,6 @@
 import { actionCreatorFactory } from "typescript-fsa";
 import { Dispatch } from "redux";
-import { bool } from "../../../../node_modules/@types/prop-types";
+import { bool } from "prop-types";
 
 const createActionCreator = actionCreatorFactory();
 

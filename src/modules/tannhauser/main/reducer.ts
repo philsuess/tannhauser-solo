@@ -1,7 +1,7 @@
-import { reducerWithInitialState } from "typescript-fsa-reducers";
+import { reducerWithInitialState } from "typescript-fsa-reducers/dist";
 import * as actions from "./actions";
 import { TannhauserState } from "./model";
-import { StaticRouter } from "../../../../node_modules/@types/react-router";
+import { StaticRouter } from "react-router";
 
 const initialState: TannhauserState = {
   selectedFaction: "",
