@@ -24,6 +24,10 @@ interface TeamSelectionState {
   [characterKey: string]: SelectionData;
 }
 
+function randomIntFromInterval(min: number, max: number) {
+  return Math.floor(Math.random()*(max-min+1)+min);
+}
+
 export default class TeamSelectionMat extends React.Component<TeamSelectionProps,TeamSelectionState> {
   constructor(props: TeamSelectionProps) {
     super(props);
@@ -124,14 +128,27 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     });
   }
 
+  selectRandomPackFor(characterKey: string, availablePacks: string[]) {
+    const randomPackIndex = randomIntFromInterval(0, availablePacks.length - 1);
+    this.selectPackFor(characterKey, availablePacks[randomPackIndex]);
+  }
+
   renderAvailablePacksFor(characterKey: string) {
     const character = this.props.characters[characterKey];
-    return Model.GetAvailablePacks(character.type).map(pack => {
+    const availablePacksDivs = Model.GetAvailablePacks(character.type).map(pack => {
       return <div key={character+pack} className={Style.packSelectOption} 
                 onClick={(event) => {event.stopPropagation(); this.selectPackFor(characterKey, pack)}}>
                   {pack} pack
               </div>;
     });
+    const packsSelection = availablePacksDivs.concat(
+      <div className={Style.packSelectOption}
+        onClick={(event) => {event.stopPropagation(); 
+          this.selectRandomPackFor(characterKey, Model.GetAvailablePacks(character.type))}}>
+        Pick randomly
+      </div>
+    );
+    return packsSelection;
   }
 
   renderPackIndicator(pack: string) {
