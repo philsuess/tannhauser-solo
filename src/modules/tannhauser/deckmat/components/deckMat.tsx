@@ -32,7 +32,8 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
   }
 
   componentWillReceiveProps(nextProps: DeckMatProps) {
-    this.updateStateFromProps(nextProps)
+    console.log(nextProps)
+    this.updateStateFromProps(nextProps);
   }
 
   updateStateFromProps(props: DeckMatProps) {

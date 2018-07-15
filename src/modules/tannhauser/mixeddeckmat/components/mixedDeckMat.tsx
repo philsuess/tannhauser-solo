@@ -30,21 +30,16 @@ function randomIntFromInterval(min: number, max: number) {
 export default class MixedDeckMat extends React.Component<MixedDeckMatProps,MixedDeckMatState> {
   constructor(props: MixedDeckMatProps) {
     super(props);
+    const newDecks = this.constructNewDecks(1);
     this.state = { 
       currentDeckIndex: 0,
       roundCounter: 0,
-      roundDecks: [{
-        name: "Round 0",
-        image: "",
-        deck: [""],
-        card_back_image: "",
-      }],
+      roundDecks: newDecks,
     };
-    this.constructNewDecks();
   }
 
   drawRandomCardFrom(deck: string[]): string {
-    const randomCardIndex = randomIntFromInterval(0, deck.length);
+    const randomCardIndex = randomIntFromInterval(0, deck.length - 1);
     const card = deck.splice(randomCardIndex, 1);
     return card[0];
   }
@@ -53,7 +48,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     return this.props.characters.map(characterKey => Model.AllCharacters[characterKey].deck.splice(0));
   }
 
-  constructNRoundDecksFrom(numRounds: number, decks: string[][]) {
+  constructNRoundDecksFrom(numRounds: number, decks: string[][]): string[][] {
     const constructedDecks: string[][] = [];
     for (let i = 0; i < numRounds; i=i+1) {
       const constructedDeck: string[] = decks.map(deck => this.drawRandomCardFrom(deck));
@@ -62,29 +57,27 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     return constructedDecks;
   }
 
-  constructNewDecks() {
+  constructNewDecks(startRoundCounter: number): DeckMatData[] {
     const characterDecks = this.getCopiesOfCharacterDecks();
     const constructedDecks = this.constructNRoundDecksFrom(5, characterDecks);
     const roundDecksData: DeckMatData[] = constructedDecks.map((constructedDeck, index) => {
       return {
-        name: "Round " + (this.state.roundCounter + index + 1),
+        name: "Round " + (startRoundCounter + index),
         image: "",
         deck: constructedDeck,
         card_back_image: Model.AllCharacters[this.props.characters[0]].card_back_image,
       }
     });
-    this.state = ({
-      ...this.state,
-      roundDecks: roundDecksData,
-    });
+    return roundDecksData;
   }
 
   advanceRound() {
     if (this.state.currentDeckIndex === 5) {
-      this.constructNewDecks();
+      const newDecks = this.constructNewDecks(this.state.roundCounter + 1);
       this.setState(prevState => ({
         currentDeckIndex: 0,
         roundCounter: prevState.roundCounter + 5,
+        roundDecks: newDecks,
       }));
     }
     else {
