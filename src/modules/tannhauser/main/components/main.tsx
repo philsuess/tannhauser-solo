@@ -5,6 +5,7 @@ import * as EventSelection from '../../eventsselection';
 import * as TeamSelection from '../../teamselection';
 import * as FactionSelection from '../../factionselection';
 import * as FactionMat from '../../factionmat';
+import * as MixedDeckMat from '../../mixeddeckmat';
 import Style from '../style.css';
 import * as Model from '../../model';
 import ThLogo from '../../img/tannhauser-logo.png';
@@ -78,6 +79,14 @@ export default class Main extends React.Component<MainProps> {
     />;
   }
 
+  renderMixedDeckMat() {
+    return <MixedDeckMat.Component
+      events={this.props.selectedEvents} 
+      characters={this.props.selectedCharacters} 
+      packs={this.props.selectedPacks}
+    />;
+  }
+
   areEventCardsDeclined() {
     return this.props.optOutFromEvents;
   }
@@ -134,8 +143,8 @@ export default class Main extends React.Component<MainProps> {
           <img src={FactionSelectionHelp} />
         </div>
         <div className={Style.helpSection} id="teamSelectionHelp">
-          <h2>Team selection: choose enemies and (optionally), their equipment packs. The chosen packs will be displayed 
-            in the main playing screen to help you identify the correct part of the AI cards.
+          <h2>Team selection: choose enemies and (optionally), their equipment packs. The chosen packs 
+            will be displayed in the main playing screen to help you identify the correct part of the AI cards.
             <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
@@ -161,7 +170,7 @@ export default class Main extends React.Component<MainProps> {
   render() {
     let renderComponent = this.renderFactionSelection();
     if (this.props.showHelp) renderComponent = this.renderOverview();
-    else if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
+    else if (this.isEverythingConfigured()) renderComponent = this.renderMixedDeckMat(); //this.renderFactionMat();
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (

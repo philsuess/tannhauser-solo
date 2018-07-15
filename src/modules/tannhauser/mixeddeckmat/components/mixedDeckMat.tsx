@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ScrollIntoView from 'react-scroll-into-view';
 import MixedDeckMatStyle from '../style.css';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
@@ -10,84 +9,112 @@ interface MixedDeckMatProps {
   packs: string[];
 }
 
+interface DeckMatData {
+  name: string;
+  image: string;
+  deck: string[];
+  card_back_image: string;
+  extra_text?: any;
+}
+
 interface MixedDeckMatState {
-  currentCharacter: number;
+  currentCard: string;
+  roundCounter: number;
+  roundDecks: DeckMatData[];
+}
+
+function randomIntFromInterval(min: number, max: number) {
+  return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 export default class MixedDeckMat extends React.Component<MixedDeckMatProps,MixedDeckMatState> {
-  state = { currentCharacter: 0 };
+  constructor(props: MixedDeckMatProps) {
+    super(props);
+    this.state = { 
+      currentCard: "",
+      roundCounter: 0,
+      roundDecks: [{
+        name: "Round 0",
+        image: "",
+        deck: [""],
+        card_back_image: "",
+      }],
+    };
+    this.constructNewDecks();
+  }
 
-  renderCharacterHeader() {
-    return this.props.characters.map(characterName => {
-      const Player = Model.AllCharacters[characterName];
-      return <div key={characterName}>
-          <ScrollIntoView selector={"#" + characterName} >
-          <img key={characterName} src={Player.token_image} height={100} />
-          </ScrollIntoView>
-        </div>;
+  drawRandomCardFrom(deck: string[]): string {
+    const randomCardIndex = randomIntFromInterval(0, deck.length);
+    const card = deck.splice(randomCardIndex, 1);
+    return card[0];
+  }
+
+  getCopiesOfCharacterDecks() {
+    return this.props.characters.map(characterKey => Model.AllCharacters[characterKey].deck.splice(0));
+  }
+
+  constructNRoundDecksFrom(numRounds: number, decks: string[][]) {
+    const constructedDecks: string[][] = [];
+    for (let i = 0; i < numRounds; i++) {
+      const constructedDeck: string[] = decks.map(deck => this.drawRandomCardFrom(deck));
+      constructedDecks.push(constructedDeck);
+    }
+    return constructedDecks;
+  }
+
+  constructNewDecks() {
+    const characterDecks = this.getCopiesOfCharacterDecks();
+    const constructedDecks = this.constructNRoundDecksFrom(5, characterDecks);
+    const roundDecksData: DeckMatData[] = constructedDecks.map((constructedDeck, index) => {
+      return {
+        name: "Round " + (this.state.roundCounter + index),
+        image: "",
+        deck: constructedDeck,
+        card_back_image: Model.AllCharacters[this.props.characters[0]].card_back_image,
+      }
+    });
+    this.state = ({
+      ...this.state,
+      roundDecks: roundDecksData,
     });
   }
 
-  renderEventsHeader() {
-    return this.props.events.map(eventName => {
-      const Event = Model.AllEvents[eventName];
-      return <div key={eventName}>
-          <ScrollIntoView selector={"#" + eventName} >
-          <img key={eventName} src={Event.image} height={100} />
-          </ScrollIntoView>
-        </div>;
+  advanceRound() {
+    this.state = ({
+      ...this.state,
+      roundCounter: this.state.roundCounter + 1,
     });
   }
 
   renderHeader() {
-    return [this.renderEventsHeader()].concat(this.renderCharacterHeader());
-  }
-
-  renderDeckMats() {
-    return this.props.characters.map((characterName, index) => {
+    return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
-      const equippedPack = this.props.packs[index];
-      const inlineStyleForDeckMat = {
-        backgroundColor: '#ebeacb',
-        color: Model.GetPackColor(equippedPack),
-      };
-      const packText = equippedPack === "" ? ["No pack selected"] : 
-        [
-          "Equipped with the ", 
-          <span key={characterName+"style"} style={inlineStyleForDeckMat}><strong>{equippedPack}</strong></span>, 
-          " pack",
-        ];
-      const deckMatProps = {
-        ...Player,
-        extra_text: packText,
-      };
-      return <div className={MixedDeckMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
-        <DeckMat.Component {...deckMatProps} key={characterName + "_mat"} />
+      return <div key={characterName}>
+          <img key={characterName} src={Player.token_image} height={100} />
         </div>;
     });
   }
 
-  renderEventMats() {
-    return this.props.events.map(eventName => {
-      const Event = Model.AllEvents[eventName];
-      return <div id={eventName} key={eventName + "_matd"} >
-        <DeckMat.Component {...Event} key={eventName + "_mat"} />
-        </div>;
-    });
+  renderDeckMat() {
+    if (this.state.roundCounter % 5) this.constructNewDecks();
+    const useDeckIndex = (this.state.roundCounter / 5) % 5;
+    return <div className={MixedDeckMatStyle.characterDeck} >
+        <DeckMat.Component {...this.state.roundDecks[useDeckIndex]} />
+      </div>;
   }
 
-  renderMats() {
-    return [this.renderEventMats()].concat(this.renderDeckMats());
+  renderMat() {
+    return this.renderDeckMat();
   }
 
   render() {
     return (
-      <div className={MixedDeckMatStyle.MixedDeckMat}>
+      <div className={MixedDeckMatStyle.mixeddeckmat}>
         <div className={MixedDeckMatStyle.header}>
           {this.renderHeader()}
         </div>
         <div>
-          {this.renderMats()}
+          {this.renderMat()}
         </div>
       </div>
     );
