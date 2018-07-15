@@ -14,12 +14,11 @@ interface DeckMatData {
   image: string;
   deck: string[];
   card_back_image: string;
-  reshuffleOnEmpty: boolean;
   extra_text?: any;
 }
 
 interface MixedDeckMatState {
-  currentCard: string;
+  currentDeckIndex: number;
   roundCounter: number;
   roundDecks: DeckMatData[];
 }
@@ -32,13 +31,12 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   constructor(props: MixedDeckMatProps) {
     super(props);
     this.state = { 
-      currentCard: "",
+      currentDeckIndex: 0,
       roundCounter: 0,
       roundDecks: [{
         name: "Round 0",
         image: "",
         deck: [""],
-        reshuffleOnEmpty: false,
         card_back_image: "",
       }],
     };
@@ -57,7 +55,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   constructNRoundDecksFrom(numRounds: number, decks: string[][]) {
     const constructedDecks: string[][] = [];
-    for (let i = 0; i < numRounds; i++) {
+    for (let i = 0; i < numRounds; i=i+1) {
       const constructedDeck: string[] = decks.map(deck => this.drawRandomCardFrom(deck));
       constructedDecks.push(constructedDeck);
     }
@@ -69,10 +67,9 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     const constructedDecks = this.constructNRoundDecksFrom(5, characterDecks);
     const roundDecksData: DeckMatData[] = constructedDecks.map((constructedDeck, index) => {
       return {
-        name: "Round " + (this.state.roundCounter + index),
+        name: "Round " + (this.state.roundCounter + index + 1),
         image: "",
         deck: constructedDeck,
-        reshuffleOnEmpty: false,
         card_back_image: Model.AllCharacters[this.props.characters[0]].card_back_image,
       }
     });
@@ -83,10 +80,18 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   advanceRound() {
-    this.state = ({
-      ...this.state,
-      roundCounter: this.state.roundCounter + 1,
-    });
+    if (this.state.currentDeckIndex === 5) {
+      this.constructNewDecks();
+      this.setState(prevState => ({
+        currentDeckIndex: 0,
+        roundCounter: prevState.roundCounter + 5,
+      }));
+    }
+    else {
+      this.setState(prevState => ({ 
+        currentDeckIndex: prevState.currentDeckIndex + 1,
+      }));
+    }
   }
 
   renderHeader() {
@@ -99,10 +104,13 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   renderDeckMat() {
-    if (this.state.roundCounter % 5) this.constructNewDecks();
-    const useDeckIndex = (this.state.roundCounter / 5) % 5;
+    const deckMatProps = {
+      ...this.state.roundDecks[this.state.currentDeckIndex],
+      reshuffleOnEmpty: false,
+      emptyDeckClicked: () => this.advanceRound(),
+    };
     return <div className={MixedDeckMatStyle.characterDeck} >
-        <DeckMat.Component {...this.state.roundDecks[useDeckIndex]} />
+        <DeckMat.Component {...deckMatProps} />
       </div>;
   }
 

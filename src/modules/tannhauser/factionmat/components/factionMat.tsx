@@ -66,8 +66,12 @@ export default class FactionMat extends React.Component<FactionMatProps> {
   renderEventMats() {
     return this.props.events.map(eventName => {
       const Event = Model.AllEvents[eventName];
+      const deckMatProps = {
+        ...Event,
+        reshuffleOnEmpty: true,
+      };
       return <div id={eventName} key={eventName + "_matd"} >
-        <DeckMat.Component {...Event} key={eventName + "_mat"} />
+        <DeckMat.Component {...deckMatProps} key={eventName + "_mat"} />
         </div>;
     });
   }

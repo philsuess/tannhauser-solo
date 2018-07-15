@@ -10,6 +10,7 @@ interface DeckMatProps {
   card_back_image: string;
   reshuffleOnEmpty: boolean;
   extra_text?: any;
+  emptyDeckClicked?: () => any;
 }
 
 interface DeckMatState {
@@ -30,6 +31,17 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
     };
   }
 
+  componentWillReceiveProps(nextProps: DeckMatProps) {
+    this.updateStateFromProps(nextProps)
+  }
+
+  updateStateFromProps(props: DeckMatProps) {
+    this.setState({
+      drawDeck: props.deck.slice(),
+      drawnCard: "",
+    });
+  }
+
   shuffleAllCardsIntoDeck() {
     this.setState({
       ...this.state,
@@ -38,9 +50,14 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
     });
   }
 
+  callBackEmptyDeckPileClicked() {
+    this.props.emptyDeckClicked && this.props.emptyDeckClicked();
+  }
+
   drawCard() {
     if (this.state.drawDeck.length === 0) {
       if (this.props.reshuffleOnEmpty) this.shuffleAllCardsIntoDeck();
+      this.callBackEmptyDeckPileClicked();
       return;
     }
     const randomCardIndex = randomIntFromInterval(0, this.state.drawDeck.length - 1);
