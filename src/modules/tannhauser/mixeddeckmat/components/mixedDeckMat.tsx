@@ -45,7 +45,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   getCopiesOfCharacterDecks() {
-    return this.props.characters.map(characterKey => Model.AllCharacters[characterKey].deck.splice(0));
+    return this.props.characters.map(characterKey => Model.AllCharacters[characterKey].deck.slice(0));
   }
 
   constructNRoundDecksFrom(numRounds: number, decks: string[][]): string[][] {
