@@ -31,18 +31,6 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
     };
   }
 
-  componentWillReceiveProps(nextProps: DeckMatProps) {
-    console.log(nextProps)
-    this.updateStateFromProps(nextProps);
-  }
-
-  updateStateFromProps(props: DeckMatProps) {
-    this.setState({
-      drawDeck: props.deck.slice(),
-      drawnCard: "",
-    });
-  }
-
   shuffleAllCardsIntoDeck() {
     this.setState({
       ...this.state,

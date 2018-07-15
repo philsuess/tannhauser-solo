@@ -72,13 +72,14 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   advanceRound() {
-    if (this.state.currentDeckIndex === 5) {
-      const newDecks = this.constructNewDecks(this.state.roundCounter + 1);
-      this.setState(prevState => ({
+    if (this.state.currentDeckIndex === 4) {
+      const newRoundCounter = this.state.roundCounter + 5;
+      const newDecks = this.constructNewDecks(newRoundCounter);
+      this.setState({
         currentDeckIndex: 0,
-        roundCounter: prevState.roundCounter + 5,
+        roundCounter: newRoundCounter,
         roundDecks: newDecks,
-      }));
+      });
     }
     else {
       this.setState(prevState => ({ 
@@ -103,7 +104,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       emptyDeckClicked: () => this.advanceRound(),
     };
     return <div className={MixedDeckMatStyle.characterDeck} >
-        <DeckMat.Component {...deckMatProps} />
+        <DeckMat.Component {...deckMatProps} key={this.state.roundCounter+this.state.currentDeckIndex} />
       </div>;
   }
 
