@@ -8,6 +8,7 @@ interface DeckMatProps {
   image: string;
   deck: string[];
   card_back_image: string;
+  reshuffleOnEmpty: boolean;
   extra_text?: any;
 }
 
@@ -39,7 +40,7 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
 
   drawCard() {
     if (this.state.drawDeck.length === 0) {
-      this.shuffleAllCardsIntoDeck();
+      if (this.props.reshuffleOnEmpty) this.shuffleAllCardsIntoDeck();
       return;
     }
     const randomCardIndex = randomIntFromInterval(0, this.state.drawDeck.length - 1);

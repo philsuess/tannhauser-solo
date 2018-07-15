@@ -54,6 +54,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
         ];
       const deckMatProps = {
         ...Player,
+        reshuffleOnEmpty: true,
         extra_text: packText,
       };
       return <div className={FactionMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
