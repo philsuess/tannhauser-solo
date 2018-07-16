@@ -14,6 +14,7 @@ interface DeckMatData {
   name: string;
   image: string;
   deck: string[];
+  cardIds: string[];
   card_back_image: string;
   extra_text?: any;
 }
@@ -67,6 +68,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         name: "Round " + (startRoundCounter + index),
         image: "",
         deck: constructedDeck,
+        cardIds: this.props.characters.slice(),
         card_back_image: Model.AllCharacters[this.props.characters[0]].card_back_image,
       }
     });
@@ -104,6 +106,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       ...this.state.roundDecks[this.state.currentDeckIndex],
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
+      drawnCard: (cardId: string) => console.log(cardId),
     };
     return <div className={MixedDeckMatStyle.characterDeck} >
         <DeckMat.Component {...deckMatProps} 
