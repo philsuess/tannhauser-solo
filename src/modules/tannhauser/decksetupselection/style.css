@@ -1,0 +1,33 @@
+.decksetupselection {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 60px 0;
+}
+
+.selectionOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.symbol {
+  height: 300px;
+  margin: 20px;
+}
+
+
+.unselected {
+  height: 250px;
+  margin: 20px;
+  filter: grayscale(80%);
+}
+
+.selected {
+  height: 300px;
+  margin: 20px;
+  box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
+}

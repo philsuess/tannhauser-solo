@@ -400,6 +400,12 @@ export const StringToFaction = (fac: string): Faction => {
   return returnVal;
 }
 
+export enum DeckSetup {
+  Lazy,
+  Preferred,
+  NoneSelected,
+}
+
 export enum CharacterType {
   Hero,
   Soldier,

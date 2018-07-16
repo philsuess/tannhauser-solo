@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import Main from "./main";
 import * as actions from "../actions";
 import { GlobalState } from "../global";
-import { TannhauserState } from "../model";
 
 const mapStateToProps = ({ tannhauser }: GlobalState) => ({
   selectedFaction: tannhauser.selectedFaction,
   selectedCharacters: tannhauser.selectedCharacters,
   selectedPacks: tannhauser.selectedPacks,
   selectedEvents: tannhauser.selectedEvents,
+  selectedDeckSetup: tannhauser.selectedDeckSetup,
   optOutFromEvents: tannhauser.optOutFromEvents,
   showHelp: tannhauser.showHelp,
 });
@@ -19,6 +19,7 @@ const mapDispatchToProps = {
   selectCharacters: actions.selectCharacters,
   selectEvents: actions.selectEvents,
   toggleOptOutFromEvents: actions.toggleOptOutFromEvents,
+  selectDeckSetup: actions.selectDeckSetup,
   toggleShowHelp: actions.toggleShowHelp,
 };
 

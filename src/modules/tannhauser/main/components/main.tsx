@@ -4,6 +4,7 @@ import ScrollIntoView from 'react-scroll-into-view';
 import * as EventSelection from '../../eventsselection';
 import * as TeamSelection from '../../teamselection';
 import * as FactionSelection from '../../factionselection';
+import * as DeckSetupSelection from '../../decksetupselection';
 import * as FactionMat from '../../factionmat';
 import * as MixedDeckMat from '../../mixeddeckmat';
 import Style from '../style.css';
@@ -20,12 +21,14 @@ interface MainProps {
   selectedCharacters: string[];
   selectedPacks: string[];
   selectedEvents: string[];
+  selectedDeckSetup: Model.DeckSetup;
   optOutFromEvents: boolean;
   showHelp: boolean;
   selectFaction: ActionCreator<string>;
   selectCharacters: ActionCreator<{characters: string[], packs: string[]}>;
   selectEvents: ActionCreator<string[]>;
   toggleOptOutFromEvents: ActionCreator<boolean>;
+  selectDeckSetup: ActionCreator<Model.DeckSetup>;
   toggleShowHelp: ActionCreator<boolean>;
 }
 
@@ -72,6 +75,12 @@ export default class Main extends React.Component<MainProps> {
             />;
   }
 
+  renderDeckSetupSelection() {
+    return <DeckSetupSelection.Component
+      selectionComplete={(selection: Model.DeckSetup) => this.props.selectDeckSetup(selection)}
+    />;
+  }
+
   renderFactionMat() {
     return <FactionMat.Component 
       events={this.props.selectedEvents} 
@@ -89,12 +98,24 @@ export default class Main extends React.Component<MainProps> {
     />;
   }
 
+  renderPlayMat() {
+    if (this.props.selectedDeckSetup === Model.DeckSetup.Lazy) {
+      return this.renderFactionMat();
+    }
+    
+    return this.renderMixedDeckMat();
+  }
+
   areEventCardsDeclined() {
     return this.props.optOutFromEvents;
   }
 
   areEventCardsSelected() {
     return this.props.selectedEvents.length > 0;
+  }
+
+  areEventsConfigured() {
+    return this.areEventCardsDeclined() || this.areEventCardsSelected();
   }
 
   areCharactersSelected() {
@@ -105,10 +126,15 @@ export default class Main extends React.Component<MainProps> {
     return this.props.selectedFaction.length > 0;
   }
 
+  isDeckSetupSelected() {
+    return this.props.selectedDeckSetup !== Model.DeckSetup.NoneSelected;
+  }
+
   isEverythingConfigured() {
     let configComplete = false;
-    if (this.areCharactersSelected() && this.areEventCardsDeclined()) configComplete = true;
-    if (this.areCharactersSelected() && this.areEventCardsSelected()) configComplete = true;
+    if (this.areCharactersSelected() && 
+        this.areEventsConfigured() && 
+        this.isDeckSetupSelected()) configComplete = true;
     return configComplete;
   }
 
@@ -181,7 +207,8 @@ export default class Main extends React.Component<MainProps> {
   render() {
     let renderComponent = this.renderFactionSelection();
     if (this.props.showHelp) renderComponent = this.renderOverview();
-    else if (this.isEverythingConfigured()) renderComponent = this.renderMixedDeckMat(); // this.renderFactionMat(); // 
+    else if (this.isEverythingConfigured()) renderComponent = this.renderPlayMat(); 
+    else if (this.areEventsConfigured()) renderComponent = this.renderDeckSetupSelection();
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (
