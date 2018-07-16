@@ -84,6 +84,7 @@ export default class Main extends React.Component<MainProps> {
       events={this.props.selectedEvents} 
       characters={this.props.selectedCharacters} 
       packs={this.props.selectedPacks}
+      numCharacterCardsBeforeReshuffle={5}
     />;
   }
 

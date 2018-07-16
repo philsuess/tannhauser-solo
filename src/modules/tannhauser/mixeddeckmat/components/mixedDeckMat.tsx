@@ -7,6 +7,7 @@ interface MixedDeckMatProps {
   events: string[];
   characters: string[];
   packs: string[];
+  numCharacterCardsBeforeReshuffle: number;
 }
 
 interface DeckMatData {
@@ -33,7 +34,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     const newDecks = this.constructNewDecks(1);
     this.state = { 
       currentDeckIndex: 0,
-      roundCounter: 0,
+      roundCounter: 1,
       roundDecks: newDecks,
     };
   }
@@ -59,7 +60,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   constructNewDecks(startRoundCounter: number): DeckMatData[] {
     const characterDecks = this.getCopiesOfCharacterDecks();
-    const constructedDecks = this.constructNRoundDecksFrom(5, characterDecks);
+    const constructedDecks = 
+      this.constructNRoundDecksFrom(this.props.numCharacterCardsBeforeReshuffle, characterDecks);
     const roundDecksData: DeckMatData[] = constructedDecks.map((constructedDeck, index) => {
       return {
         name: "Round " + (startRoundCounter + index),
@@ -73,7 +75,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   advanceRound() {
     if (this.state.currentDeckIndex === 4) {
-      const newRoundCounter = this.state.roundCounter + 5;
+      const newRoundCounter = this.state.roundCounter + this.props.numCharacterCardsBeforeReshuffle;
       const newDecks = this.constructNewDecks(newRoundCounter);
       this.setState({
         currentDeckIndex: 0,
@@ -104,7 +106,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       emptyDeckClicked: () => this.advanceRound(),
     };
     return <div className={MixedDeckMatStyle.characterDeck} >
-        <DeckMat.Component {...deckMatProps} key={this.state.roundCounter+this.state.currentDeckIndex} />
+        <DeckMat.Component {...deckMatProps} 
+          key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
       </div>;
   }
 
