@@ -2,18 +2,22 @@ import * as React from 'react';
 import DeckMatStyle from '../style.css';
 import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
-import * as Model from '../../model';
 
 interface DeckMatProps {
   name: string;
   image: string;
   deck: string[];
+  cardIds?: string[];
   card_back_image: string;
+  reshuffleOnEmpty: boolean;
   extra_text?: any;
+  emptyDeckClicked?: () => any;
+  drawnCard?: (cardId: string) => any;
 }
 
 interface DeckMatState {
   drawDeck: string[];
+  remainingCardIds: string[];
   drawnCard: string;
 }
 
@@ -26,6 +30,7 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
     super(props);
     this.state = {
       drawDeck: props.deck.slice(),
+      remainingCardIds: props.cardIds ? props.cardIds.slice() : [],
       drawnCard: "",
     };
   }
@@ -38,20 +43,38 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
     });
   }
 
+  callBackEmptyDeckPileClicked() {
+    this.props.emptyDeckClicked && this.props.emptyDeckClicked();
+  }
+
+  updateArray(listToUpdate: string[], indexToSplice: number) {
+    const newList = listToUpdate;
+    newList.splice(indexToSplice, 1);
+    return newList;
+  }
+
   drawCard() {
     if (this.state.drawDeck.length === 0) {
-      this.shuffleAllCardsIntoDeck();
+      if (this.props.reshuffleOnEmpty) this.shuffleAllCardsIntoDeck();
+      this.callBackEmptyDeckPileClicked();
       return;
     }
     const randomCardIndex = randomIntFromInterval(0, this.state.drawDeck.length - 1);
     const draw = this.state.drawDeck[randomCardIndex];
-    const newDrawDeck = this.state.drawDeck;
-    newDrawDeck.splice(randomCardIndex, 1);
+    const newDrawDeck = this.updateArray(this.state.drawDeck, randomCardIndex);
     this.setState({
       ...this.state,
       drawDeck: newDrawDeck,
       drawnCard: draw,
     });
+    if (this.props.drawnCard) {
+      if (this.props.cardIds) {
+        this.props.drawnCard(this.state.remainingCardIds[randomCardIndex]);
+        const newRemainingIds = this.updateArray(this.state.remainingCardIds, randomCardIndex);
+        this.setState({remainingCardIds: newRemainingIds});
+      }
+      else this.props.drawnCard("card drawn");
+    }
   }
 
   renderDrawDeck() {

@@ -10,12 +10,7 @@ interface FactionMatProps {
   packs: string[];
 }
 
-interface FactionMatState {
-  currentCharacter: number;
-}
-
-export default class FactionMat extends React.Component<FactionMatProps,FactionMatState> {
-  state = { currentCharacter: 0 };
+export default class FactionMat extends React.Component<FactionMatProps> {
 
   renderCharacterHeader() {
     return this.props.characters.map(characterName => {
@@ -59,6 +54,7 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
         ];
       const deckMatProps = {
         ...Player,
+        reshuffleOnEmpty: true,
         extra_text: packText,
       };
       return <div className={FactionMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
@@ -70,8 +66,12 @@ export default class FactionMat extends React.Component<FactionMatProps,FactionM
   renderEventMats() {
     return this.props.events.map(eventName => {
       const Event = Model.AllEvents[eventName];
+      const deckMatProps = {
+        ...Event,
+        reshuffleOnEmpty: true,
+      };
       return <div id={eventName} key={eventName + "_matd"} >
-        <DeckMat.Component {...Event} key={eventName + "_mat"} />
+        <DeckMat.Component {...deckMatProps} key={eventName + "_mat"} />
         </div>;
     });
   }

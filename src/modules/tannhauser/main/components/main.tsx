@@ -4,7 +4,9 @@ import ScrollIntoView from 'react-scroll-into-view';
 import * as EventSelection from '../../eventsselection';
 import * as TeamSelection from '../../teamselection';
 import * as FactionSelection from '../../factionselection';
+import * as DeckSetupSelection from '../../decksetupselection';
 import * as FactionMat from '../../factionmat';
+import * as MixedDeckMat from '../../mixeddeckmat';
 import Style from '../style.css';
 import * as Model from '../../model';
 import ThLogo from '../../img/tannhauser-logo.png';
@@ -12,18 +14,21 @@ import FactionSelectionHelp from '../../img/help/factionSelection.gif';
 import TeamSelectionHelp from '../../img/help/teamSelection.gif';
 import EventSelectionHelp from '../../img/help/eventsSelection.gif';
 import FactionMatHelp from '../../img/help/factionMat.gif';
+import MixedDeckMatHelp from '../../img/help/mixedDeckMat.gif';
 
 interface MainProps {
   selectedFaction: string;
   selectedCharacters: string[];
   selectedPacks: string[];
   selectedEvents: string[];
+  selectedDeckSetup: Model.DeckSetup;
   optOutFromEvents: boolean;
   showHelp: boolean;
   selectFaction: ActionCreator<string>;
   selectCharacters: ActionCreator<{characters: string[], packs: string[]}>;
   selectEvents: ActionCreator<string[]>;
   toggleOptOutFromEvents: ActionCreator<boolean>;
+  selectDeckSetup: ActionCreator<Model.DeckSetup>;
   toggleShowHelp: ActionCreator<boolean>;
 }
 
@@ -70,12 +75,35 @@ export default class Main extends React.Component<MainProps> {
             />;
   }
 
+  renderDeckSetupSelection() {
+    return <DeckSetupSelection.Component
+      selectionComplete={(selection: Model.DeckSetup) => this.props.selectDeckSetup(selection)}
+    />;
+  }
+
   renderFactionMat() {
     return <FactionMat.Component 
       events={this.props.selectedEvents} 
       characters={this.props.selectedCharacters} 
       packs={this.props.selectedPacks}
     />;
+  }
+
+  renderMixedDeckMat() {
+    return <MixedDeckMat.Component
+      events={this.props.selectedEvents} 
+      characters={this.props.selectedCharacters} 
+      packs={this.props.selectedPacks}
+      numCharacterCardsBeforeReshuffle={5}
+    />;
+  }
+
+  renderPlayMat() {
+    if (this.props.selectedDeckSetup === Model.DeckSetup.Lazy) {
+      return this.renderFactionMat();
+    }
+    
+    return this.renderMixedDeckMat();
   }
 
   areEventCardsDeclined() {
@@ -86,6 +114,10 @@ export default class Main extends React.Component<MainProps> {
     return this.props.selectedEvents.length > 0;
   }
 
+  areEventsConfigured() {
+    return this.areEventCardsDeclined() || this.areEventCardsSelected();
+  }
+
   areCharactersSelected() {
     return this.props.selectedCharacters.length > 0;
   }
@@ -94,10 +126,15 @@ export default class Main extends React.Component<MainProps> {
     return this.props.selectedFaction.length > 0;
   }
 
+  isDeckSetupSelected() {
+    return this.props.selectedDeckSetup !== Model.DeckSetup.NoneSelected;
+  }
+
   isEverythingConfigured() {
     let configComplete = false;
-    if (this.areCharactersSelected() && this.areEventCardsDeclined()) configComplete = true;
-    if (this.areCharactersSelected() && this.areEventCardsSelected()) configComplete = true;
+    if (this.areCharactersSelected() && 
+        this.areEventsConfigured() && 
+        this.isDeckSetupSelected()) configComplete = true;
     return configComplete;
   }
 
@@ -124,7 +161,9 @@ export default class Main extends React.Component<MainProps> {
           <h2 className={Style.hashLink}><ScrollIntoView selector="#eventSelectionHelp" >
             <u>Event selection</u></ScrollIntoView></h2>
           <h2 className={Style.hashLink}><ScrollIntoView selector="#factionMatHelp" >
-            <u>Main play screen</u></ScrollIntoView></h2>
+            <u>Main play screen (Dan's 'lazy' method)</u></ScrollIntoView></h2>
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#mixedDeckMatHelp" >
+            <u>Main play screen (Dan's 'preferred' method)</u></ScrollIntoView></h2>
         </div>
         <div className={Style.helpSection} id="factionSelectionHelp">
           <h2>Faction selection: pick what faction your enemies belong to
@@ -134,8 +173,8 @@ export default class Main extends React.Component<MainProps> {
           <img src={FactionSelectionHelp} />
         </div>
         <div className={Style.helpSection} id="teamSelectionHelp">
-          <h2>Team selection: choose enemies and (optionally), their equipment packs. The chosen packs will be displayed 
-            in the main playing screen to help you identify the correct part of the AI cards.
+          <h2>Team selection: choose enemies and (optionally), their equipment packs. The chosen packs 
+            will be displayed in the main playing screen to help you identify the correct part of the AI cards.
             <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
@@ -155,13 +194,21 @@ export default class Main extends React.Component<MainProps> {
           </h2>
           <img src={FactionMatHelp} />
         </div>
+        <div className={Style.helpSection} id="mixedDeckMatHelp">
+          <h2>Main play screen: deck has all characters mixed. After 5 rounds, all cards are reshuffled.
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
+            <u>Back to top</u></ScrollIntoView></span>
+          </h2>
+          <img src={MixedDeckMatHelp} />
+        </div>
       </div>
   }
 
   render() {
     let renderComponent = this.renderFactionSelection();
     if (this.props.showHelp) renderComponent = this.renderOverview();
-    else if (this.isEverythingConfigured()) renderComponent = this.renderFactionMat();
+    else if (this.isEverythingConfigured()) renderComponent = this.renderPlayMat(); 
+    else if (this.areEventsConfigured()) renderComponent = this.renderDeckSetupSelection();
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (

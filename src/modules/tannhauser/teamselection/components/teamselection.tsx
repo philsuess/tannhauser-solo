@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactTooltip from 'react-tooltip'
+import ReactTooltip from 'react-tooltip';
 import Style from '../style.css';
 import THStyle from '../../main/style.css';
 import * as Model from '../../model';
@@ -142,7 +142,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
               </div>;
     });
     const packsSelection = availablePacksDivs.concat(
-      <div className={Style.packSelectOption}
+      <div key={characterKey + "randPack"} className={Style.packSelectOption}
         onClick={(event) => {event.stopPropagation(); 
           this.selectRandomPackFor(characterKey, Model.GetAvailablePacks(character.type))}}>
         Pick randomly
