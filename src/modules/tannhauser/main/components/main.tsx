@@ -13,6 +13,7 @@ import FactionSelectionHelp from '../../img/help/factionSelection.gif';
 import TeamSelectionHelp from '../../img/help/teamSelection.gif';
 import EventSelectionHelp from '../../img/help/eventsSelection.gif';
 import FactionMatHelp from '../../img/help/factionMat.gif';
+import MixedDeckMatHelp from '../../img/help/mixedDeckMat.gif';
 
 interface MainProps {
   selectedFaction: string;
@@ -134,7 +135,9 @@ export default class Main extends React.Component<MainProps> {
           <h2 className={Style.hashLink}><ScrollIntoView selector="#eventSelectionHelp" >
             <u>Event selection</u></ScrollIntoView></h2>
           <h2 className={Style.hashLink}><ScrollIntoView selector="#factionMatHelp" >
-            <u>Main play screen</u></ScrollIntoView></h2>
+            <u>Main play screen (Dan's 'lazy' method)</u></ScrollIntoView></h2>
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#mixedDeckMatHelp" >
+            <u>Main play screen (Dan's 'preferred' method)</u></ScrollIntoView></h2>
         </div>
         <div className={Style.helpSection} id="factionSelectionHelp">
           <h2>Faction selection: pick what faction your enemies belong to
@@ -164,6 +167,13 @@ export default class Main extends React.Component<MainProps> {
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={FactionMatHelp} />
+        </div>
+        <div className={Style.helpSection} id="mixedDeckMatHelp">
+          <h2>Main play screen: deck has all characters mixed. After 5 rounds, all cards are reshuffled.
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
+            <u>Back to top</u></ScrollIntoView></span>
+          </h2>
+          <img src={MixedDeckMatHelp} />
         </div>
       </div>
   }
