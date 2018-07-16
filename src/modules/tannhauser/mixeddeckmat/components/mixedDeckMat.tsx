@@ -23,6 +23,8 @@ interface MixedDeckMatState {
   currentDeckIndex: number;
   roundCounter: number;
   roundDecks: DeckMatData[];
+  currentCharacter: string;
+  charactersActivated: string[];
 }
 
 function randomIntFromInterval(min: number, max: number) {
@@ -37,6 +39,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       currentDeckIndex: 0,
       roundCounter: 1,
       roundDecks: newDecks,
+      currentCharacter: "",
+      charactersActivated: [""],
     };
   }
 
@@ -76,11 +80,13 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   advanceRound() {
-    if (this.state.currentDeckIndex === 4) {
+    if (this.state.currentDeckIndex === this.props.numCharacterCardsBeforeReshuffle - 1) {
       const newRoundCounter = this.state.roundCounter + this.props.numCharacterCardsBeforeReshuffle;
       const newDecks = this.constructNewDecks(newRoundCounter);
       this.setState({
         currentDeckIndex: 0,
+        currentCharacter: "",
+        charactersActivated: [""],
         roundCounter: newRoundCounter,
         roundDecks: newDecks,
       });
@@ -88,6 +94,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     else {
       this.setState(prevState => ({ 
         currentDeckIndex: prevState.currentDeckIndex + 1,
+        currentCharacter: "",
+        charactersActivated: [""],
       }));
     }
   }
@@ -95,10 +103,19 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   renderHeader() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
-      return <div key={characterName}>
+      const activated = this.state.charactersActivated.includes(characterName);
+      return <div key={characterName} 
+        className={activated ? MixedDeckMatStyle.headerImgActivated : MixedDeckMatStyle.headerImg}>
           <img key={characterName} src={Player.token_image} height={100} />
         </div>;
     });
+  }
+
+  activateCharacter(characterKey: string) {
+    this.setState(previousState => ({
+      currentCharacter: characterKey,
+      charactersActivated: previousState.charactersActivated.concat(previousState.currentCharacter),
+    }));
   }
 
   renderDeckMat() {
@@ -106,12 +123,53 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       ...this.state.roundDecks[this.state.currentDeckIndex],
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
-      drawnCard: (cardId: string) => console.log(cardId),
+      drawnCard: (cardId: string) => this.activateCharacter(cardId),
     };
     return <div className={MixedDeckMatStyle.characterDeck} >
         <DeckMat.Component {...deckMatProps} 
           key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
       </div>;
+  }
+
+  renderCurrentCharacterImage() {
+    if (this.state.currentCharacter !== "") {
+      const image = Model.AllCharacters[this.state.currentCharacter].image;
+      return <img src={image} width={250} height={450} />;
+    }
+  }
+
+  renderCurrentCharacterPackInfo() {
+    const characterKey = this.state.currentCharacter;
+    if (characterKey !== "") {
+      const characterIndex = this.props.characters.indexOf(characterKey);
+      const equippedPack = this.props.packs[characterIndex];
+      const inlineStyleForDeckMat = {
+        backgroundColor: '#ebeacb',
+        color: Model.GetPackColor(equippedPack),
+      };
+      const packText = equippedPack === "" ? ["No pack selected"] : 
+        [
+          "Equipped with the ", 
+          <span key={characterKey+"style"} style={inlineStyleForDeckMat}><strong>{equippedPack}</strong></span>, 
+          " pack",
+        ];
+      return <h3>{packText}</h3>
+    }
+  }
+
+  renderCurrentCharacterName() {
+    const characterKey = this.state.currentCharacter;
+    if (characterKey !== "") {
+      return <h2>{Model.AllCharacters[characterKey].name}</h2>
+    }
+  }
+
+  renderCharacterInfo() {
+    return <div>
+      {this.renderCurrentCharacterImage()}
+      {this.renderCurrentCharacterName()}
+      {this.renderCurrentCharacterPackInfo()}
+    </div>
   }
 
   renderMat() {
@@ -124,8 +182,9 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         <div className={MixedDeckMatStyle.header}>
           {this.renderHeader()}
         </div>
-        <div>
+        <div className={MixedDeckMatStyle.characterDeck}>
           {this.renderMat()}
+          {this.renderCharacterInfo()}
         </div>
       </div>
     );
