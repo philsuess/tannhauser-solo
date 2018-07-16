@@ -1,4 +1,4 @@
-.factionmat {
+.mixeddeckmat {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
 .header {
   background-color: black;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 

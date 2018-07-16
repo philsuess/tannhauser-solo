@@ -171,7 +171,7 @@ export default class Main extends React.Component<MainProps> {
   render() {
     let renderComponent = this.renderFactionSelection();
     if (this.props.showHelp) renderComponent = this.renderOverview();
-    else if (this.isEverythingConfigured()) renderComponent = this.renderMixedDeckMat(); //this.renderFactionMat();
+    else if (this.isEverythingConfigured()) renderComponent = this.renderMixedDeckMat(); // this.renderFactionMat(); // 
     else if (this.areCharactersSelected()) renderComponent = this.renderEventSelection();
     else if (this.isFactionSelected()) renderComponent = this.renderTeamSelection();
     return (

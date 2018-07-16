@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactTooltip from 'react-tooltip';
 import MixedDeckMatStyle from '../style.css';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
@@ -104,9 +105,14 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
       const activated = this.state.charactersActivated.includes(characterName);
+      const tipString = activated ? "unit has been actived already this round" : 
+        "unit will still activate this round";
       return <div key={characterName} 
-        className={activated ? MixedDeckMatStyle.headerImgActivated : MixedDeckMatStyle.headerImg}>
+          className={activated ? MixedDeckMatStyle.headerImgActivated : MixedDeckMatStyle.headerImg}
+          data-tip={tipString}
+        >
           <img key={characterName} src={Player.token_image} height={100} />
+          <ReactTooltip place="left" type="dark" effect="float"/>
         </div>;
     });
   }
@@ -116,19 +122,6 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       currentCharacter: characterKey,
       charactersActivated: previousState.charactersActivated.concat(previousState.currentCharacter),
     }));
-  }
-
-  renderDeckMat() {
-    const deckMatProps = {
-      ...this.state.roundDecks[this.state.currentDeckIndex],
-      reshuffleOnEmpty: false,
-      emptyDeckClicked: () => this.advanceRound(),
-      drawnCard: (cardId: string) => this.activateCharacter(cardId),
-    };
-    return <div className={MixedDeckMatStyle.characterDeck} >
-        <DeckMat.Component {...deckMatProps} 
-          key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
-      </div>;
   }
 
   renderCurrentCharacterImage() {
@@ -171,21 +164,47 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       {this.renderCurrentCharacterPackInfo()}
     </div>
   }
+  
+  renderEventMats() {
+    return this.props.events.map(eventName => {
+      const Event = Model.AllEvents[eventName];
+      const deckMatProps = {
+        ...Event,
+        reshuffleOnEmpty: true,
+      };
+      return <div id={eventName} key={eventName + "_matd"} >
+        <DeckMat.Component {...deckMatProps} key={eventName + "_mat"} />
+        </div>;
+    });
+  }
+
+  renderDeckMat() {
+    const deckMatProps = {
+      ...this.state.roundDecks[this.state.currentDeckIndex],
+      reshuffleOnEmpty: false,
+      emptyDeckClicked: () => this.advanceRound(),
+      drawnCard: (cardId: string) => this.activateCharacter(cardId),
+    };
+    return <div className={MixedDeckMatStyle.characterDeck} >
+        <div className={MixedDeckMatStyle.header}>
+          {this.renderHeader()}
+        </div>
+        <DeckMat.Component {...deckMatProps} 
+          key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
+          {this.renderCharacterInfo()}
+      </div>;
+  }
 
   renderMat() {
-    return this.renderDeckMat();
+    const mats = this.renderEventMats();
+    mats.push(this.renderDeckMat());
+    return mats;
   }
 
   render() {
     return (
       <div className={MixedDeckMatStyle.mixeddeckmat}>
-        <div className={MixedDeckMatStyle.header}>
-          {this.renderHeader()}
-        </div>
-        <div className={MixedDeckMatStyle.characterDeck}>
-          {this.renderMat()}
-          {this.renderCharacterInfo()}
-        </div>
+        {this.renderMat()}
       </div>
     );
   }
