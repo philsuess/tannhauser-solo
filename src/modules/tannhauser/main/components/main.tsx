@@ -7,7 +7,7 @@ import * as FactionSelection from '../../factionselection';
 import * as DeckSetupSelection from '../../decksetupselection';
 import * as FactionMat from '../../factionmat';
 import * as MixedDeckMat from '../../mixeddeckmat';
-import Style from '../style.css';
+import Style from '../style.scss';
 import * as Model from '../../model';
 import ThLogo from '../../img/tannhauser-logo.png';
 import FactionSelectionHelp from '../../img/help/factionSelection.gif';

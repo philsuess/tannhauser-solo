@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ScrollIntoView from 'react-scroll-into-view';
-import FactionMatStyle from '../style.css';
+import FactionMatStyle from '../style.scss';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 

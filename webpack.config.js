@@ -12,10 +12,16 @@ if (NODE_ENV !== "production" && NODE_ENV !== "development") {
 }
 const IS_PROD = NODE_ENV === "production";
 
+const firstCssLoader = IS_PROD
+  ? MiniCSSExtractPlugin.loader
+  : {
+      loader: "style-loader"
+    };
+
 // used below to define css loaders for various cases
-function cssLoaders(modules) {
-  return [
-    IS_PROD ? MiniCSSExtractPlugin.loader : "style-loader",
+function cssLoaders(modules = true, sass = false) {
+  const loaders = [
+    firstCssLoader,
     {
       loader: "css-loader",
       options: {
@@ -27,6 +33,19 @@ function cssLoaders(modules) {
       }
     }
   ];
+  if (sass) {
+    return [
+      ...loaders,
+      {
+        // in Sass mode, compile sass first
+        loader: "sass-loader",
+        options: {
+          sourceMap: true
+        }
+      }
+    ];
+  }
+  return loaders;
 }
 
 module.exports = {
@@ -65,12 +84,22 @@ module.exports = {
         // use css-loader with CSS modules for css files
         test: /\.css$/,
         exclude: /node_modules/,
-        use: cssLoaders((modules = true))
+        use: cssLoaders((modules = true), (sass = false))
       },
       {
         test: /\.css$/, // use css-loader without CSS modules for 3rd party modules
         include: /node_modules/,
-        use: cssLoaders((modules = false))
+        use: cssLoaders((modules = false), (sass = false))
+      },
+      {
+        test: /\.scss$/, // use sass-loader for scss files
+        exclude: /node_modules/,
+        use: cssLoaders((modules = true), (sass = true))
+      },
+      {
+        test: /\.jsx?$/, // use babel-loader for js/jsx
+        exclude: /node_modules/,
+        use: "babel-loader",
       },
       {
         test: /\.tsx?$/, // use tslint/ts/babel for typescript files

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DeckMatStyle from '../style.css';
+import DeckMatStyle from '../style.scss';
 import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
 

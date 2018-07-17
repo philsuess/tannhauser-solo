@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
-import MixedDeckMatStyle from '../style.css';
+import MixedDeckMatStyle from '../style.scss';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 

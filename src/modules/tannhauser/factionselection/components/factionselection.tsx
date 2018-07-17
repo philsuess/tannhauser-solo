@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
+import Style from '../style.scss';
+import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";

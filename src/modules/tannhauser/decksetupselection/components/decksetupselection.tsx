@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
+import Style from '../style.scss';
+import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 import lazy from '../../img/help/factionMat.gif';
 import preferred from "../../img/help/mixedDeckMat.gif";

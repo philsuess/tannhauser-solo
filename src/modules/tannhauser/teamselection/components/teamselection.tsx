@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
+import Style from '../style.scss';
+import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 
 interface CompleteSelection {
