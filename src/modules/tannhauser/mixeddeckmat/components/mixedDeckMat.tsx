@@ -107,7 +107,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       const activated = this.state.charactersActivated.includes(characterName);
       const tipString = activated ? "unit has been actived already this round" : 
         "unit will still activate this round";
-      return <div key={characterName} 
+      return <div key={characterName + "div"} 
           className={activated ? MixedDeckMatStyle.headerImgActivated : MixedDeckMatStyle.headerImg}
           data-tip={tipString}
         >

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import Style from '../style.scss';
-import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 
 interface EventsSelectionProps {
@@ -53,9 +51,9 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
     return this.getEventKeys().map(key => {
       const event = this.props.events[key];
       return (
-        <div key={key} className={Style.event} onClick={() => this.select(key)} >
+        <div key={key} className={"event"} onClick={() => this.select(key)} >
           <img src={event.image} alt={event.name} height={100} 
-            className={this.state[key] ? Style.selected : Style.unselected} 
+            className={this.state[key] ? "selected" : "unselected"} 
           />
           <h3>{event.name}</h3>
         </div>
@@ -65,19 +63,19 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
 
   render() {
     return (
-      <div className={Style.eventsselection}>
+      <div className={"eventsselection"}>
         <div>
           <h1>Pick event cards to draw</h1>
           <button 
-            className={THStyle.thbutton}
+            className={"thbutton"}
             onClick={() => this.props.selectionComplete(this.getSelectedAsStrings()) }>Select
           </button>
           <button
-            className={THStyle.thbutton}
+            className={"thbutton"}
             onClick={() => this.props.selectNoEvent() }>Don't use event cards
           </button>
         </div>
-        <div className={Style.events} >{this.renderEvents()}</div>
+        <div className={"events"} >{this.renderEvents()}</div>
       </div>
     );
   }

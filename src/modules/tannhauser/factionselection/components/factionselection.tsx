@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Style from '../style.scss';
-import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";
 import daedalusSymbol from "../../img/daedalus-symbol.png";
+import Style from '../../stylesheets/main.scss';
 
 interface FactionSelectionProps {
   factions: Model.Faction[];
@@ -27,11 +26,11 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
 
   render() {
     return (
-      <div className={Style.factionselection}>
+      <div className={Style.THfactionselection}>
         <div>
           <h1>Select your opponents' faction</h1>
           <button 
-            className={THStyle.thbutton}
+            className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.state.chosenFaction) }>Select
           </button>
         </div>

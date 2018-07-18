@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DeckMatStyle from '../style.scss';
+import '../../stylesheets/main.scss';
 import * as Deck from '../../deck';
 import * as MatConstants from '../constants';
 
@@ -103,7 +103,7 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
       width: MatConstants.width,
     };
     return (
-      <div className={DeckMatStyle.deckmat} style={VariableDeckMatStyle} >
+      <div className={'th-deckmat'} style={VariableDeckMatStyle} >
         <div>
           <img src={this.props.image} width={MatConstants.deckImageVidth} />
           <h2>{this.props.name}</h2>

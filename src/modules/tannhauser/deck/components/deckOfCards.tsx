@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from '../style.scss';
+import '../../stylesheets/main.scss';
 import * as DeckConstants from '../constants';
 import CardImage from './cardImage';
 
@@ -20,6 +20,7 @@ function cardStack(numCards: number, imageFileName: string) {
 }
 
 export default class Deck extends React.Component<DeckProps> {
+
   render() {
     const DeckSpaceStyle = {
       zIndex: 0,
@@ -27,8 +28,8 @@ export default class Deck extends React.Component<DeckProps> {
       width: DeckConstants.maxDeckWidth,
     };
     return (
-        <div className={style.deck} onClick={this.props.clicked}>
-          <div className={style.nocard} style={DeckSpaceStyle}>empty</div>
+        <div className={'th-deck'} onClick={this.props.clicked}>
+          <div className={'th-nocard'} style={DeckSpaceStyle}>empty</div>
             {cardStack(this.props.numCards, this.props.topCardFile)}
         </div>
       );

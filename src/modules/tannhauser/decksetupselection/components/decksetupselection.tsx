@@ -1,6 +1,4 @@
 import * as React from 'react';
-import Style from '../style.scss';
-import THStyle from '../../main/style.scss';
 import * as Model from '../../model';
 import lazy from '../../img/help/factionMat.gif';
 import preferred from "../../img/help/mixedDeckMat.gif";
@@ -22,28 +20,28 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
 
   render() {
     return (
-      <div className={Style.decksetupselection}>
+      <div className={"decksetupselection"}>
         <div>
           <h1>Choose how the AI cards should be set up</h1>
           <button 
-            className={THStyle.thbutton}
+            className={"thbutton"}
             onClick={() => this.props.selectionComplete(this.state.chosenSetup) }>Select
           </button>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={"selectionOption"}>
         <img 
           className={
-            this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.selected : Style.unselected
+            this.state.chosenSetup === Model.DeckSetup.Lazy ? "selected" : "unselected"
           }
           src={lazy}
           onClick={() => this.select(Model.DeckSetup.Lazy)} 
         />
         <h2>Manage character selection and character decks yourself<br/>(aka Dan's "lazy" method)</h2>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={"selectionOption"}>
           <img 
             className={
-              this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.selected : Style.unselected
+              this.state.chosenSetup === Model.DeckSetup.Preferred ? "selected" : "unselected"
             }
             src={preferred}
             onClick={() => this.select(Model.DeckSetup.Preferred)} 
