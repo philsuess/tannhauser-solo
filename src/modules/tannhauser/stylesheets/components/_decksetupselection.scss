@@ -1,4 +1,4 @@
-.decksetupselection {
+.THDSSdecksetupselection {
   background-color: black;
   color: whitesmoke;
   display: flex;
@@ -9,24 +9,24 @@
   padding: 60px 0;
 }
 
-.selectionOption {
+.THDSSselectionOption {
   display: flex;
   flex-direction: column;
 }
 
-.symbol {
+.THDSSsymbol {
   height: 300px;
   margin: 20px;
 }
 
 
-.unselected {
+.THDSSunselected {
   height: 250px;
   margin: 20px;
   filter: grayscale(80%);
 }
 
-.selected {
+.THDSSselected {
   height: 300px;
   margin: 20px;
   box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);

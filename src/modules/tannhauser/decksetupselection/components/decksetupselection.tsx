@@ -21,7 +21,7 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
 
   render() {
     return (
-      <div className={Style.decksetupselection}>
+      <div className={Style.THDSSdecksetupselection}>
         <div>
           <h1>Choose how the AI cards should be set up</h1>
           <button 
@@ -29,20 +29,20 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
             onClick={() => this.props.selectionComplete(this.state.chosenSetup) }>Select
           </button>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={Style.THDSSselectionOption}>
         <img 
           className={
-            this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.selected : Style.unselected
+            this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.THDSSselected : Style.THDSSunselected
           }
           src={lazy}
           onClick={() => this.select(Model.DeckSetup.Lazy)} 
         />
         <h2>Manage character selection and character decks yourself<br/>(aka Dan's "lazy" method)</h2>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={Style.THDSSselectionOption}>
           <img 
             className={
-              this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.selected : Style.unselected
+              this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.THDSSselected : Style.THDSSunselected
             }
             src={preferred}
             onClick={() => this.select(Model.DeckSetup.Preferred)} 

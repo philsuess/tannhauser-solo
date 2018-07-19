@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classnames from 'classnames';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";
@@ -37,21 +38,21 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
         <div>
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.selected : Style.unselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.THfactionselected : Style.THfactionunselected
             }
             src={reichSymbol}
             onClick={() => this.select(Model.Faction.Reich)} 
           />
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.selected : Style.unselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.THfactionselected : Style.THfactionunselected
             }
             src={unionSymbol}
             onClick={() => this.select(Model.Faction.Union)} 
           />
           <img 
           className={
-            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? Style.selected : Style.unselected
+            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? Style.THfactionselected : Style.THfactionunselected
           }
           src={daedalusSymbol}
           onClick={() => this.select(Model.Faction.Daedalus)} 

@@ -108,7 +108,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       const tipString = activated ? "unit has been actived already this round" : 
         "unit will still activate this round";
       return <div key={characterName + "div"} 
-          className={activated ? Style.headerImgActivated : Style.headerImg}
+          className={activated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg}
           data-tip={tipString}
         >
           <img key={characterName} src={Player.token_image} height={100} />
@@ -185,8 +185,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
     };
-    return <div className={Style.characterDeck} >
-        <div className={Style.header}>
+    return <div className={Style.THMDMcharacterDeck} >
+        <div className={Style.THMDMheader}>
           {this.renderHeader()}
         </div>
         <DeckMat.Component {...deckMatProps} 
@@ -203,7 +203,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   render() {
     return (
-      <div className={Style.mixeddeckmat}>
+      <div className={Style.THMDMmixeddeckmat}>
         {this.renderMat()}
       </div>
     );

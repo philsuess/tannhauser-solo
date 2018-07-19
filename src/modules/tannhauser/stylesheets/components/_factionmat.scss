@@ -1,4 +1,4 @@
-.factionmat {
+.THFMfactionmat {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.header {
+.THFMheader {
   background-color: black;
   display: flex;
   justify-content: space-evenly;
@@ -17,13 +17,13 @@
   z-index: 100;
 }
 
-.header img {
+.THFMheader img {
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
 }
 
-.characterDeck {
+.THFMcharacterDeck {
   display: flex;
   flex-direction: row;
 }

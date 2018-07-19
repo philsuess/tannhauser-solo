@@ -57,7 +57,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
         reshuffleOnEmpty: true,
         extra_text: packText,
       };
-      return <div className={Style.characterDeck} id={characterName} key={characterName + "_matd"} >
+      return <div className={Style.THFMcharacterDeck} id={characterName} key={characterName + "_matd"} >
         <DeckMat.Component {...deckMatProps} key={characterName + "_mat"} />
         </div>;
     });
@@ -82,8 +82,8 @@ export default class FactionMat extends React.Component<FactionMatProps> {
 
   render() {
     return (
-      <div className={Style.factionmat}>
-        <div className={Style.header}>
+      <div className={Style.THFMfactionmat}>
+        <div className={Style.THFMheader}>
           {this.renderHeader()}
         </div>
         <div>

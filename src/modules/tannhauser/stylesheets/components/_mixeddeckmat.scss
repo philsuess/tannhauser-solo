@@ -1,4 +1,4 @@
-.mixeddeckmat {
+.THMDMmixeddeckmat {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -7,21 +7,21 @@
   width: 100%;
 }
 
-.header {
+.THMDMheader {
   background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.headerImg {
+.THMDMheaderImg {
 }
 
-.headerImgActivated {
+.THMDMheaderImgActivated {
   filter: grayscale(80%);
 }
 
-.characterDeck {
+.THMDMcharacterDeck {
   background-color: black;
   display: flex;
   flex-direction: row;

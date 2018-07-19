@@ -1,4 +1,4 @@
-.eventsselection {
+.THESeventsselection {
   background-color: black;
   color: whitesmoke;
   display: flex;
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.events {
+.THESevents {
   width: 30%;
   align-items: center;
   display: flex;
@@ -18,7 +18,7 @@
   justify-content: center;
 }
 
-.event {
+.THESevent {
   margin: 20px;
   align-items: center;
   display: flex;
@@ -27,13 +27,13 @@
 }
 
 
-.unselected {
+.THESunselected {
   height: 150px;
   margin: 20px;
   filter: grayscale(80%);
 }
 
-.selected {
+.THESselected {
   height: 200px;
   margin: 20px;
 }

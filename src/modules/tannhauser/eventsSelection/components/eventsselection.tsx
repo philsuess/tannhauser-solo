@@ -52,9 +52,9 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
     return this.getEventKeys().map(key => {
       const event = this.props.events[key];
       return (
-        <div key={key} className={Style.event} onClick={() => this.select(key)} >
+        <div key={key} className={Style.THESevent} onClick={() => this.select(key)} >
           <img src={event.image} alt={event.name} height={100} 
-            className={this.state[key] ? Style.selected : Style.unselected} 
+            className={this.state[key] ? Style.THESselected : Style.THESunselected} 
           />
           <h3>{event.name}</h3>
         </div>
@@ -64,7 +64,7 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
 
   render() {
     return (
-      <div className={Style.eventsselection}>
+      <div className={Style.THESeventsselection}>
         <div>
           <h1>Pick event cards to draw</h1>
           <button 
@@ -76,7 +76,7 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
             onClick={() => this.props.selectNoEvent() }>Don't use event cards
           </button>
         </div>
-        <div className={Style.events} >{this.renderEvents()}</div>
+        <div className={Style.THESevents} >{this.renderEvents()}</div>
       </div>
     );
   }
