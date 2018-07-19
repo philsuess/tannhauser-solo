@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
-import MixedDeckMatStyle from '../style.scss';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
+import Style from '../../stylesheets/main.scss';
 
 interface MixedDeckMatProps {
   events: string[];
@@ -108,7 +108,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       const tipString = activated ? "unit has been actived already this round" : 
         "unit will still activate this round";
       return <div key={characterName + "div"} 
-          className={activated ? MixedDeckMatStyle.headerImgActivated : MixedDeckMatStyle.headerImg}
+          className={activated ? Style.headerImgActivated : Style.headerImg}
           data-tip={tipString}
         >
           <img key={characterName} src={Player.token_image} height={100} />
@@ -185,8 +185,8 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
     };
-    return <div className={MixedDeckMatStyle.characterDeck} >
-        <div className={MixedDeckMatStyle.header}>
+    return <div className={Style.characterDeck} >
+        <div className={Style.header}>
           {this.renderHeader()}
         </div>
         <DeckMat.Component {...deckMatProps} 
@@ -203,7 +203,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   render() {
     return (
-      <div className={MixedDeckMatStyle.mixeddeckmat}>
+      <div className={Style.mixeddeckmat}>
         {this.renderMat()}
       </div>
     );

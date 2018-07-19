@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ScrollIntoView from 'react-scroll-into-view';
-import FactionMatStyle from '../style.scss';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
+import Style from '../../stylesheets/main.scss';
 
 interface FactionMatProps {
   events: string[];
@@ -57,7 +57,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
         reshuffleOnEmpty: true,
         extra_text: packText,
       };
-      return <div className={FactionMatStyle.characterDeck} id={characterName} key={characterName + "_matd"} >
+      return <div className={Style.characterDeck} id={characterName} key={characterName + "_matd"} >
         <DeckMat.Component {...deckMatProps} key={characterName + "_mat"} />
         </div>;
     });
@@ -82,8 +82,8 @@ export default class FactionMat extends React.Component<FactionMatProps> {
 
   render() {
     return (
-      <div className={FactionMatStyle.factionmat}>
-        <div className={FactionMatStyle.header}>
+      <div className={Style.factionmat}>
+        <div className={Style.header}>
           {this.renderHeader()}
         </div>
         <div>

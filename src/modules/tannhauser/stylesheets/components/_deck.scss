@@ -1,11 +1,11 @@
-.th-deck {
+.THdeck {
   background-color: black;
   display:inline-block;
   position: relative;
   margin: 20px;
 }
 
-.th-nocard {
+.THnocard {
   color: whitesmoke;
   position: relative;
   border: 2px solid gray;
@@ -16,7 +16,7 @@
   font-family: Lucida Console, Courier, monospace;
 }
 
-.th-card {
+.THcard {
   border: 2px solid gray;
   border-radius: 5px;
   position: absolute;

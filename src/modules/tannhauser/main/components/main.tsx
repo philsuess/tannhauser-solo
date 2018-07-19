@@ -151,52 +151,52 @@ export default class Main extends React.Component<MainProps> {
          you have suggestions for improvement.</h2>
         </div>
         <div>
-         <h2 className={"hashLink"} onClick={() => this.props.toggleShowHelp(false)}><u>Close help screen</u></h2>
+         <h2 className={Style.hashLink} onClick={() => this.props.toggleShowHelp(false)}><u>Close help screen</u></h2>
         </div>
-        <div className={"helpSection"} id="HelpQuickAccess">
-          <h2 className={"hashLink"}><ScrollIntoView selector="#factionSelectionHelp" >
+        <div className={Style.helpSection} id="HelpQuickAccess">
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#factionSelectionHelp" >
             <u>Faction selection</u></ScrollIntoView></h2>
-          <h2 className={"hashLink"}><ScrollIntoView selector="#teamSelectionHelp" >
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#teamSelectionHelp" >
             <u>Team selection</u></ScrollIntoView></h2>
-          <h2 className={"hashLink"}><ScrollIntoView selector="#eventSelectionHelp" >
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#eventSelectionHelp" >
             <u>Event selection</u></ScrollIntoView></h2>
-          <h2 className={"hashLink"}><ScrollIntoView selector="#factionMatHelp" >
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#factionMatHelp" >
             <u>Main play screen (Dan's 'lazy' method)</u></ScrollIntoView></h2>
-          <h2 className={"hashLink"}><ScrollIntoView selector="#mixedDeckMatHelp" >
+          <h2 className={Style.hashLink}><ScrollIntoView selector="#mixedDeckMatHelp" >
             <u>Main play screen (Dan's 'preferred' method)</u></ScrollIntoView></h2>
         </div>
-        <div className={"helpSection"} id="factionSelectionHelp">
+        <div className={Style.helpSection} id="factionSelectionHelp">
           <h2>Faction selection: pick what faction your enemies belong to
-          <br/><span className={"hashLink"}><ScrollIntoView selector="#HelpQuickAccess">
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={FactionSelectionHelp} />
         </div>
-        <div className={"helpSection"} id="teamSelectionHelp">
+        <div className={Style.helpSection} id="teamSelectionHelp">
           <h2>Team selection: choose enemies and (optionally), their equipment packs. The chosen packs 
             will be displayed in the main playing screen to help you identify the correct part of the AI cards.
-            <br/><span className={"hashLink"}><ScrollIntoView selector="#HelpQuickAccess">
+            <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={TeamSelectionHelp} />
         </div>
-        <div className={"helpSection"} id="eventSelectionHelp">
+        <div className={Style.helpSection} id="eventSelectionHelp">
           <h2>Event cards selection: Choose which event cards deck to construct, or elect to play without
-          <br/><span className={"hashLink"}><ScrollIntoView selector="#HelpQuickAccess">
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={EventSelectionHelp} />
         </div>
-        <div className={"helpSection"} id="factionMatHelp">
+        <div className={Style.helpSection} id="factionMatHelp">
           <h2>Main play screen: use the quick access links at the top of the page to jump to the corresponding decks
-          <br/><span className={"hashLink"}><ScrollIntoView selector="#HelpQuickAccess">
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={FactionMatHelp} />
         </div>
-        <div className={"helpSection"} id="mixedDeckMatHelp">
+        <div className={Style.helpSection} id="mixedDeckMatHelp">
           <h2>Main play screen: deck has all characters mixed. After 5 rounds, all cards are reshuffled.
-          <br/><span className={"hashLink"}><ScrollIntoView selector="#HelpQuickAccess">
+          <br/><span className={Style.hashLink}><ScrollIntoView selector="#HelpQuickAccess">
             <u>Back to top</u></ScrollIntoView></span>
           </h2>
           <img src={MixedDeckMatHelp} />
