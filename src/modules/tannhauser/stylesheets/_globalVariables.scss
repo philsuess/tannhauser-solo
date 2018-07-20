@@ -1,0 +1,11 @@
+$xl: 87.5em; // 4k and hi-res desktop
+$lg: 60em; // 1080 and hi-res laptops
+$med: 40em; // hi-res tablets and low-res laptops
+$sm: 28em; // mobile and low-res tablets
+$xs: 20em; // mobile only
+
+@mixin responsive($query) {
+  @media(min-width: + $query) {
+    @content;
+  }
+}

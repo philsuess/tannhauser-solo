@@ -13,6 +13,9 @@ h2, h3 {
   padding: 50px;
   display: flex;
   justify-content: center;
+  @include responsive($lg) {
+    padding: 50px;
+  }
 }
 
 .THbutton {
@@ -32,16 +35,25 @@ h2, h3 {
 }
 
 .splash p {
-  margin: 40px;
+  margin: 10px;
   color: whitesmoke;
-  font-size: 23px;
+  font-size: 20px;
   text-align: center;
   width: 30em;
+  @include responsive($lg) {
+    margin: 40px;
+    font-size: 23px;
+    width: 30em;
+  }
 }
 
 .splash a:link, a:visited {
   color: navajowhite;
-  font-size: 23px;
+  font-size: 20px;
+  @include responsive($lg) {
+    color: navajowhite;
+    font-size: 23px;
+  }
 }
 
 .helpSection {

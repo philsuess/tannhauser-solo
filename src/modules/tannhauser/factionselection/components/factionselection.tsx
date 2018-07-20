@@ -38,21 +38,24 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
         <div>
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.THfactionselected : Style.THfactionunselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? 
+                Style.THfactionselected : Style.THfactionunselected
             }
             src={reichSymbol}
             onClick={() => this.select(Model.Faction.Reich)} 
           />
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.THfactionselected : Style.THfactionunselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? 
+                Style.THfactionselected : Style.THfactionunselected
             }
             src={unionSymbol}
             onClick={() => this.select(Model.Faction.Union)} 
           />
           <img 
           className={
-            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? Style.THfactionselected : Style.THfactionunselected
+            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? 
+              Style.THfactionselected : Style.THfactionunselected
           }
           src={daedalusSymbol}
           onClick={() => this.select(Model.Faction.Daedalus)} 
