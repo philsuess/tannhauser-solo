@@ -169,7 +169,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
       return (
         <div key={key} className={Style.THTeamSelcharacter} >
           <div className={Style.THTeamSeldropDown} onClick={() => this.select(key)} >
-            <img src={char.token_image} alt={char.name} height={100} 
+            <img src={char.token_image} alt={char.name} 
               className={this.state[key].selected ? Style.THTeamSelselected : Style.THTeamSelunselected} 
             />
             <div className={Style.THTeamSeldropdownContent}>
@@ -196,7 +196,7 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     return (
       <div className={Style.THTeamSelteamselection}>
         <div>
-          <h1>Select your opponents</h1>
+          <h2>Select your opponents</h2>
           <h3>({this.getCountString()})</h3>
           <button 
             className={Style.THbutton}

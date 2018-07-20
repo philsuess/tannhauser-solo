@@ -9,7 +9,7 @@
 }
 
 .THTeamSelcharacters {
-  width: 30%;
+  width: 50%;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -25,16 +25,27 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  position: relative; 
+  position: relative;
+}
+
+.THTeamSelcharacter img {
+  height: 70px;
+  @include responsive($lg) {
+    height: 100px;
+  }
+}
+
+.THTeamSelcharacter h3 {
+  font-size: 80%;
+  @include responsive($lg) {
+    font-size: 100%;
+  }
 }
 
 .THTeamSelunselected {
   filter: grayscale(80%);
 }
 
-h3 {
-  margin: 5px 0;
-}
 
 .THTeamSeldropDown {
   position: relative;
