@@ -2,11 +2,16 @@
   background-color: black;
   color: whitesmoke;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-evenly;
-  width: 100%;
-  padding: 60px 0;
+  align-items: center;
+  padding: 30px 0;
+
+  @include responsive($lg) {
+    flex-direction: row;
+    align-items: center;
+    padding: 60px 0;
+  }
 }
 
 .THDSSselectionOption {
@@ -14,20 +19,24 @@
   flex-direction: column;
 }
 
-.THDSSsymbol {
-  height: 300px;
-  margin: 20px;
-}
-
-
 .THDSSunselected {
-  height: 250px;
+  height: 100px;
   margin: 20px;
   filter: grayscale(80%);
+
+  @include responsive($lg) {
+    height: 250px;
+    margin: 20px;
+  }
 }
 
 .THDSSselected {
-  height: 300px;
+  height: 150px;
   margin: 20px;
   box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
+  
+  @include responsive($lg) {
+    height: 300px;
+    margin: 20px;
+  }
 }
