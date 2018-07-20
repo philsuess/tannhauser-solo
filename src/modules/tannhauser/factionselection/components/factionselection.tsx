@@ -29,7 +29,7 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
     return (
       <div className={Style.THfactionselection}>
         <div>
-          <h1>Select your opponents' faction</h1>
+          <h2>Select your opponents' faction</h2>
           <button 
             className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.state.chosenFaction) }>Select
