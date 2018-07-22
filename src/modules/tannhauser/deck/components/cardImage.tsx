@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as DeckConstants from '../constants';
 import Style from '../../stylesheets/main.scss';
 
 interface cardImageProps {
@@ -18,7 +17,7 @@ const CardImage = function statelessFunctionComponentClass(props: cardImageProps
 
   return (
     <div className={Style.THcard} style={inlineStyle}>
-      <img src={props.source} height={DeckConstants.cardHeight} />
+      <img src={props.source} />
     </div>
   );
 };

@@ -22,15 +22,10 @@ function cardStack(numCards: number, imageFileName: string) {
 export default class Deck extends React.Component<DeckProps> {
 
   render() {
-    const DeckSpaceStyle = {
-      zIndex: 0,
-      height: DeckConstants.maxDeckHeight,
-      width: DeckConstants.maxDeckWidth,
-    };
     return (
         <div className={Style.THdeck} onClick={this.props.clicked}>
-          <div className={Style.THnocard} style={DeckSpaceStyle}>empty</div>
-            {cardStack(this.props.numCards, this.props.topCardFile)}
+          <div className={Style.THnocard}>empty</div>
+          {cardStack(this.props.numCards, this.props.topCardFile)}
         </div>
       );
   }

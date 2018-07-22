@@ -4,4 +4,46 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: $deckmatHeightMobile;
+  width: $deckmatWidthMobile;
+
+  @include responsive($lg) {
+    height: $deckmatHeight;
+    width: $deckmatWidth;
+  }
+}
+
+.THdeckmatDeckLeft {
+  width: $deckImageWidthMobile;
+
+  @include responsive($lg) {
+    width: $deckImageWidth;
+  }
+}
+
+.THdeckmatDeckLeft img {
+  max-height: $cardHeightMobile;
+  width: auto;
+
+  @include responsive($lg) {
+    max-height: 100%;
+    height: 100%;
+    width: auto;
+  }
+}
+
+.THdeckmatDeckLeft h2, h3 {
+  font-size: 100%;
+
+  @include responsive($lg) {
+    font-size: 1.5em;
+  }
+}
+
+.THdeckmatDeckRight h3 {
+  font-size: 100%;
+
+  @include responsive($lg) {
+    font-size: 1.5em;
+  }
 }

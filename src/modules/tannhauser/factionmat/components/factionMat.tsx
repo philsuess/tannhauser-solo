@@ -17,7 +17,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
       const Player = Model.AllCharacters[characterName];
       return <div key={characterName}>
           <ScrollIntoView selector={"#" + characterName} >
-          <img key={characterName} src={Player.token_image} height={100} />
+          <img key={characterName} src={Player.token_image} />
           </ScrollIntoView>
         </div>;
     });
@@ -28,7 +28,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
       const Event = Model.AllEvents[eventName];
       return <div key={eventName}>
           <ScrollIntoView selector={"#" + eventName} >
-          <img key={eventName} src={Event.image} height={100} />
+          <img key={eventName} src={Event.image} />
           </ScrollIntoView>
         </div>;
     });

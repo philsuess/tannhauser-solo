@@ -111,7 +111,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
           className={activated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg}
           data-tip={tipString}
         >
-          <img key={characterName} src={Player.token_image} height={100} />
+          <img key={characterName} src={Player.token_image} />
           <ReactTooltip place="left" type="dark" effect="float"/>
         </div>;
     });
@@ -127,7 +127,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   renderCurrentCharacterImage() {
     if (this.state.currentCharacter !== "") {
       const image = Model.AllCharacters[this.state.currentCharacter].image;
-      return <img src={image} width={250} height={450} />;
+      return <img src={image} />;
     }
   }
 
@@ -158,7 +158,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   renderCharacterInfo() {
-    return <div>
+    return <div className={Style.THMDMCharacterInfo}>
       {this.renderCurrentCharacterImage()}
       {this.renderCurrentCharacterName()}
       {this.renderCurrentCharacterPackInfo()}
@@ -189,9 +189,11 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         <div className={Style.THMDMheader}>
           {this.renderHeader()}
         </div>
-        <DeckMat.Component {...deckMatProps} 
+        <div className={Style.THMDMdeckandInfo}>
+          <DeckMat.Component {...deckMatProps} 
           key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
           {this.renderCharacterInfo()}
+        </div>
       </div>;
   }
 

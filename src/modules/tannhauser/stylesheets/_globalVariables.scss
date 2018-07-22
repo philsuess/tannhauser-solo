@@ -9,3 +9,23 @@ $xs: 20em; // mobile only
     @content;
   }
 }
+
+$cardHeight: 500px; // original: 822 x 1122
+$cardWidth: $cardHeight / 1122 * 822;
+$maxCardsInDeck: 14;
+$cardStackOffset: 5px;
+$maxDeckHeight: $cardHeight + $maxCardsInDeck * $cardStackOffset;
+$maxDeckWidth: $cardWidth + $maxCardsInDeck * $cardStackOffset;
+$deckImageWidth: 250px;
+$deckmatHeight: $maxDeckHeight + 300px;
+$deckmatWidth: $maxDeckWidth * 2 + $deckImageWidth + 100px;
+
+$mobileScale: 0.5;
+
+$cardHeightMobile: $mobileScale * $cardHeight;
+$cardWidthMobile: $mobileScale * $cardWidth;
+$maxDeckHeightMobile: $cardHeightMobile + $maxCardsInDeck * $cardStackOffset;
+$maxDeckWidthMobile: $cardWidthMobile + $maxCardsInDeck * $cardStackOffset;
+$deckImageWidthMobile: $mobileScale * $deckImageWidth;
+$deckmatHeightMobile: $maxDeckHeightMobile + 150px;
+$deckmatWidthMobile: $maxDeckWidthMobile * 2 + $deckImageWidthMobile + 100px;

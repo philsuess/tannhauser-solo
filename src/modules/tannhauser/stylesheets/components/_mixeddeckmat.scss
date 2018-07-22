@@ -10,8 +10,20 @@
 .THMDMheader {
   background-color: black;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
+
+  
+  @include responsive($lg) {
+    flex-direction: column;
+  }
+}
+
+.THMDMheader img {
+  height: 60px;
+  @include responsive($lg) {
+    height: 100px;
+  }
 }
 
 .THMDMheaderImg {
@@ -24,7 +36,35 @@
 .THMDMcharacterDeck {
   background-color: black;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include responsive($lg) {
+    flex-direction: row;
+  }
+}
+
+.THMDMdeckandInfo {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.THMDMCharacterInfo img {
+  width: $deckImageWidthMobile;
+  height: auto;
+
+  @include responsive($lg) {
+    width: $deckImageWidth;
+  }
+}
+
+.THMDMCharacterInfo h2, h3 {
+  font-size: 100%;
+
+  @include responsive($lg) {
+    font-size: 1.5em;
+  }
 }

@@ -2,7 +2,11 @@
   background-color: black;
   display:inline-block;
   position: relative;
-  margin: 20px;
+  margin: 2px;
+  
+  @include responsive($lg) {
+    margin: 20px;
+  }
 }
 
 .THnocard {
@@ -14,6 +18,13 @@
   align-items: center;
   justify-content: center;
   font-family: Lucida Console, Courier, monospace;
+  height: $maxDeckHeightMobile;
+  width: $maxDeckWidthMobile;
+
+  @include responsive($lg) {
+    height: $maxDeckHeight;
+    width: $maxDeckWidth;
+  }
 }
 
 .THcard {
@@ -23,4 +34,12 @@
   top: 0;
   left: 0;
   z-index : 0;
+}
+
+.THcard img {
+  height: $cardHeightMobile;
+
+  @include responsive($lg) {
+    height: $cardHeight;
+  }
 }

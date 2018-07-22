@@ -21,6 +21,11 @@
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
+  height: 60px;
+
+  @include responsive($lg) {
+    height: 100px;
+  }
 }
 
 .THFMcharacterDeck {
