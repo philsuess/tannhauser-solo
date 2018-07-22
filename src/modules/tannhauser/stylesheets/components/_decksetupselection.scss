@@ -20,23 +20,23 @@
 }
 
 .THDSSunselected {
-  height: 100px;
+  width: 150px;
+  height: auto;
   margin: 20px;
   filter: grayscale(80%);
 
   @include responsive($lg) {
-    height: 250px;
-    margin: 20px;
+    width: 300px;
   }
 }
 
 .THDSSselected {
-  height: 150px;
+  width: 200px;
+  height: auto;
   margin: 20px;
   box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
   
   @include responsive($lg) {
-    height: 300px;
-    margin: 20px;
+    width: 350px;
   }
 }
