@@ -25,6 +25,7 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
         <div>
           <h2>Choose how the AI cards should be set up</h2>
           <button 
+            hidden={true}
             className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.state.chosenSetup) }>Select
           </button>
@@ -35,7 +36,7 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
             this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.THDSSselected : Style.THDSSunselected
           }
           src={lazy}
-          onClick={() => this.select(Model.DeckSetup.Lazy)} 
+          onClick={() => this.props.selectionComplete(Model.DeckSetup.Lazy) } 
         />
         <h3>Manage character selection and character decks yourself<br/>(aka Dan's "lazy" method)</h3>
         </div>
@@ -45,7 +46,7 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
               this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.THDSSselected : Style.THDSSunselected
             }
             src={preferred}
-            onClick={() => this.select(Model.DeckSetup.Preferred)} 
+            onClick={() => this.props.selectionComplete(Model.DeckSetup.Preferred) } 
           />
           <h3>Mix all characters into round decks, <br/>which will be reshuffled every 5 rounds <br/>
             (aka Dan's "preferred" method)</h3>
