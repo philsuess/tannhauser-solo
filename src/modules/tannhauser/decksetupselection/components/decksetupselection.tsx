@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
 import * as Model from '../../model';
 import lazy from '../../img/help/factionMat.gif';
 import preferred from "../../img/help/mixedDeckMat.gif";
+import Style from '../../stylesheets/main.scss';
 
 interface DeckSetupSelectionProps {
   selectionComplete: (chosen: Model.DeckSetup) => any;
@@ -22,34 +21,34 @@ export default class DeckSetupSelection extends React.Component<DeckSetupSelecti
 
   render() {
     return (
-      <div className={Style.decksetupselection}>
+      <div className={Style.THDSSdecksetupselection}>
         <div>
-          <h1>Choose how the AI cards should be set up</h1>
+          <h2>Choose how the AI cards should be set up</h2>
           <button 
-            className={THStyle.thbutton}
+            className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.state.chosenSetup) }>Select
           </button>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={Style.THDSSselectionOption}>
         <img 
           className={
-            this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.selected : Style.unselected
+            this.state.chosenSetup === Model.DeckSetup.Lazy ? Style.THDSSselected : Style.THDSSunselected
           }
           src={lazy}
           onClick={() => this.select(Model.DeckSetup.Lazy)} 
         />
-        <h2>Manage character selection and character decks yourself<br/>(aka Dan's "lazy" method)</h2>
+        <h3>Manage character selection and character decks yourself<br/>(aka Dan's "lazy" method)</h3>
         </div>
-        <div className={Style.selectionOption}>
+        <div className={Style.THDSSselectionOption}>
           <img 
             className={
-              this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.selected : Style.unselected
+              this.state.chosenSetup === Model.DeckSetup.Preferred ? Style.THDSSselected : Style.THDSSunselected
             }
             src={preferred}
             onClick={() => this.select(Model.DeckSetup.Preferred)} 
           />
-          <h2>Mix all characters into round decks, <br/>which will be reshuffled every 5 rounds <br/>
-            (aka Dan's "preferred" method)</h2>
+          <h3>Mix all characters into round decks, <br/>which will be reshuffled every 5 rounds <br/>
+            (aka Dan's "preferred" method)</h3>
         </div>
       </div>
     );

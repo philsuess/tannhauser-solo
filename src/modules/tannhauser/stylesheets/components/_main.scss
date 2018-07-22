@@ -1,3 +1,9 @@
+
+h2, h3 {
+  color: whitesmoke;
+  text-align: center;
+}
+
 .main {
   width: 100%;
 }
@@ -7,14 +13,17 @@
   padding: 50px;
   display: flex;
   justify-content: center;
+  @include responsive($lg) {
+    padding: 50px;
+  }
 }
 
-.thbutton {
+.THbutton {
   color: white;
   background-color: #555555;
-  font-size: 16px;
-  padding: 15px 32px;
-  margin: 5px;
+  font-size: 14px;
+  padding: 10px 25px;
+  margin: 1px;
 }
 
 .splash {
@@ -26,16 +35,25 @@
 }
 
 .splash p {
-  margin: 40px;
+  margin: 10px;
   color: whitesmoke;
-  font-size: 23px;
+  font-size: 20px;
   text-align: center;
   width: 30em;
+  @include responsive($lg) {
+    margin: 40px;
+    font-size: 23px;
+    width: 30em;
+  }
 }
 
 .splash a:link, a:visited {
   color: navajowhite;
-  font-size: 23px;
+  font-size: 20px;
+  @include responsive($lg) {
+    color: navajowhite;
+    font-size: 23px;
+  }
 }
 
 .helpSection {

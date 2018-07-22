@@ -1,7 +1,6 @@
 import * as React from 'react';
-import DeckMatStyle from '../style.css';
 import * as Deck from '../../deck';
-import * as MatConstants from '../constants';
+import Style from '../../stylesheets/main.scss';
 
 interface DeckMatProps {
   name: string;
@@ -98,20 +97,18 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
   }
 
   render() {
-    const VariableDeckMatStyle = {
-      height: MatConstants.height,
-      width: MatConstants.width,
-    };
     return (
-      <div className={DeckMatStyle.deckmat} style={VariableDeckMatStyle} >
-        <div>
-          <img src={this.props.image} width={MatConstants.deckImageVidth} />
+      <div className={Style.THdeckmat}>
+        <div className={Style.THdeckmatDeckLeft}>
+          <img src={this.props.image} />
           <h2>{this.props.name}</h2>
           <h3>({this.state.drawDeck.length} cards left)</h3>
         </div>
         {this.renderDrawDeck()}
         {this.renderDiscardPile()}
-        {(this.props.extra_text != null) && <h3>{this.props.extra_text}</h3>}
+        <div className={Style.THdeckmatDeckRight}>
+          {(this.props.extra_text != null) && <h3>{this.props.extra_text}</h3>}
+        </div>
       </div>
     );
   }

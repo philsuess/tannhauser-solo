@@ -1,0 +1,42 @@
+.THDSSdecksetupselection {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px 0;
+
+  @include responsive($lg) {
+    flex-direction: row;
+    align-items: center;
+    padding: 60px 0;
+  }
+}
+
+.THDSSselectionOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.THDSSunselected {
+  height: 100px;
+  margin: 20px;
+  filter: grayscale(80%);
+
+  @include responsive($lg) {
+    height: 250px;
+    margin: 20px;
+  }
+}
+
+.THDSSselected {
+  height: 150px;
+  margin: 20px;
+  box-shadow: 4px 4px 10px 5px rgba(73, 88, 9, 0.774);
+  
+  @include responsive($lg) {
+    height: 300px;
+    margin: 20px;
+  }
+}

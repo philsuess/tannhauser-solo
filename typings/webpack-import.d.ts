@@ -5,6 +5,13 @@ declare module "*.css" {
   export default names;
 }
 
+// tell Typescript that "import 'styles.scss'"" is ok
+// and contains strings
+declare module "*.scss" {
+  const names: { [name: string]: string };
+  export default names;
+}
+
 // tell Typescript that "import 'x.png"" is ok
 declare module "*.png" {
   const value: string;

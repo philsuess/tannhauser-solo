@@ -1,4 +1,4 @@
-.teamselection {
+.THTeamSelteamselection {
   background-color: black;
   color: whitesmoke;
   display: flex;
@@ -8,12 +8,8 @@
   width: 100%;
 }
 
-.characters {
-  /*background-image: linear-gradient(black, white), url('../img/Solo_Reich_cards/Rbacks-bw.png');
-  background-repeat: no-repeat;
-  background-position: right 35% bottom 45%;
-  background-size: 70%;*/
-  width: 30%;
+.THTeamSelcharacters {
+  width: 50%;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -22,30 +18,41 @@
   justify-content: center;
 }
 
-.character {
+.THTeamSelcharacter {
   margin: 20px;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  position: relative; 
+  position: relative;
 }
 
-.unselected {
+.THTeamSelcharacter img {
+  height: 70px;
+  @include responsive($lg) {
+    height: 100px;
+  }
+}
+
+.THTeamSelcharacter h3 {
+  font-size: 80%;
+  @include responsive($lg) {
+    font-size: 100%;
+  }
+}
+
+.THTeamSelunselected {
   filter: grayscale(80%);
 }
 
-h3 {
-  margin: 5px 0;
-}
 
-.dropDown {
+.THTeamSeldropDown {
   position: relative;
 }
 
 /* Dropdown Content (Hidden by Default) */
-.dropdownContent {
+.THTeamSeldropdownContent {
   display: none;
   position: absolute;
   background-color: rgb(44, 43, 43);
@@ -55,12 +62,12 @@ h3 {
   /*left: 100px;*/
 }
 
-.packSelectOption {
+.THTeamSelpackSelectOption {
   padding: 2px;
 }
 
 /* Links inside the dropdown */
-.dropdownContent .packSelectOption {
+.THTeamSeldropdownContent .THTeamSelpackSelectOption {
   color: whitesmoke;
   padding: 12px 16px;
   text-decoration: none;
@@ -68,9 +75,9 @@ h3 {
 }
 
 /* Change color of dropdown links on hover */
-.dropdownContent .packSelectOption:hover {background-color: rgba(169, 169, 169, 0.479)}
+.THTeamSeldropdownContent .THTeamSelpackSelectOption:hover {background-color: rgba(169, 169, 169, 0.479)}
 
 /* Show the dropdown menu on hover */
-.dropDown:hover .dropdownContent {
+.THTeamSeldropDown:hover .THTeamSeldropdownContent {
   display: block;
 }

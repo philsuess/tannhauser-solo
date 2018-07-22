@@ -1,0 +1,35 @@
+.THfactionselection {
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 90%;
+  padding: 40px 0;
+  
+  @include responsive($lg) {
+    padding: 60px 0;
+  }
+}
+
+.THfactionunselected {
+  height: 80px;
+  margin: 10px;
+  filter: grayscale(80%);
+  
+  @include responsive($lg) {
+    height: 150px;
+    margin: 20px;
+  }
+}
+
+.THfactionselected {
+  height: 100px;
+  margin: 20px;
+  
+  @include responsive($lg) {
+    height: 200px;
+    margin: 20px;
+  }
+}

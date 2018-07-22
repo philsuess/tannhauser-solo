@@ -1,8 +1,7 @@
 import * as React from 'react';
 import ReactTooltip from 'react-tooltip';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
 import * as Model from '../../model';
+import Style from '../../stylesheets/main.scss';
 
 interface CompleteSelection {
   characters: string[];
@@ -136,13 +135,13 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
   renderAvailablePacksFor(characterKey: string) {
     const character = this.props.characters[characterKey];
     const availablePacksDivs = Model.GetAvailablePacks(character.type).map(pack => {
-      return <div key={character+pack} className={Style.packSelectOption} 
+      return <div key={character+pack} className={Style.THTeamSelpackSelectOption} 
                 onClick={(event) => {event.stopPropagation(); this.selectPackFor(characterKey, pack)}}>
                   {pack} pack
               </div>;
     });
     const packsSelection = availablePacksDivs.concat(
-      <div key={characterKey + "randPack"} className={Style.packSelectOption}
+      <div key={characterKey + "randPack"} className={Style.THTeamSelpackSelectOption}
         onClick={(event) => {event.stopPropagation(); 
           this.selectRandomPackFor(characterKey, Model.GetAvailablePacks(character.type))}}>
         Pick randomly
@@ -168,12 +167,12 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
     return this.getFactionKeys().map(key => {
       const char = this.props.characters[key];
       return (
-        <div key={key} className={Style.character} >
-          <div className={Style.dropDown} onClick={() => this.select(key)} >
-            <img src={char.token_image} alt={char.name} height={100} 
-              className={this.state[key].selected ? Style.selected : Style.unselected} 
+        <div key={key} className={Style.THTeamSelcharacter} >
+          <div className={Style.THTeamSeldropDown} onClick={() => this.select(key)} >
+            <img src={char.token_image} alt={char.name} 
+              className={this.state[key].selected ? Style.THTeamSelselected : Style.THTeamSelunselected} 
             />
-            <div className={Style.dropdownContent}>
+            <div className={Style.THTeamSeldropdownContent}>
               {this.renderAvailablePacksFor(key)}
             </div>
           </div>
@@ -195,16 +194,16 @@ export default class TeamSelectionMat extends React.Component<TeamSelectionProps
 
   render() {
     return (
-      <div className={Style.teamselection}>
+      <div className={Style.THTeamSelteamselection}>
         <div>
-          <h1>Select your opponents</h1>
+          <h2>Select your opponents</h2>
           <h3>({this.getCountString()})</h3>
           <button 
-            className={THStyle.thbutton}
+            className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.getCompleteSelection()) }>Select
           </button>
         </div>
-        <div className={Style.characters} >{this.renderFaction()}</div>
+        <div className={Style.THTeamSelcharacters} >{this.renderFaction()}</div>
       </div>
     );
   }

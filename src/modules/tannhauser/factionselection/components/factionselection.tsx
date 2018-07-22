@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Style from '../style.css';
-import THStyle from '../../main/style.css';
+import classnames from 'classnames';
 import * as Model from '../../model';
 import reichSymbol from "../../img/reich-symbol.png";
 import unionSymbol from "../../img/union-symbol.png";
 import daedalusSymbol from "../../img/daedalus-symbol.png";
+import Style from '../../stylesheets/main.scss';
 
 interface FactionSelectionProps {
   factions: Model.Faction[];
@@ -27,32 +27,35 @@ export default class FactionSelection extends React.Component<FactionSelectionPr
 
   render() {
     return (
-      <div className={Style.factionselection}>
+      <div className={Style.THfactionselection}>
         <div>
-          <h1>Select your opponents' faction</h1>
+          <h2>Select your opponents' faction</h2>
           <button 
-            className={THStyle.thbutton}
+            className={Style.THbutton}
             onClick={() => this.props.selectionComplete(this.state.chosenFaction) }>Select
           </button>
         </div>
         <div>
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? Style.selected : Style.unselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Reich] ? 
+                Style.THfactionselected : Style.THfactionunselected
             }
             src={reichSymbol}
             onClick={() => this.select(Model.Faction.Reich)} 
           />
           <img 
             className={
-              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? Style.selected : Style.unselected
+              this.state.chosenFaction === Model.Faction[Model.Faction.Union] ? 
+                Style.THfactionselected : Style.THfactionunselected
             }
             src={unionSymbol}
             onClick={() => this.select(Model.Faction.Union)} 
           />
           <img 
           className={
-            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? Style.selected : Style.unselected
+            this.state.chosenFaction === Model.Faction[Model.Faction.Daedalus] ? 
+              Style.THfactionselected : Style.THfactionunselected
           }
           src={daedalusSymbol}
           onClick={() => this.select(Model.Faction.Daedalus)} 

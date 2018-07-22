@@ -7,7 +7,6 @@ import * as FactionSelection from '../../factionselection';
 import * as DeckSetupSelection from '../../decksetupselection';
 import * as FactionMat from '../../factionmat';
 import * as MixedDeckMat from '../../mixeddeckmat';
-import Style from '../style.css';
 import * as Model from '../../model';
 import ThLogo from '../../img/tannhauser-logo.png';
 import FactionSelectionHelp from '../../img/help/factionSelection.gif';
@@ -15,6 +14,7 @@ import TeamSelectionHelp from '../../img/help/teamSelection.gif';
 import EventSelectionHelp from '../../img/help/eventsSelection.gif';
 import FactionMatHelp from '../../img/help/factionMat.gif';
 import MixedDeckMatHelp from '../../img/help/mixedDeckMat.gif';
+import Style from '../../stylesheets/main.scss';
 
 interface MainProps {
   selectedFaction: string;
