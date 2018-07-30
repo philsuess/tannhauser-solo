@@ -23,10 +23,12 @@
 
 .THdeckmatDeckLeft img {
   max-height: $cardHeightMobile;
+  max-width: 100px;
   width: auto;
 
   @include responsive($lg) {
     max-height: 100%;
+    max-width: inherit;
     height: 100%;
     width: auto;
   }

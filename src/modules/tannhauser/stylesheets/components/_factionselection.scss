@@ -14,7 +14,7 @@
 }
 
 .THfactionunselected {
-  height: 80px;
+  height: 60px;
   margin: 10px;
   filter: grayscale(80%);
   
@@ -25,7 +25,7 @@
 }
 
 .THfactionselected {
-  height: 100px;
+  height: 80px;
   margin: 20px;
   
   @include responsive($lg) {

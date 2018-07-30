@@ -20,12 +20,15 @@
 
 .THTeamSelcharacter {
   margin: 20px;
-  align-items: center;
+  align-items: baseline;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
   position: relative;
+  @include responsive($lg) {
+    align-items: center;
+  }
 }
 
 .THTeamSelcharacter img {
@@ -37,8 +40,10 @@
 
 .THTeamSelcharacter h3 {
   font-size: 80%;
+  max-width: 90px;
   @include responsive($lg) {
     font-size: 100%;
+    max-width: 100%;
   }
 }
 

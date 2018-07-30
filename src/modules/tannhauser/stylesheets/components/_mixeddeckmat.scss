@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-
+  padding: 10px;
   
   @include responsive($lg) {
     flex-direction: column;
@@ -39,6 +39,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   @include responsive($lg) {
     flex-direction: row;
@@ -50,6 +51,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  max-width: 130px;
+
+  @include responsive($lg) {
+    max-width: 200px;
+  }
 }
 
 .THMDMCharacterInfo img {

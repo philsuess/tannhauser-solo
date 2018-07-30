@@ -53,7 +53,7 @@ export default class EventsSelection extends React.Component<EventsSelectionProp
       const event = this.props.events[key];
       return (
         <div key={key} className={Style.THESevent} onClick={() => this.select(key)} >
-          <img src={event.image} alt={event.name} height={100} 
+          <img src={event.image} alt={event.name} 
             className={this.state[key] ? Style.THESselected : Style.THESunselected} 
           />
           <h3>{event.name}</h3>

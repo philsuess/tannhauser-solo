@@ -86,7 +86,7 @@ export default class FactionMat extends React.Component<FactionMatProps> {
         <div className={Style.THFMheader}>
           {this.renderHeader()}
         </div>
-        <div>
+        <div className={Style.THFMDeckmats}>
           {this.renderMats()}
         </div>
       </div>

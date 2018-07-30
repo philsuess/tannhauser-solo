@@ -27,5 +27,5 @@ $cardWidthMobile: $mobileScale * $cardWidth;
 $maxDeckHeightMobile: $cardHeightMobile + $maxCardsInDeck * $cardStackOffset;
 $maxDeckWidthMobile: $cardWidthMobile + $maxCardsInDeck * $cardStackOffset;
 $deckImageWidthMobile: $mobileScale * $deckImageWidth;
-$deckmatHeightMobile: $maxDeckHeightMobile + 150px;
+$deckmatHeightMobile: $maxDeckHeightMobile + 20px;
 $deckmatWidthMobile: $maxDeckWidthMobile * 2 + $deckImageWidthMobile + 100px;
