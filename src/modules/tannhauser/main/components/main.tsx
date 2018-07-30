@@ -145,10 +145,10 @@ export default class Main extends React.Component<MainProps> {
   renderOverview() {
     return <div className={Style.splash}>
         <div>
-          <h2>These animations of how to use the individual parts
+          <p>These animations of how to use the individual parts
          of the app show all available features. Drop me 
          a <a href="https://boardgamegeek.com/user/philsuess">personal message on bgg</a> if
-         you have suggestions for improvement.</h2>
+         you have suggestions for improvement.</p>
         </div>
         <div>
          <h2 className={Style.hashLink} onClick={() => this.props.toggleShowHelp(false)}><u>Close help screen</u></h2>

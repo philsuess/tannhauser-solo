@@ -40,6 +40,7 @@ h2, h3 {
   font-size: 20px;
   text-align: center;
   width: 30em;
+
   @include responsive($lg) {
     margin: 40px;
     font-size: 23px;
@@ -60,7 +61,11 @@ h2, h3 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 200px 0;
+  max-width: 100%;
+
+  @include responsive($lg) {
+    margin: 200px 0;
+  }
 }
 
 .hashLink {
@@ -73,4 +78,9 @@ h2, h3 {
 .helpSection img {
   margin: 20px;
   border: 2px solid antiquewhite;
+  max-width: 350px;
+  
+  @include responsive($lg) {
+    max-width: 1500px;
+  }
 }
