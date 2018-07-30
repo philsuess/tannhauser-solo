@@ -54,7 +54,7 @@
   max-width: 130px;
 
   @include responsive($lg) {
-    max-width: 200px;
+    max-width: 100%;
   }
 }
 
