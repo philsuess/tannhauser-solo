@@ -101,6 +101,10 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     }
   }
 
+  markCharacterDown(characterName: string) {
+    alert(characterName + " down")
+  }
+
   renderHeader() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
@@ -111,8 +115,16 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
           className={activated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg}
           data-tip={tipString}
         >
+          <div className={Style.THTeamSeldropDown} >
           <img key={characterName} src={Player.token_image} />
+          <div className={Style.THTeamSeldropdownContent}>
+              <div className={Style.THTeamSelpackSelectOption} 
+                onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
+                    Character down
+              </div>
+            </div>
           <ReactTooltip place="left" type="dark" effect="float"/>
+          </div>
         </div>;
     });
   }
