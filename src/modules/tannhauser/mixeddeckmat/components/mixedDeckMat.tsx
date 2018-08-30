@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ReactTooltip from 'react-tooltip';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 import Style from '../../stylesheets/main.scss';
@@ -128,15 +127,10 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       const Player = Model.AllCharacters[characterName];
       const activated = this.state.charactersActivated.includes(characterName);
       const down = this.state.charactersDown.includes(characterName);
-      const tipString = this.getCharacterRoundStatus(down, activated);
       const imgClassName = this.getCharacterHeaderImgClassName(down, activated);
       return <div key={characterName + "div"} >
           <div key={characterName + "img"} className={Style.THTeamSeldropDown} >
-            <img className={imgClassName} data-for={characterName + 'CharacterStatus'} src={Player.token_image} />
-            <ReactTooltip key={characterName + "tooltip"} 
-                id={characterName + 'CharacterStatus'} place="left" type="dark" effect="float">
-              <span>{tipString}</span>
-            </ReactTooltip>
+            <img className={imgClassName} src={Player.token_image} />
             <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
                 <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
                   onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
