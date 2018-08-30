@@ -26,6 +26,7 @@ interface MixedDeckMatState {
   roundDecks: DeckMatData[];
   currentCharacter: string;
   charactersActivated: string[];
+  charactersDown: string[];
 }
 
 function randomIntFromInterval(min: number, max: number) {
@@ -42,6 +43,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       roundDecks: newDecks,
       currentCharacter: "",
       charactersActivated: [""],
+      charactersDown: [""],
     };
   }
 
@@ -88,6 +90,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         currentDeckIndex: 0,
         currentCharacter: "",
         charactersActivated: [""],
+        charactersDown: this.state.charactersDown,
         roundCounter: newRoundCounter,
         roundDecks: newDecks,
       });
@@ -102,28 +105,44 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   markCharacterDown(characterName: string) {
-    alert(characterName + " down")
+    this.setState(previousState => ({
+      charactersDown: previousState.charactersDown.concat(characterName),
+    }));
+  }
+
+  getCharacterRoundStatus(isDown: boolean, hasBeenActivated: boolean): string {
+    if (isDown) return "Unit is bleeding out"
+    
+    return hasBeenActivated ? "unit has been actived already this round" : 
+      "unit will still activate this round";
+  }
+
+  getCharacterHeaderImgClassName(isDown: boolean, hasBeenActivated: boolean): string {
+    if (isDown) return Style.THDMheaderImgBleedingOut;
+
+    return hasBeenActivated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg;
   }
 
   renderHeader() {
     return this.props.characters.map(characterName => {
       const Player = Model.AllCharacters[characterName];
       const activated = this.state.charactersActivated.includes(characterName);
-      const tipString = activated ? "unit has been actived already this round" : 
-        "unit will still activate this round";
-      return <div key={characterName + "div"} 
-          className={activated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg}
-          data-tip={tipString}
-        >
-          <div className={Style.THTeamSeldropDown} >
-          <img key={characterName} src={Player.token_image} />
-          <div className={Style.THTeamSeldropdownContent}>
-              <div className={Style.THTeamSelpackSelectOption} 
-                onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
-                    Character down
-              </div>
+      const down = this.state.charactersDown.includes(characterName);
+      const tipString = this.getCharacterRoundStatus(down, activated);
+      const imgClassName = this.getCharacterHeaderImgClassName(down, activated);
+      return <div key={characterName + "div"} >
+          <div key={characterName + "img"} className={Style.THTeamSeldropDown} >
+            <img className={imgClassName} data-for={characterName + 'CharacterStatus'} src={Player.token_image} />
+            <ReactTooltip key={characterName + "tooltip"} 
+                id={characterName + 'CharacterStatus'} place="left" type="dark" effect="float">
+              <span>{tipString}</span>
+            </ReactTooltip>
+            <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
+                <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
+                  onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
+                      Character down
+                </div>
             </div>
-          <ReactTooltip place="left" type="dark" effect="float"/>
           </div>
         </div>;
     });
@@ -197,7 +216,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
     };
-    return <div className={Style.THMDMcharacterDeck} >
+    return <div key="Deckmat" className={Style.THMDMcharacterDeck} >
         <div className={Style.THMDMheader}>
           {this.renderHeader()}
         </div>

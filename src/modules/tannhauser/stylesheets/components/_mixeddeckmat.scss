@@ -35,6 +35,11 @@
   filter: grayscale(80%);
 }
 
+.THDMheaderImgBleedingOut {
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
 .THMDMcharacterDeck {
   background-color: black;
   display: flex;
