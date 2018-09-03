@@ -110,6 +110,17 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     }));
   }
 
+  markCharacterRevived(characterName: string) {
+    const newCharDown = this.state.charactersDown;
+    var index = newCharDown.indexOf(characterName, 0);
+    if (index > -1) {
+      newCharDown.splice(index, 1);
+    }
+    this.setState(previousState => ({
+      charactersDown: newCharDown,
+    }));
+  }
+
   getCharacterRoundStatus(isDown: boolean, hasBeenActivated: boolean): string {
     if (isDown) return "Unit is bleeding out"
     
@@ -135,6 +146,22 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={Player.token_image} />;
   }
 
+  getCharacterOptions(characterName: string, isDown: boolean) {
+    let charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
+        onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
+          Character down
+      </div>;    
+    if (isDown)
+      charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
+        onClick={(event) => {event.stopPropagation(); this.markCharacterRevived(characterName); }}>
+          Revive
+      </div>;
+
+    return <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
+      {charStatusOption}
+    </div>
+  }
+
   renderHeader() {
     return this.props.characters.map(characterName => {
       const activated = this.state.charactersActivated.includes(characterName);
@@ -142,12 +169,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       return <div key={characterName + "div"} >
           <div key={characterName + "img"} className={Style.THTeamSeldropDown} >
             {this.getCharacterTokenImage(characterName, down, activated)}
-            <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
-                <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
-                  onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
-                      Character down
-                </div>
-            </div>
+              {this.getCharacterOptions(characterName, down)}
           </div>
         </div>;
     });
