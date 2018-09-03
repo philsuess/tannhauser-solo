@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 import Style from '../../stylesheets/main.scss';
+import scratchedToken from '../../img/token-scratched.png';
 
 interface MixedDeckMatProps {
   events: string[];
@@ -122,15 +123,25 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     return hasBeenActivated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg;
   }
 
+  getCharacterTokenImage(characterName: string, isDown: boolean, hasBeenActivated: boolean) {
+    const Player = Model.AllCharacters[characterName];
+    const scratchStyle = {
+      backgroundImage: `url(${Player.token_image})`,
+      backgroundSize: 'cover',
+    };
+    return isDown ?
+      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={scratchedToken} style={ scratchStyle }/>
+      :
+      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={Player.token_image} />;
+  }
+
   renderHeader() {
     return this.props.characters.map(characterName => {
-      const Player = Model.AllCharacters[characterName];
       const activated = this.state.charactersActivated.includes(characterName);
       const down = this.state.charactersDown.includes(characterName);
-      const imgClassName = this.getCharacterHeaderImgClassName(down, activated);
       return <div key={characterName + "div"} >
           <div key={characterName + "img"} className={Style.THTeamSeldropDown} >
-            <img className={imgClassName} src={Player.token_image} />
+            {this.getCharacterTokenImage(characterName, down, activated)}
             <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
                 <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
                   onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
