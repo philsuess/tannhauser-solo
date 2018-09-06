@@ -29,6 +29,10 @@ interface MixedDeckMatState {
   charactersDown: string[];
 }
 
+function filterDeckMatData(deckToFilter: DeckMatData, excludeIds: string[]): DeckMatData {
+  return deckToFilter;
+}
+
 function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -112,7 +116,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   markCharacterRevived(characterName: string) {
     const newCharDown = this.state.charactersDown;
-    var index = newCharDown.indexOf(characterName, 0);
+    const index = newCharDown.indexOf(characterName, 0);
     if (index > -1) {
       newCharDown.splice(index, 1);
     }
@@ -141,21 +145,23 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       backgroundSize: 'cover',
     };
     return isDown ?
-      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={scratchedToken} style={ scratchStyle }/>
+      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} 
+        src={scratchedToken} style={ scratchStyle }/>
       :
       <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={Player.token_image} />;
   }
 
   getCharacterOptions(characterName: string, isDown: boolean) {
-    let charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
+    let charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption}
         onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
           Character down
-      </div>;    
-    if (isDown)
+      </div>;
+    if (isDown) {
       charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
         onClick={(event) => {event.stopPropagation(); this.markCharacterRevived(characterName); }}>
           Revive
       </div>;
+    }
 
     return <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
       {charStatusOption}
@@ -236,9 +242,14 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     });
   }
 
+  getCurrentRoundDeck(currentDeckIndex: number) {
+    return filterDeckMatData(this.state.roundDecks[currentDeckIndex], [""]);
+  }
+
   renderDeckMat() {
+    const currentRoundDeck = this.getCurrentRoundDeck(this.state.currentDeckIndex);
     const deckMatProps = {
-      ...this.state.roundDecks[this.state.currentDeckIndex],
+      ...currentRoundDeck,
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
