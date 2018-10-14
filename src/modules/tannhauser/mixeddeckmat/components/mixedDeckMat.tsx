@@ -1,8 +1,9 @@
 import * as React from 'react';
-import ReactTooltip from 'react-tooltip';
 import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 import Style from '../../stylesheets/main.scss';
+import scratchedToken from '../../img/token-scratched.png';
+import miaCard from '../../img/cardoverlay-stamp-mia.png';
 
 interface MixedDeckMatProps {
   events: string[];
@@ -26,6 +27,7 @@ interface MixedDeckMatState {
   roundDecks: DeckMatData[];
   currentCharacter: string;
   charactersActivated: string[];
+  charactersDown: string[];
 }
 
 function randomIntFromInterval(min: number, max: number) {
@@ -42,6 +44,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
       roundDecks: newDecks,
       currentCharacter: "",
       charactersActivated: [""],
+      charactersDown: [""],
     };
   }
 
@@ -88,6 +91,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         currentDeckIndex: 0,
         currentCharacter: "",
         charactersActivated: [""],
+        charactersDown: this.state.charactersDown,
         roundCounter: newRoundCounter,
         roundDecks: newDecks,
       });
@@ -101,18 +105,75 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     }
   }
 
+  markCharacterDown(characterName: string) {
+    this.setState(previousState => ({
+      charactersDown: previousState.charactersDown.concat(characterName),
+    }));
+  }
+
+  markCharacterRevived(characterName: string) {
+    const newCharDown = this.state.charactersDown;
+    const index = newCharDown.indexOf(characterName, 0);
+    if (index > -1) {
+      newCharDown.splice(index, 1);
+    }
+    this.setState(previousState => ({
+      charactersDown: newCharDown,
+    }));
+  }
+
+  getCharacterRoundStatus(isDown: boolean, hasBeenActivated: boolean): string {
+    if (isDown) return "Unit is bleeding out"
+    
+    return hasBeenActivated ? "unit has been actived already this round" : 
+      "unit will still activate this round";
+  }
+
+  getCharacterHeaderImgClassName(isDown: boolean, hasBeenActivated: boolean): string {
+    if (isDown) return Style.THDMheaderImgBleedingOut;
+
+    return hasBeenActivated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg;
+  }
+
+  getCharacterTokenImage(characterName: string, isDown: boolean, hasBeenActivated: boolean) {
+    const Player = Model.AllCharacters[characterName];
+    const scratchStyle = {
+      backgroundImage: `url(${Player.token_image})`,
+      backgroundSize: 'cover',
+    };
+    return isDown ?
+      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} 
+        src={scratchedToken} style={ scratchStyle }/>
+      :
+      <img className={this.getCharacterHeaderImgClassName(isDown, hasBeenActivated)} src={Player.token_image} />;
+  }
+
+  getCharacterOptions(characterName: string, isDown: boolean) {
+    let charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption}
+        onClick={(event) => {event.stopPropagation(); this.markCharacterDown(characterName); }}>
+          Character down
+      </div>;
+    if (isDown) {
+      charStatusOption = <div key={characterName + "ddoptionCharDown"} className={Style.THTeamSelpackSelectOption} 
+        onClick={(event) => {event.stopPropagation(); this.markCharacterRevived(characterName); }}>
+          Revive
+      </div>;
+    }
+
+    return <div key={characterName + "ddcontent"} className={Style.THTeamSeldropdownContent}>
+      {charStatusOption}
+    </div>
+  }
+
   renderHeader() {
     return this.props.characters.map(characterName => {
-      const Player = Model.AllCharacters[characterName];
       const activated = this.state.charactersActivated.includes(characterName);
-      const tipString = activated ? "unit has been actived already this round" : 
-        "unit will still activate this round";
-      return <div key={characterName + "div"} 
-          className={activated ? Style.THMDMheaderImgActivated : Style.THMDMheaderImg}
-          data-tip={tipString}
-        >
-          <img key={characterName} src={Player.token_image} />
-          <ReactTooltip place="left" type="dark" effect="float"/>
+      const down = this.state.charactersDown.includes(characterName);
+      return <div key={characterName + "div"} >
+          <div key={characterName + "img"} className={Style.THTeamSeldropDown} >
+            {this.getCharacterTokenImage(characterName, down, activated)}
+              {this.getCharacterOptions(characterName, down)}
+          </div>
         </div>;
     });
   }
@@ -178,20 +239,28 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
     });
   }
 
+  getCurrentRoundDeck(currentDeckIndex: number) {
+    return this.state.roundDecks[currentDeckIndex];
+  }
+
   renderDeckMat() {
+    const currentRoundDeck = this.getCurrentRoundDeck(this.state.currentDeckIndex);
+    const isCurrenCharacterDown = this.state.charactersDown.includes(this.state.currentCharacter);
     const deckMatProps = {
-      ...this.state.roundDecks[this.state.currentDeckIndex],
+      ...currentRoundDeck,
+      overRideDrawnCard: isCurrenCharacterDown,
+      overRideCard: miaCard,
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
     };
-    return <div className={Style.THMDMcharacterDeck} >
+    return <div key="Deckmat" className={Style.THMDMcharacterDeck} >
         <div className={Style.THMDMheader}>
           {this.renderHeader()}
         </div>
         <div className={Style.THMDMdeckandInfo}>
           <DeckMat.Component {...deckMatProps} 
-          key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
+            key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
           {this.renderCharacterInfo()}
         </div>
       </div>;

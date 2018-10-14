@@ -27,10 +27,17 @@
 }
 
 .THMDMheaderImg {
+  cursor: pointer;
 }
 
 .THMDMheaderImgActivated {
+  cursor: pointer;
   filter: grayscale(80%);
+}
+
+.THDMheaderImgBleedingOut {
+  cursor: pointer;
+  filter: grayscale(65%);
 }
 
 .THMDMcharacterDeck {
