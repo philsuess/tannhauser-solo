@@ -29,10 +29,6 @@ interface MixedDeckMatState {
   charactersDown: string[];
 }
 
-function filterDeckMatData(deckToFilter: DeckMatData, excludeIds: string[]): DeckMatData {
-  return deckToFilter;
-}
-
 function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -243,7 +239,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   getCurrentRoundDeck(currentDeckIndex: number) {
-    return filterDeckMatData(this.state.roundDecks[currentDeckIndex], [""]);
+    return this.state.roundDecks[currentDeckIndex];
   }
 
   renderDeckMat() {
