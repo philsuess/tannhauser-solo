@@ -3,6 +3,7 @@ import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 import Style from '../../stylesheets/main.scss';
 import scratchedToken from '../../img/token-scratched.png';
+import miaCard from '../../img/cardoverlay-stamp-mia.png';
 
 interface MixedDeckMatProps {
   events: string[];
@@ -27,10 +28,6 @@ interface MixedDeckMatState {
   currentCharacter: string;
   charactersActivated: string[];
   charactersDown: string[];
-}
-
-function filterDeckMatData(deckToFilter: DeckMatData, excludeIds: string[]): DeckMatData {
-  return deckToFilter;
 }
 
 function randomIntFromInterval(min: number, max: number) {
@@ -243,13 +240,16 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
   }
 
   getCurrentRoundDeck(currentDeckIndex: number) {
-    return filterDeckMatData(this.state.roundDecks[currentDeckIndex], [""]);
+    return this.state.roundDecks[currentDeckIndex];
   }
 
   renderDeckMat() {
     const currentRoundDeck = this.getCurrentRoundDeck(this.state.currentDeckIndex);
+    const isCurrenCharacterDown = this.state.charactersDown.includes(this.state.currentCharacter);
     const deckMatProps = {
       ...currentRoundDeck,
+      overRideDrawnCard: isCurrenCharacterDown,
+      overRideCard: miaCard,
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
