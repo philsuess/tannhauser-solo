@@ -260,7 +260,7 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
         </div>
         <div className={Style.THMDMdeckandInfo}>
           <DeckMat.Component {...deckMatProps} 
-          key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
+            key={this.state.roundCounter*this.props.numCharacterCardsBeforeReshuffle+this.state.currentDeckIndex} />
           {this.renderCharacterInfo()}
         </div>
       </div>;
