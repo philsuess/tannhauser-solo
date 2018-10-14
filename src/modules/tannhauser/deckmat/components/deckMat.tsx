@@ -10,6 +10,8 @@ interface DeckMatProps {
   card_back_image: string;
   reshuffleOnEmpty: boolean;
   extra_text?: any;
+  overRideDrawnCard?: boolean;
+  overRideCard?: string;
   emptyDeckClicked?: () => any;
   drawnCard?: (cardId: string) => any;
 }
@@ -87,9 +89,10 @@ export default class DeckMat extends React.Component<DeckMatProps,DeckMatState> 
   }
 
   renderDiscardPile() {
+    const card = this.props.overRideDrawnCard ? this.props.overRideCard : this.state.drawnCard;
     return (
       <Deck.Components.Deck
-        topCardFile={this.state.drawnCard}
+        topCardFile={card}
         numCards={this.props.deck.length - this.state.drawDeck.length}
         clicked={() => console.log("Discard pile clicked")}
       />

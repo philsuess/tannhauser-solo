@@ -3,6 +3,7 @@ import * as DeckMat from '../../deckmat';
 import * as Model from '../../model';
 import Style from '../../stylesheets/main.scss';
 import scratchedToken from '../../img/token-scratched.png';
+import miaCard from '../../img/cardoverlay-stamp-mia.png';
 
 interface MixedDeckMatProps {
   events: string[];
@@ -244,8 +245,11 @@ export default class MixedDeckMat extends React.Component<MixedDeckMatProps,Mixe
 
   renderDeckMat() {
     const currentRoundDeck = this.getCurrentRoundDeck(this.state.currentDeckIndex);
+    const isCurrenCharacterDown = this.state.charactersDown.includes(this.state.currentCharacter);
     const deckMatProps = {
       ...currentRoundDeck,
+      overRideDrawnCard: isCurrenCharacterDown,
+      overRideCard: miaCard,
       reshuffleOnEmpty: false,
       emptyDeckClicked: () => this.advanceRound(),
       drawnCard: (cardId: string) => this.activateCharacter(cardId),
